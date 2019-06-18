@@ -3,7 +3,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div className="ui container">
       <h1>JDict Search</h1>
     </div>
   );
