@@ -6,7 +6,8 @@ import './App.css';
 
 class App extends React.Component {
   state = {
-      weblio: ''
+      weblio: '',
+      infoseek: ''
     }
 
     onTermSubmit = searchTerm => {
@@ -17,8 +18,17 @@ class App extends React.Component {
           this.setState({
             weblio: result1Data
           });
-          console.log(this.state.weblio)
-    })
+
+        return axios.get(`https://cors-anywhere.herokuapp.com/http://dictionary.infoseek.ne.jp/ejword/${searchTerm}`)
+          .then(res => {
+              const $ = cheerio.load(res.data);
+              const result2Data = $('.word_block').children().slice(2, 11).text();
+               this.setState({
+                 infoseek: result2Data
+               });
+               console.log(this.state.infoseek)
+          })
+        })
   }
   render () {
     return (
