@@ -44,15 +44,28 @@ class Results extends React.Component {
   }
 
   render() {
+    let weblioComponent, infoseekComponent, eijiroComponent
 
+    if (this.state.weblioResult.length >= 1) {
+      weblioComponent = <Result name="weblio" text={this.state.weblioResult} />
+    }
+
+    if (this.state.infoseekResult.length >= 1) {
+      infoseekComponent = <Result name="infoseek" text={this.state.infoseekResult} />
+    }
+
+    if (this.state.eijiroResult.length >= 1) {
+      eijiroComponent = <Result name="eijiro" text={this.state.eijiroResult} />
+
+    }
     return (
 
     <div className="ui three column grid">
 
       <div className="row">
-        <Result name="weblio" text={this.state.weblioResult} />
-        <Result name="infoseek" text={this.state.infoseekResult} />
-        <Result name="eijiro" text={this.state.eijiroResult} />
+        {weblioComponent}
+        {infoseekComponent}
+        {eijiroComponent}
       </div>
 
     </div>
