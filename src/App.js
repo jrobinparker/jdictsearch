@@ -2,22 +2,28 @@ import React from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import Search from './components/Search';
+import Results from './components/Results';
 import './App.css';
 
 class App extends React.Component {
   state = {
       weblio: '',
       infoseek: '',
-      eijiro: ''
+      eijiro: '',
+      loading: false
     }
 
     onTermSubmit = searchTerm => {
       axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
         .then(res => {
+          this.setState({
+            loading: true
+          })
           const $ = cheerio.load(res.data);
           const result1Data = $('.content-explanation.ej').text();
           this.setState({
-            weblio: result1Data
+            weblio: result1Data,
+            loading: false
           });
 
         return axios.get(`https://cors-anywhere.herokuapp.com/http://dictionary.infoseek.ne.jp/ejword/${searchTerm}`)
@@ -44,6 +50,12 @@ class App extends React.Component {
     return (
       <div className="ui container" style={{ marginTop: '20px' }}>
         <Search onTermSubmit={this.onTermSubmit} />
+        <Results
+          weblio={this.state.weblio}
+          infoseek={this.state.infoseek}
+          eijiro={this.state.eijiro}
+          loading={this.state.loading}
+        />
       </div>
     );
   }
