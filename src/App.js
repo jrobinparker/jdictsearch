@@ -1,12 +1,32 @@
 import React from 'react';
+import axios from 'axios';
+import cheerio from 'cheerio';
+import Search from './components/Search';
 import './App.css';
 
-function App() {
-  return (
-    <div className="ui container" style={{ marginTop: '20px' }}>
-      <h1>JDict Search</h1>
-    </div>
-  );
+class App extends React.Component {
+  state = {
+      weblio: ''
+    }
+
+    onTermSubmit = searchTerm => {
+      axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
+        .then(res => {
+          const $ = cheerio.load(res.data);
+          const result1Data = $('.content-explanation.ej').text();
+          this.setState({
+            weblio: result1Data
+          });
+          console.log(this.state.weblio)
+    })
+  }
+  render () {
+    return (
+      <div className="ui container" style={{ marginTop: '20px' }}>
+        <Search onTermSubmit={this.onTermSubmit} />
+      </div>
+    );
+  }
 }
 
 export default App;
