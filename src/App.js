@@ -10,15 +10,13 @@ class App extends React.Component {
       weblio: '',
       infoseek: '',
       eijiro: '',
+
       loading: false
     }
 
     onTermSubmit = searchTerm => {
       axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
         .then(res => {
-          this.setState({
-            loading: true
-          })
           const $ = cheerio.load(res.data);
           const result1Data = $('.content-explanation.ej').text();
           this.setState({
