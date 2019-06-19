@@ -129,3 +129,12 @@ a, a:hover {
   color: white;
   text-decoration: none;
 }
+
+.close {
+  color: gray;
+}
+
+.close:hover {
+  cursor: pointer;
+  color: black;
+}

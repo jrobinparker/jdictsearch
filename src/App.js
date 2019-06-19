@@ -11,12 +11,13 @@ class App extends React.Component {
       infoseek: '',
       eijiro: '',
       term: '',
-      loading: false
+      renderResults: false,
     }
 
     onTermSubmit = searchTerm => {
       this.setState({
-        term: searchTerm
+        term: searchTerm,
+        renderResults: true
       })
 
       axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
@@ -48,6 +49,16 @@ class App extends React.Component {
         })
   }
 
+  handleReload = () => {
+    this.setState({
+      weblio: '',
+      infoseek: '',
+      eijiro: '',
+      term: '',
+      renderResults: false
+    })
+  }
+
   render () {
     return (
       <div className="container">
@@ -56,13 +67,18 @@ class App extends React.Component {
           <h4>the english-japanese search aggregator</h4>
         </div>
         <div className="row">
-          <Search onTermSubmit={this.onTermSubmit} />
-          <Results
-            weblio={this.state.weblio}
-            infoseek={this.state.infoseek}
-            eijiro={this.state.eijiro}
-            term={this.state.term}
-          />
+          <Search onTermSubmit={this.onTermSubmit} removeResults={this.handleReload} />
+          {this.state.renderResults ? (
+            <Results
+              weblio={this.state.weblio}
+              infoseek={this.state.infoseek}
+              eijiro={this.state.eijiro}
+              term={this.state.term}
+            />
+          ) : (
+              <React.Fragment></React.Fragment>
+          )
+          }
         </div>
       </div>
     );
