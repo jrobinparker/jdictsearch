@@ -50,14 +50,20 @@ class App extends React.Component {
 
   render () {
     return (
-      <div className="ui container" style={{ marginTop: '20px' }}>
-        <Search onTermSubmit={this.onTermSubmit} />
-        <Results
-          weblio={this.state.weblio}
-          infoseek={this.state.infoseek}
-          eijiro={this.state.eijiro}
-          term={this.state.term}
-        />
+      <div className="container">
+        <div className="title">
+          <h2>JDictSearch</h2>
+          <h4>the english-japanese search aggregator</h4>
+        </div>
+        <div className="row">
+          <Search onTermSubmit={this.onTermSubmit} />
+          <Results
+            weblio={this.state.weblio}
+            infoseek={this.state.infoseek}
+            eijiro={this.state.eijiro}
+            term={this.state.term}
+          />
+        </div>
       </div>
     );
   }

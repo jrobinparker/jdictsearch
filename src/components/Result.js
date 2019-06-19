@@ -1,5 +1,4 @@
 import React from 'react';
-import '../App.css';
 
 const Result = props => {
 
@@ -13,7 +12,7 @@ const Result = props => {
 
 
   return (
-    <div className="column">
+    <div className="col s4">
         <div className="result" onMouseLeave={() => setButtonStyle()}>
 
           <div className="column-header">
