@@ -78,6 +78,10 @@ li {
   top: 5%;
 }
 
+.view-link:hover {
+  cursor: pointer;
+}
+
 .result:hover + .view-link {
   display: block;
   animation: fadeInDown .5s;
@@ -94,7 +98,7 @@ li {
             }
          }
 
-
-.viewlink:hover {
-  visibility: visible;
+a, a:hover {
+  color: white;
+  text-decoration: none;
 }

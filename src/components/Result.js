@@ -3,8 +3,10 @@ import '../App.css';
 
 const Result = props => {
 
+  const { buttonId, name, text, url } = props
+
   const setButtonStyle = () => {
-    const buttonIdNumber = props.buttonId
+    const buttonIdNumber = buttonId
     const buttonIdTag = document.getElementById(buttonIdNumber)
     buttonIdTag.style.display = 'block'
   }
@@ -15,19 +17,18 @@ const Result = props => {
         <div className="result" onMouseLeave={() => setButtonStyle()}>
 
           <div className="column-header">
-            {props.name}
+            {name}
           </div>
 
           <div className="result-text">
             <ul>
-              {props.text.map((item, i) => {
+              {text.map((item, i) => {
                 return <li key={i}>{item}</li>;
               })}
             </ul>
           </div>
         </div>
-        <div className='view-link' id={props.buttonId}>click here for full definition</div>
-
+        <div className="view-link" id={props.buttonId}><a href={url} target="_blank" rel="noopener noreferrer">click here for full definition</a></div>
     </div>
     )
 };
