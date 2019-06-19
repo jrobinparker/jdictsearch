@@ -1,6 +1,6 @@
 import React from 'react';
 import Result from './Result';
-import { Spinner } from './Spinner';
+import Loader from './Loader';
 
 class Results extends React.Component {
   state = {
@@ -57,7 +57,7 @@ class Results extends React.Component {
     const { term } = this.props
 
     if (this.state.loading) {
-      loading = <Spinner />
+      loading = <Loader />
     }
 
     if (this.state.weblioResult.length >= 1) {
@@ -74,15 +74,11 @@ class Results extends React.Component {
 
     return (
 
-    <div className="ui three column grid">
-      {loading}
-
-      <div className="row">
+    <div className="row">
+        {loading}
         {weblioComponent}
         {infoseekComponent}
         {eijiroComponent}
-      </div>
-
     </div>
     );
   }

@@ -19,13 +19,9 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>JDictSearch</h1>
-        <h3>the english-japanese search aggregator</h3>
-        <form onSubmit={this.onFormSubmit} className="ui form" style={{ marginBottom: '20px' }}>
-              <input className="prompt" type="text" placeholder="enter an english word..." name="searchTerm" value={this.state.searchTerm} onChange={this.onChange} />
-        </form>
-      </div>
+          <form onSubmit={this.onFormSubmit} className="input-field" style={{ marginTop: '10%' }}>
+              <input type="text" className="input-text" placeholder="enter an english word..." name="searchTerm" value={this.state.searchTerm} onChange={this.onChange} />
+          </form>
     )
   }
 }

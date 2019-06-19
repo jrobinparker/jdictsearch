@@ -5,14 +5,16 @@ body {
   overflow-y: hidden;
 }
 
-h1 {
+* {
   font-family: 'Work Sans', sans-serif;
-  font-size: 3rem;
+  font-weight: 500;
+}
+
+h2 {
   text-align: center;
 }
 
-h3 {
-  font-family: 'Work Sans', sans-serif;
+h4 {
   text-align: center;
 }
 
@@ -25,6 +27,18 @@ li {
   margin: 0px 0px 10px -10px;
   padding: 0px 10px 10px 0px;
   font-size: 1.25rem;
+}
+
+.input-field [type="text"] {
+  font-family: 'Work Sans', sans-serif !important;
+  font-size: 2rem !important;
+  color: black !important;
+}
+
+::placeholder {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 2rem;
+  color: black;
 }
 
 .column-header {
@@ -49,21 +63,34 @@ li {
   -moz-box-shadow: 1px 11px 25px -8px rgba(0,0,0,0.75);
   box-shadow: 1px 11px 25px -8px rgba(0,0,0,0.75);
   overflow-y: scroll;
-  animation: flyInUp 2s;
+  animation: fadeInUp 1s;
 }
 
-@keyframes bounceIn {
-  0% {
-    transform: scale(0.1);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.2);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-  }
+.result-text {
+  padding-left: 20px;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0);
+        opacity: 0
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
+
+@-webkit-keyframes fadeInUp {
+    from {
+        transform: translate3d(0,40px,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
 }
 
 .view-link  {
@@ -75,7 +102,7 @@ li {
   text-align: center;
   color: white;
   position: relative;
-  top: 5%;
+  top: 10px;
 }
 
 .view-link:hover {
@@ -94,7 +121,7 @@ li {
             }
             100% {
                opacity: 1;
-               transform: translateY(0);
+               transform: translateY(0px);
             }
          }
 
