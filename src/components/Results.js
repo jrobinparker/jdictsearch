@@ -1,15 +1,21 @@
 import React from 'react';
 import Result from './Result';
+import { Spinner } from './Spinner';
 
 class Results extends React.Component {
   state = {
     weblioResult: [],
     infoseekResult: [],
-    eijiroResult: []
+    eijiroResult: [],
+    loading: false
   }
 
   componentWillReceiveProps(nextProps) {
-
+    if (this.state.weblioResult.length === 0 || this.state.infoseekResult.length === 0 || this.state.eijiroResult.length === 0) {
+      this.setState({
+        loading: true
+      })
+    }
     // weblio search results
     if (nextProps.weblio) {
       const weblioSearchFullArray = nextProps.weblio.split("主な意味");
@@ -41,26 +47,38 @@ class Results extends React.Component {
         eijiroResult: eijiroArray
       })
     }
+
+    if (this.state.weblioResult.length >= 1 || this.state.infoseekResult.length >= 1 || this.state.eijiroResult.length >= 1) {
+      this.setState({
+        loading: false
+      })
+    }
   }
 
   render() {
-    let weblioComponent, infoseekComponent, eijiroComponent
+
+    let weblioComponent, infoseekComponent, eijiroComponent, loading
+
+    if (this.state.loading) {
+      loading = <Spinner />
+    }
 
     if (this.state.weblioResult.length >= 1) {
-      weblioComponent = <Result name="weblio" text={this.state.weblioResult} />
+      weblioComponent = <Result name="weblio" text={this.state.weblioResult} buttonId="1" />
     }
 
     if (this.state.infoseekResult.length >= 1) {
-      infoseekComponent = <Result name="infoseek" text={this.state.infoseekResult} />
+      infoseekComponent = <Result name="infoseek" text={this.state.infoseekResult} buttonId="2" />
     }
 
     if (this.state.eijiroResult.length >= 1) {
-      eijiroComponent = <Result name="eijiro" text={this.state.eijiroResult} />
-
+      eijiroComponent = <Result name="eijiro" text={this.state.eijiroResult} buttonId="3" />
     }
+
     return (
 
     <div className="ui three column grid">
+      {loading}
 
       <div className="row">
         {weblioComponent}

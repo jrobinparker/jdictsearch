@@ -19,11 +19,11 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className="search-bar ui segment">
-        <h1 className="ui center aligned header">JDictSearch</h1>
-        <h4 className="ui center aligned header" style={{ marginBottom: '20px' }}>the english-japanese search aggregator</h4>
-        <form onSubmit={this.onFormSubmit} className="ui form">
-              <input className="prompt" type="text" placeholder="enter an english word..." name="searchTerm" value={this.state.searchTerm} onChange={this.onChange} className="field" />
+      <div>
+        <h1>JDictSearch</h1>
+        <h3>the english-japanese search aggregator</h3>
+        <form onSubmit={this.onFormSubmit} className="ui form" style={{ marginBottom: '20px' }}>
+              <input className="prompt" type="text" placeholder="enter an english word..." name="searchTerm" value={this.state.searchTerm} onChange={this.onChange} />
         </form>
       </div>
     )
