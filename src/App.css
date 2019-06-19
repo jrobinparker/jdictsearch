@@ -33,6 +33,7 @@ li {
   font-family: 'Work Sans', sans-serif !important;
   font-size: 2rem !important;
   color: black !important;
+  width: 97%
 }
 
 ::placeholder {
