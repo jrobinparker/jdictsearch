@@ -10,7 +10,6 @@ const Result = props => {
     buttonIdTag.style.display = 'block'
   }
 
-
   return (
     <div className="col s4">
         <div className="result" onMouseLeave={() => setButtonStyle()}>
