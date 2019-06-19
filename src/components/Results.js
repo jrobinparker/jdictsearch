@@ -59,20 +59,22 @@ class Results extends React.Component {
 
     let weblioComponent, infoseekComponent, eijiroComponent, loading
 
+    const { term } = this.props
+
     if (this.state.loading) {
       loading = <Spinner />
     }
 
     if (this.state.weblioResult.length >= 1) {
-      weblioComponent = <Result name="weblio" text={this.state.weblioResult} buttonId="1" />
+      weblioComponent = <Result name="weblio" url={`https://ejje.weblio.jp/content/${term}`} text={this.state.weblioResult} buttonId="1" />
     }
 
     if (this.state.infoseekResult.length >= 1) {
-      infoseekComponent = <Result name="infoseek" text={this.state.infoseekResult} buttonId="2" />
+      infoseekComponent = <Result name="infoseek" url={`http://dictionary.infoseek.ne.jp/ejword/${term}`} text={this.state.infoseekResult} buttonId="2" />
     }
 
     if (this.state.eijiroResult.length >= 1) {
-      eijiroComponent = <Result name="eijiro" text={this.state.eijiroResult} buttonId="3" />
+      eijiroComponent = <Result name="eijiro" url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`} text={this.state.eijiroResult} buttonId="3" />
     }
 
     return (
