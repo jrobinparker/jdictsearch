@@ -27,7 +27,7 @@ class Search extends React.Component {
   render() {
     return (
           <form onSubmit={this.onFormSubmit} className="input-field" style={{ marginTop: '10%' }}>
-              <input type="text" className="input-text" placeholder="enter an english word..." name="searchTerm" value={this.state.searchTerm} onChange={this.onChange}/>
+              <input type="text" className="input-text" placeholder="enter an english word..." name="searchTerm" value={this.state.searchTerm} onChange={this.onChange} style={{ width: '97%' }}/>
               <i className="material-icons close" onClick={this.removeResults}>close</i>
           </form>
     )

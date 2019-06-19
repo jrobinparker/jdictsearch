@@ -64,7 +64,7 @@ class App extends React.Component {
       <div className="container">
         <div className="title">
           <h2>JDictSearch</h2>
-          <h4>english-japanese search aggregator</h4>
+          <h4>english-japanese dictionary search aggregator</h4>
         </div>
         <div className="row">
           <Search onTermSubmit={this.onTermSubmit} removeResults={this.handleReload} />
