@@ -62,7 +62,7 @@ li {
   -webkit-box-shadow: 1px 11px 25px -8px rgba(0,0,0,0.75);
   -moz-box-shadow: 1px 11px 25px -8px rgba(0,0,0,0.75);
   box-shadow: 1px 11px 25px -8px rgba(0,0,0,0.75);
-  overflow-y: scroll;
+  overflow-y: auto;
   animation: fadeInUp 1s;
 }
 
