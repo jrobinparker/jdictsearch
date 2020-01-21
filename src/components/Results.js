@@ -74,7 +74,7 @@ class Results extends React.Component {
 
     return (
 
-    <div className="row">
+    <div className="results-grid">
         {loading}
         {weblioComponent}
         {infoseekComponent}
