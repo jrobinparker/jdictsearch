@@ -11,10 +11,10 @@ const Result = props => {
   }
 
   return (
-    <div className="col s4">
+    <div className="result-column">
         <div className="result" onMouseLeave={() => setButtonStyle()}>
 
-          <div className="column-header">
+          <div className="result-header">
             {name}
           </div>
 
