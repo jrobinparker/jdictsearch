@@ -1,21 +1,26 @@
 import React from 'react';
 import Result from './Result';
 import Loader from './Loader';
+import gsap from 'gsap';
 
 class Results extends React.Component {
   state = {
     weblioResult: [],
     infoseekResult: [],
     eijiroResult: [],
-    loading: false
+    loading: 'idle'
+  }
+
+  componentDidMount() {
+    console.log('results grid mounted')
+  }
+
+  componentWillUnmount() {
+    console.log('results grid unmounted')
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.weblioResult.length === 0 || this.state.infoseekResult.length === 0 || this.state.eijiroResult.length === 0) {
-      this.setState({
-        loading: true
-      })
-    }
+
     // weblio search results
     if (nextProps.weblio) {
       const weblioSearch = nextProps.weblio.split("主な意味").toString().split("、");
@@ -43,11 +48,12 @@ class Results extends React.Component {
       })
     }
 
-    if (this.state.weblioResult.length >= 1 || this.state.infoseekResult.length >= 1 || this.state.eijiroResult.length >= 1) {
+    if (this.state.weblioResult && this.state.infoseekResult && this.state.eijiroResult) {
       this.setState({
-        loading: false
+        loading: 'loaded'
       })
     }
+
   }
 
   render() {
@@ -56,25 +62,17 @@ class Results extends React.Component {
 
     const { term } = this.props
 
-    if (this.state.loading) {
-      loading = <Loader />
-    }
+    if (this.state.loaded === 'loaded') {
+      weblioComponent = <Result name="weblio" url={`https://ejje.weblio.jp/content/${term}`} text={this.state.weblioResult} buttonId="1" columnName="weblio" key={Math.random()} />
 
-    if (this.state.weblioResult.length >= 1) {
-      weblioComponent = <Result name="weblio" url={`https://ejje.weblio.jp/content/${term}`} text={this.state.weblioResult} buttonId="1" />
-    }
+      infoseekComponent = <Result name="infoseek" url={`http://dictionary.infoseek.ne.jp/ejword/${term}`} text={this.state.infoseekResult} buttonId="2" columnName="infoseek" key={Math.random()}/>
 
-    if (this.state.infoseekResult.length >= 1) {
-      infoseekComponent = <Result name="infoseek" url={`http://dictionary.infoseek.ne.jp/ejword/${term}`} text={this.state.infoseekResult} buttonId="2" />
-    }
-
-    if (this.state.eijiroResult.length >= 1) {
-      eijiroComponent = <Result name="eijiro" url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`} text={this.state.eijiroResult} buttonId="3" />
+      eijiroComponent = <Result name="eijiro" url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`} text={this.state.eijiroResult} buttonId="3" columnName="eijiro" key={Math.random()}/>
     }
 
     return (
 
-    <div className="results-grid">
+    <div className="results-grid" key={Math.random()} id="results-grid">
         {loading}
         {weblioComponent}
         {infoseekComponent}

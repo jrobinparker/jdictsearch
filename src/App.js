@@ -20,6 +20,7 @@ class App extends React.Component {
         renderResults: true
       })
 
+
       axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
         .then(res => {
           const $ = cheerio.load(res.data);
@@ -55,16 +56,20 @@ class App extends React.Component {
       infoseek: '',
       eijiro: '',
       term: '',
-      renderResults: false
     })
+    const results = document.querySelector('.results-grid')
+    results.style.opacity = 0
   }
 
   render () {
     return (
       <div className="container">
         <div className="header">
-          <div className="header-text">JDictSearch</div>
-          <div className="header-subtext">english-japanese dictionary search aggregator</div>
+          <div id="toggle"><i className="fas fa-moon" /> | </div>
+          <div className="header-text">
+            <div className="header-maintext">JDictSearch</div>
+            <div className="header-subtext">english-japanese dictionary search aggregator</div>
+          </div>
         </div>
         <div className="row">
           <Search onTermSubmit={this.onTermSubmit} removeResults={this.handleReload} />
