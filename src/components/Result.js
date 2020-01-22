@@ -1,8 +1,31 @@
 import React from 'react';
+import gsap from 'gsap';
 
-const Result = props => {
+class Result extends React.Component {
+  state = {
+    loaded: false,
+    text: ''
+  }
 
-  const { buttonId, name, text, url } = props
+  appear = () => {
+    const columnName = this.props.columnName
+    const column = document.getElementById(columnName)
+    gsap.to(column, .5, {opacity: 1, y: -5})
+  }
+
+  disappear = () => {
+    const columnName = this.props.columnName
+    const column = document.getElementById(columnName)
+    gsap.to(column, .5, {opacity: 0, y: 5})
+  }
+
+  componentDidMount() {
+    this.appear()
+  }
+
+  render() {
+
+  const { buttonId, name, text, url, columnName } = this.props
 
   const setButtonStyle = () => {
     const buttonIdNumber = buttonId
@@ -12,7 +35,7 @@ const Result = props => {
 
   return (
     <div className="result-column">
-        <div className="result" onMouseLeave={() => setButtonStyle()}>
+        <div className="result" onMouseLeave={() => setButtonStyle()} id={`${columnName}`}>
 
           <div className="result-header">
             {name}
@@ -26,9 +49,10 @@ const Result = props => {
             </ul>
           </div>
         </div>
-        <div className="view-link" id={props.buttonId}><a href={url} target="_blank" rel="noopener noreferrer">click here for full definition</a></div>
+        <div className="view-link" id={buttonId}><a href={url} target="_blank" rel="noopener noreferrer">click here for full definition</a></div>
     </div>
     )
-};
+}
+}
 
 export default Result;
