@@ -2,26 +2,11 @@ import React from 'react';
 import gsap from 'gsap';
 
 class Result extends React.Component {
-  state = {
-    loaded: false,
-    text: ''
-  }
-
-  appear = () => {
-    const columnName = this.props.columnName
-    const column = document.getElementById(columnName)
-    gsap.to(column, .5, {opacity: 1, y: -5})
-  }
-
-  disappear = () => {
-    const columnName = this.props.columnName
-    const column = document.getElementById(columnName)
-    gsap.to(column, .5, {opacity: 0, y: 5})
-  }
 
   componentDidMount() {
-    this.appear()
+    this.props.appear()
   }
+
 
   render() {
 
@@ -35,7 +20,7 @@ class Result extends React.Component {
 
   return (
     <div className="result-column">
-        <div className="result" onMouseLeave={() => setButtonStyle()} id={`${columnName}`}>
+        <div className="result" id={`${columnName}`}>
 
           <div className="result-header">
             {name}
@@ -49,7 +34,6 @@ class Result extends React.Component {
             </ul>
           </div>
         </div>
-        <div className="view-link" id={buttonId}><a href={url} target="_blank" rel="noopener noreferrer">click here for full definition</a></div>
     </div>
     )
 }
