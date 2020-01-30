@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
+import gsap from 'gsap';
 import Search from './components/Search';
 import Results from './components/Results';
 import './App.css';
@@ -11,15 +12,14 @@ class App extends React.Component {
       infoseek: '',
       eijiro: '',
       term: '',
-      renderResults: false,
+      renderChild: false
     }
 
     onTermSubmit = searchTerm => {
       this.setState({
         term: searchTerm,
-        renderResults: true
+        renderChild: true
       })
-
 
       axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
         .then(res => {
@@ -51,38 +51,57 @@ class App extends React.Component {
   }
 
   handleReload = () => {
+
+  const result1 = document.querySelectorAll('.result')[0]
+  const result2 = document.querySelectorAll('.result')[1]
+  const result3 = document.querySelectorAll('.result')[2]
+  const tl = gsap.timeline()
+
+  tl.to(result1, .25, {opacity: 0, y: 5})
+    .to(result2, .25, {opacity: 0, y: 5})
+    .to(result3, .25, {opacity: 0, y: 5})
+
+  setTimeout(() => {
     this.setState({
       weblio: '',
       infoseek: '',
       eijiro: '',
       term: '',
-    })
-    const results = document.querySelector('.results-grid')
-    results.style.opacity = 0
+      renderChild: !this.state.renderChild
+    })}, 1000)
+  }
+
+  resultAnimation = () => {
+    const result1 = document.querySelectorAll('.result')
+    gsap.to(result1, .5, {opacity: 1, y: -5})
   }
 
   render () {
+
     return (
       <div className="container">
         <div className="header">
-          <div id="toggle"><i className="fas fa-moon" /> | </div>
           <div className="header-text">
             <div className="header-maintext">JDictSearch</div>
             <div className="header-subtext">english-japanese dictionary search aggregator</div>
           </div>
         </div>
         <div className="row">
-          <Search onTermSubmit={this.onTermSubmit} removeResults={this.handleReload} />
-          {this.state.renderResults ? (
-            <Results
-              weblio={this.state.weblio}
-              infoseek={this.state.infoseek}
-              eijiro={this.state.eijiro}
-              term={this.state.term}
-            />
-          ) : (
-              <React.Fragment></React.Fragment>
-          )
+          <Search
+            onTermSubmit={this.onTermSubmit}
+            handleReload={this.handleReload}
+          />
+            {this.state.renderChild ? (
+              <Results
+                weblio={this.state.weblio}
+                infoseek={this.state.infoseek}
+                eijiro={this.state.eijiro}
+                term={this.state.term}
+                showResults={this.resultAnimation}
+              />
+            ) : (
+                <React.Fragment></React.Fragment>
+            )
           }
         </div>
       </div>
