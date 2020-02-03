@@ -3,7 +3,7 @@ body {
   color: black;
   font-family: 'Alata', sans-serif;
   margin: 0 auto;
-  overflow-y: hidden;  
+  overflow-y: hidden;
 }
 
 ul {
@@ -89,12 +89,18 @@ i {
   font-size: 1.75rem;
   cursor: pointer;
   color: #5d13e7;
-  visibility: hidden
+  visibility: hidden;
 }
 
-.circle {
-
+.spin-animation {
+  -webkit-animation: spin 1s linear infinite;
+  -moz-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
 }
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .results-grid {
   margin-top: 5%;
