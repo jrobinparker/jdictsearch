@@ -73,6 +73,7 @@ class App extends React.Component {
 
   resultAnimation = () => {
     const result1 = document.querySelectorAll('.result')
+    const linkButtons = document.querySelectorAll('.view-link')
     gsap.to(result1, .5, {opacity: 1, y: -5})
   }
 

@@ -2,9 +2,29 @@ import React from 'react';
 import gsap from 'gsap';
 
 class Result extends React.Component {
+  state = {
+    viewLink: false
+  }
 
   componentDidMount() {
     this.props.appear()
+  }
+
+  showLink = () => {
+    this.setState({
+      viewLink: true
+    })
+    const linkButton = document.getElementById(`${this.props.name}`)
+    gsap.to(linkButton, .5, {visibility: 'visible', opacity: 1, y: 5})
+  }
+
+  hideLink = () => {
+
+    const linkButton = document.getElementById(`${this.props.name}`)
+    gsap.to(linkButton, .5, {visibility: 'hidden', opacity: 0, y: -5})
+    this.setState({
+      viewLink: false
+    })
   }
 
 
@@ -19,7 +39,7 @@ class Result extends React.Component {
   }
 
   return (
-    <div className="result-column">
+    <div className="result-column" onMouseOver={this.showLink} onMouseOut={this.hideLink}>
         <div className="result" id={`${columnName}`}>
 
           <div className="result-header">
@@ -34,6 +54,16 @@ class Result extends React.Component {
             </ul>
           </div>
         </div>
+        {this.state.viewLink ? (
+            <div className="view-link" id={`${name}`}>
+              <a href={url} target="_blank" rel="noopener noreferrer">see all translations</a>
+            </div>
+        ) : (
+          <div className="view-link" style={{ visibility: 'hidden' }} id={`${name}`}>
+            <a href={url} target="_blank" rel="noopener noreferrer">see all translations</a>
+          </div>
+        )}
+
     </div>
     )
 }
