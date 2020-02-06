@@ -6,9 +6,20 @@ class Arrow extends React.Component {
     arrow: 'down'
   }
 
-
+  toggleDisplay = () => {
+    const arrow = document.querySelector('.arrow-container')
+    if (window.innerWidth > 650) {
+      gsap.to(arrow, .5, {visibility: 'hidden', opacity: 0})
+    } else {
+      gsap.to(arrow, .5, {visibility: 'visible', opacity: 1})
+    }
+  }
 
   render() {
+    window.addEventListener('resize', () => {
+      this.toggleDisplay()
+    }, false)
+
     return (
       <div className="arrow-container"
         onMouseOver={() => {

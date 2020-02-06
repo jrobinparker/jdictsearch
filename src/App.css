@@ -4,6 +4,7 @@ body {
   font-family: 'Alata', sans-serif;
   margin: 0 auto;
   overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 ul {
@@ -255,13 +256,9 @@ a, a:hover {
   color: black;
 }
 
-/* phones */
+/* small screens */
 
-@media only screen and (min-width: 319px) and (max-width: 500px) {
-
-  body {
-    overflow-x: hidden;
-  }
+@media only screen and (min-width: 319px) and (max-width: 471.5px) {
 
   .header {
     height: 15vh;
@@ -328,6 +325,146 @@ a, a:hover {
     left: 65%;
     top: 17%;
     font-size: 1.25rem;
+  }
+
+}
+
+/* medium screens */
+
+@media only screen and (min-width: 472px) and (max-width: 650px) {
+
+  .header {
+    height: 15vh;
+    clip-path: polygon(0% 0, 100% 0%, 100% 70%, 0 45%);
+    padding: 10px 0 20px 0;
+  }
+
+  .header-maintext {
+    font-size: 1.25rem;
+  }
+
+  .header-subtext {
+    font-size: 1rem;
+  }
+
+  form {
+    width: 100%;
+    position: relative;
+    left: 7.5%;
+    margin-top: -5%;
+  }
+
+  input {
+    width: 60%;
+    font-size: 1.25rem;
+  }
+
+  .arrow-container {
+    margin-top: 5%;
+  }
+
+  #arrow {
+    padding: 15px;
+  }
+
+  .arrow-text {
+    font-size: 1rem;
+  }
+
+  .results-grid {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 90vw;
+    width: 90%;
+    flex-direction: column;
+    opacity: 0;
+  }
+
+  .result-column {
+    width: 100%;
+    height: 40%;
+    margin-bottom: 50px;
+  }
+
+
+  #icon {
+    left: -6.5%;
+    top: 3%;
+    font-size: 1.25rem;
+  }
+
+  #clear-icon {
+    position: absolute;
+    left: 65%;
+    top: 26%;
+    font-size: 1.25rem;
+  }
+
+}
+
+/* med-large screens */
+
+@media only screen and (min-width: 650.5px) and (max-width: 1000px) {
+
+  .header {
+    height: 20vh;
+    clip-path: polygon(0% 0, 100% 0%, 100% 70%, 0 45%);
+    padding: 10px 0 20px 0;
+  }
+
+  .header-maintext {
+    font-size: 1.5rem;
+  }
+
+  .header-subtext {
+    font-size: 1.25rem;
+  }
+
+  form {
+    width: 100%;
+    margin-top: -5%;
+  }
+
+  input {
+    width: 77%;
+    font-size: 1.25rem;
+  }
+
+  .results-grid {
+    left: 2%;
+  }
+
+  #icon {
+    left: -3%;
+    top: 1%;
+    font-size: 1.25rem;
+  }
+
+  #clear-icon {
+    left: -8%;
+    top: -1%;
+    font-size: 1.25rem;
+  }
+
+}
+
+
+/* small-mid laptop screens */
+
+@media only screen and (min-width: 1000.5px) and (max-width: 1200px) {
+
+  .results-grid {
+    left: 3.5%;
+  }
+
+  #icon {
+    left: -1%;
+    top: -2%;
+  }
+
+  #clear-icon {
+    left: -5.25%;
+    top: -3%;
   }
 
 }
