@@ -39,7 +39,10 @@ class Result extends React.Component {
   }
 
   return (
-    <div className="result-column" onMouseOver={this.showLink} onMouseOut={this.hideLink}>
+    <div
+      className="result-column"
+      onMouseOver={this.showLink}
+      onMouseOut={this.hideLink}>
         <div className="result">
 
           <div className="result-header">

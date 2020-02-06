@@ -4,6 +4,7 @@ import cheerio from 'cheerio';
 import gsap from 'gsap';
 import Search from './components/Search';
 import Results from './components/Results';
+import NoResults from './components/NoResults';
 import Arrow from './components/Arrow';
 import './App.css';
 
@@ -13,7 +14,8 @@ class App extends React.Component {
       infoseek: '',
       eijiro: '',
       term: '',
-      renderChild: false
+      renderChild: 'results',
+      failed: false
     }
 
     onTermSubmit = searchTerm => {
@@ -27,8 +29,7 @@ class App extends React.Component {
           const $ = cheerio.load(res.data);
           const result1Data = $('.content-explanation.ej').text();
           this.setState({
-            weblio: result1Data,
-            loading: false
+            weblio: result1Data
           });
 
         return axios.get(`https://cors-anywhere.herokuapp.com/http://dictionary.infoseek.ne.jp/ejword/${searchTerm}`)
@@ -49,6 +50,13 @@ class App extends React.Component {
            })
           })
         })
+        .catch(err => {
+          this.setState({
+            failed: true,
+            renderChild: true
+          })
+          console.log('failed search', this.state.failed)
+        })
   }
 
   handleReload = () => {
@@ -56,11 +64,13 @@ class App extends React.Component {
     const result1 = document.querySelectorAll('.result')[0]
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
+    const noResults = document.querySelector('.no-results')
     const tl = gsap.timeline()
 
     tl.to(result1, .25, {opacity: 0, y: 5})
       .to(result2, .25, {opacity: 0, y: 5})
       .to(result3, .25, {opacity: 0, y: 5})
+      .to(noResults, .25, {opacity: 0, y: 5})
 
     setTimeout(() => {
       this.setState({
@@ -68,7 +78,8 @@ class App extends React.Component {
         infoseek: '',
         eijiro: '',
         term: '',
-        renderChild: !this.state.renderChild
+        renderChild: !this.state.renderChild,
+        failed: false
       })}, 1000)
   }
 
@@ -93,15 +104,19 @@ class App extends React.Component {
             onTermSubmit={this.onTermSubmit}
             handleReload={this.handleReload}
           />
-          <Arrow />
-            {this.state.renderChild ? (
-                <Results
-                  weblio={this.state.weblio}
-                  infoseek={this.state.infoseek}
-                  eijiro={this.state.eijiro}
-                  term={this.state.term}
-                  showResults={this.resultAnimation}
-                />
+            {this.state.renderChild === true && this.state.failed === false ? (
+              <React.Fragment>
+                  <Arrow display={true} />
+                  <Results
+                    weblio={this.state.weblio}
+                    infoseek={this.state.infoseek}
+                    eijiro={this.state.eijiro}
+                    term={this.state.term}
+                    showResults={this.resultAnimation}
+                  />
+                </React.Fragment>
+            ) : this.state.renderChild === true && this.state.failed === true ? (
+              <NoResults />
             ) : (
                 <React.Fragment></React.Fragment>
             )
