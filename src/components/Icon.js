@@ -6,6 +6,7 @@ class Icon extends React.Component {
   searchAnimation = () => {
     const icon = document.getElementById('icon')
     const clear = document.getElementById('clear-icon')
+    const arrow = document.querySelector('.arrow-container')
     const tl = gsap.timeline()
 
     tl
@@ -14,6 +15,9 @@ class Icon extends React.Component {
       .to(icon, .5, {opacity: 0, visibility: 'hidden'})
       .to(clear, .5, {opacity: 1, visibility: 'visible'})
 
+    if (window.innerWidth < 680) {
+      tl.to(arrow, .5, {visibility: 'visible', opacity: 1})
+    }
   }
 
   handleClick = e => {
@@ -25,11 +29,16 @@ class Icon extends React.Component {
     const results = document.querySelectorAll('.result')
     const icon = document.getElementById('icon')
     const clear = document.getElementById('clear-icon')
+    const arrow = document.querySelector('.arrow-container')
     const tl = gsap.timeline()
 
     tl
       .to(clear, .1, {opacity: 0, visibility: 'hidden'})
       .to(icon, .1, {opacity: 1, visibility: 'visible', className: '-= fas fa-search '})
+
+    if (window.innerWidth < 680) {
+      tl.to(arrow, .5, {visibility: 'hidden', opacity: 0})
+    }
 
     this.props.clear()
   }

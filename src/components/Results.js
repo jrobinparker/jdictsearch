@@ -48,12 +48,12 @@ class Results extends React.Component {
 
   render() {
 
-    let weblioComponent, infoseekComponent, eijiroComponent, loading
+    let weblioComponent, infoseekComponent, eijiroComponent
 
     const { term } = this.props
 
     if (this.state.weblioResult.length >= 1) {
-      weblioComponent = <Result name="weblio" url={`https://ejje.weblio.jp/content/${term}`} text={this.state.weblioResult} appear={this.props.showResults} />
+      weblioComponent = <Result name="weblio" url={`https://ejje.weblio.jp/content/${term}`} text={this.state.weblioResult} appear={this.props.showResults} columnName="weblio"/>
     }
 
     if (this.state.infoseekResult.length >= 1) {
