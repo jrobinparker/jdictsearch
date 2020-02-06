@@ -26,7 +26,6 @@ class Icon extends React.Component {
   }
 
   clearSearch = () => {
-    const results = document.querySelectorAll('.result')
     const icon = document.getElementById('icon')
     const clear = document.getElementById('clear-icon')
     const arrow = document.querySelector('.arrow-container')

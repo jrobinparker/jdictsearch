@@ -55,7 +55,6 @@ class Search extends React.Component {
                 clear={this.clearSearch}
                 animate={this.animateIcon}
                 reset={this.resetIcon}
-                clear={this.clearSearch}
               />
           </form>
     )
