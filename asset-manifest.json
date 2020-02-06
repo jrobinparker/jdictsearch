@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/jdictsearch/static/css/main.c0096568.chunk.css",
+    "main.js": "/jdictsearch/static/js/main.d0e2ad64.chunk.js",
+    "main.js.map": "/jdictsearch/static/js/main.d0e2ad64.chunk.js.map",
+    "runtime~main.js": "/jdictsearch/static/js/runtime~main.16bda6ef.js",
+    "runtime~main.js.map": "/jdictsearch/static/js/runtime~main.16bda6ef.js.map",
+    "static/js/2.021ab359.chunk.js": "/jdictsearch/static/js/2.021ab359.chunk.js",
+    "static/js/2.021ab359.chunk.js.map": "/jdictsearch/static/js/2.021ab359.chunk.js.map",
+    "index.html": "/jdictsearch/index.html",
+    "precache-manifest.607e710d3719a44c0df1e8742abb304a.js": "/jdictsearch/precache-manifest.607e710d3719a44c0df1e8742abb304a.js",
+    "service-worker.js": "/jdictsearch/service-worker.js",
+    "static/css/main.c0096568.chunk.css.map": "/jdictsearch/static/css/main.c0096568.chunk.css.map"
+  }
+}
