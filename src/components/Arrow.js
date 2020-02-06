@@ -6,6 +6,7 @@ class Arrow extends React.Component {
     arrow: 'down'
   }
 
+
   toggleDisplay = () => {
     const arrow = document.querySelector('.arrow-container')
     if (window.innerWidth > 650) {
@@ -20,10 +21,10 @@ class Arrow extends React.Component {
       this.toggleDisplay()
     }, false)
 
-    return (
-      <div className="arrow-container"
+    let arrow
+    if (this.props.display === true) {
+      arrow = <div className="arrow-container"
         onMouseOver={() => {
-
           const arrow = document.getElementById('arrow')
           gsap.to(arrow, .5, {backgroundColor: '#bdf2d5'})}
         }
@@ -54,7 +55,6 @@ class Arrow extends React.Component {
               className="fas fa-chevron-up"
               id="arrow"
               onClick={() => {
-
                 const top = document.querySelector('.container')
                 top.scrollIntoView({behavior: 'smooth'})
                 const results = document.querySelector('.results-grid')
@@ -66,10 +66,16 @@ class Arrow extends React.Component {
               <div className="arrow-text">return to search</div>
             </div>
         )}
-
-      </div>
+    </div>
+  } else {
+    arrow = {}
+  }
+    return (
+        <React.Fragment>
+          {arrow}
+        </React.Fragment>
     )
   }
 }
 
-export default Arrow
+export default Arrow;
