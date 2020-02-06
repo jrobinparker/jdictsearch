@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "9e32e5c9720a366d4479745cb2287477",
+    "revision": "abbc15b44d6c23d4ff2683fc3c540ed4",
     "url": "/jdictsearch/index.html"
   },
   {
-    "revision": "f2a17077ae3eec5c41dd",
+    "revision": "1d0cf90c4444d49cf9cf",
     "url": "/jdictsearch/static/css/main.c0096568.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/jdictsearch/static/js/2.021ab359.chunk.js"
   },
   {
-    "revision": "f2a17077ae3eec5c41dd",
-    "url": "/jdictsearch/static/js/main.d0e2ad64.chunk.js"
+    "revision": "1d0cf90c4444d49cf9cf",
+    "url": "/jdictsearch/static/js/main.3c59cf8c.chunk.js"
   },
   {
     "revision": "d750b42d5bcfa3bcce3f",
