@@ -20,8 +20,7 @@ class App extends React.Component {
 
     onTermSubmit = searchTerm => {
       this.setState({
-        term: searchTerm,
-        renderChild: true
+        term: searchTerm
       })
 
       axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
@@ -37,7 +36,8 @@ class App extends React.Component {
               const $ = cheerio.load(res.data);
               const result2Data = $('.word_block').children().slice(2, 11).text();
                this.setState({
-                 infoseek: result2Data
+                 infoseek: result2Data,
+                 renderChild: true
                })
 
          return axios.get(`https://cors-anywhere.herokuapp.com/https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`)
@@ -85,7 +85,6 @@ class App extends React.Component {
 
   resultAnimation = () => {
     const result1 = document.querySelectorAll('.result')
-    const linkButtons = document.querySelectorAll('.view-link')
     gsap.to(result1, .5, {opacity: 1, y: -5})
   }
 

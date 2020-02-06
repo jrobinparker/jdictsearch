@@ -30,13 +30,7 @@ class Result extends React.Component {
 
   render() {
 
-  const { buttonId, name, text, url, columnName } = this.props
-
-  const setButtonStyle = () => {
-    const buttonIdNumber = buttonId
-    const buttonIdTag = document.getElementById(buttonIdNumber)
-    buttonIdTag.style.display = 'block'
-  }
+  const { name, text, url } = this.props
 
   return (
     <div
