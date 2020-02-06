@@ -45,6 +45,13 @@ class Results extends React.Component {
     gsap.to(results, .5, {opacity: 1, y: -5})
   }
 
+  toggleOnResize = () => {
+    const results = document.querySelector('.results-grid')
+
+    if (window.innerWidth > 650) {
+      gsap.to(results, .5, {visibility: 'visible', opacity: 1})
+    }
+  }
 
   render() {
 
@@ -63,6 +70,10 @@ class Results extends React.Component {
     if (this.state.eijiroResult.length >= 1) {
       eijiroComponent = <Result name="eijiro" url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`} text={this.state.eijiroResult} appear={this.props.showResults} />
     }
+
+    window.addEventListener('resize', () => {
+      this.toggleOnResize()
+    }, false)
 
     return (
 
