@@ -7,7 +7,7 @@ class Arrow extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.display === true) {
+    if (nextProps.display === true && window.innerWidth < 650) {
       const arrow = document.querySelector('.arrow-container')
       gsap.to(arrow, .5, {visibility: 'visible', opacity: 1})
     }
