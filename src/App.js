@@ -4,6 +4,7 @@ import cheerio from 'cheerio';
 import gsap from 'gsap';
 import Search from './components/Search';
 import Results from './components/Results';
+import Arrow from './components/Arrow';
 import './App.css';
 
 class App extends React.Component {
@@ -52,23 +53,23 @@ class App extends React.Component {
 
   handleReload = () => {
 
-  const result1 = document.querySelectorAll('.result')[0]
-  const result2 = document.querySelectorAll('.result')[1]
-  const result3 = document.querySelectorAll('.result')[2]
-  const tl = gsap.timeline()
+    const result1 = document.querySelectorAll('.result')[0]
+    const result2 = document.querySelectorAll('.result')[1]
+    const result3 = document.querySelectorAll('.result')[2]
+    const tl = gsap.timeline()
 
-  tl.to(result1, .25, {opacity: 0, y: 5})
-    .to(result2, .25, {opacity: 0, y: 5})
-    .to(result3, .25, {opacity: 0, y: 5})
+    tl.to(result1, .25, {opacity: 0, y: 5})
+      .to(result2, .25, {opacity: 0, y: 5})
+      .to(result3, .25, {opacity: 0, y: 5})
 
-  setTimeout(() => {
-    this.setState({
-      weblio: '',
-      infoseek: '',
-      eijiro: '',
-      term: '',
-      renderChild: !this.state.renderChild
-    })}, 1000)
+    setTimeout(() => {
+      this.setState({
+        weblio: '',
+        infoseek: '',
+        eijiro: '',
+        term: '',
+        renderChild: !this.state.renderChild
+      })}, 1000)
   }
 
   resultAnimation = () => {
@@ -92,14 +93,15 @@ class App extends React.Component {
             onTermSubmit={this.onTermSubmit}
             handleReload={this.handleReload}
           />
+          <Arrow />
             {this.state.renderChild ? (
-              <Results
-                weblio={this.state.weblio}
-                infoseek={this.state.infoseek}
-                eijiro={this.state.eijiro}
-                term={this.state.term}
-                showResults={this.resultAnimation}
-              />
+                <Results
+                  weblio={this.state.weblio}
+                  infoseek={this.state.infoseek}
+                  eijiro={this.state.eijiro}
+                  term={this.state.term}
+                  showResults={this.resultAnimation}
+                />
             ) : (
                 <React.Fragment></React.Fragment>
             )

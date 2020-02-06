@@ -34,7 +34,6 @@ li {
   font-size: 2rem;
 }
 
-
 #cursor {
   display: inline-block;
   height: 2rem;
@@ -48,6 +47,7 @@ form {
 
 
 input {
+  display: inline-block;
   position: relative;
   left: 6%;
   width: 80%;
@@ -69,13 +69,15 @@ input::placeholder {
   color: black;
 }
 
-i {
-
+.icon-container {
+  width: 10%;
+  background-color: blue;
 }
 
 #icon {
   position: relative;
   left: 1%;
+  top: 36.5%;
   border-radius: 50%;
   padding: 15px;
   font-size: 1.5rem;
@@ -99,20 +101,60 @@ i {
   animation: spin 1s linear infinite;
 }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+@-moz-keyframes spin
+  {
+    100%
+      {
+        -moz-transform: rotate(360deg);
+        }
+    }
+@-webkit-keyframes spin
+  {
+    100%
+      {
+        -webkit-transform: rotate(360deg);
+      }
+  }
+
+@keyframes spin
+  {
+    100%
+      {
+        transform:rotate(360deg);
+       }
+  }
+
+.arrow-container {
+  visibility: hidden;
+  opacity: 0;
+  color: #5d13e7;
+  font-size: 1.5rem;
+}
+
+.arrow-container div {
+  text-align: center;
+}
+
+.arrow-text {
+  font-size: 1.25rem;
+}
+
+#arrow {
+  display: inline-block;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
 .results-grid {
-  margin-top: 5%;
   position: relative;
   left: 4%;
   width: 100%;
   height: 50vh;
+  display: flex;
 }
 
 .result-column {
-  display: inline-block;
   height: 80%;
   width: 30%;
   margin-right: 20px;
@@ -211,4 +253,81 @@ a, a:hover {
 .close:hover {
   cursor: pointer;
   color: black;
+}
+
+/* phones */
+
+@media only screen and (min-width: 319px) and (max-width: 500px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .header {
+    height: 15vh;
+    clip-path: polygon(0% 0, 100% 0%, 100% 70%, 0 45%);
+    padding: 10px 0 20px 0;
+  }
+
+  .header-maintext {
+    font-size: 1rem;
+  }
+
+  .header-subtext {
+    font-size: .85rem;
+  }
+
+  form {
+    width: 100%;
+    position: relative;
+    left: 5%;
+    margin-top: -10%;
+  }
+
+  input {
+    width: 60%;
+    font-size: .75rem;
+  }
+
+  .arrow-container {
+    margin-top: 10%;
+  }
+
+  #arrow {
+    padding: 15px;
+  }
+
+  .arrow-text {
+    font-size: 1rem;
+  }
+
+  .results-grid {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 100vw;
+    width: 90%;
+    flex-direction: column;
+    opacity: 0;
+  }
+
+  .result-column {
+    width: 100%;
+    height: 50%;
+    margin-bottom: 50px;
+  }
+
+
+  #icon {
+    left: -10%;
+    top: 4.5%;
+    font-size: 1.25rem;
+  }
+
+  #clear-icon {
+    position: absolute;
+    left: 65%;
+    top: 17%;
+    font-size: 1.25rem;
+  }
+
 }
