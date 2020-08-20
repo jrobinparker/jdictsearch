@@ -48,6 +48,7 @@ class Search extends React.Component {
                 onChange={this.onChange}
                 onFocus={this.animateIcon}
                 onBlur={this.resetIcon}
+                onSubmit={this.onFormSubmit}
                 id="search-form"
               />
               <Icon
