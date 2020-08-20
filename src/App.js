@@ -89,37 +89,44 @@ class App extends React.Component {
   }
 
   render () {
-
+    let image = require('./assets/img3.svg')
     return (
       <div className="container">
-        <div className="header">
-          <div className="header-text">
-            <div className="header-maintext">JDictSearch</div>
-            <div className="header-subtext">english-japanese dictionary search aggregator</div>
-          </div>
+        <div className="image">
+          <img src={`${image}`} />
         </div>
-        <div className="row">
-          <Search
-            onTermSubmit={this.onTermSubmit}
-            handleReload={this.handleReload}
-          />
-            {this.state.renderChild === true && this.state.failed === false ? (
-              <React.Fragment>
-                  <Arrow display={true} />
-                  <Results
-                    weblio={this.state.weblio}
-                    infoseek={this.state.infoseek}
-                    eijiro={this.state.eijiro}
-                    term={this.state.term}
-                    showResults={this.resultAnimation}
-                  />
-                </React.Fragment>
-            ) : this.state.renderChild === true && this.state.failed === true ? (
-              <NoResults />
-            ) : (
-                <React.Fragment></React.Fragment>
-            )
-          }
+        <div className="ui">
+          <div className="ui-contents">
+            <div className="header">
+              <div className="header-text">
+                <div className="header-maintext">JDictSearch</div>
+                <div className="header-subtext">english-japanese dictionary search aggregator</div>
+              </div>
+            </div>
+            <div className="row">
+              <Search
+                onTermSubmit={this.onTermSubmit}
+                handleReload={this.handleReload}
+              />
+                {this.state.renderChild === true && this.state.failed === false ? (
+                  <React.Fragment>
+                      <Arrow display={true} />
+                      <Results
+                        weblio={this.state.weblio}
+                        infoseek={this.state.infoseek}
+                        eijiro={this.state.eijiro}
+                        term={this.state.term}
+                        showResults={this.resultAnimation}
+                      />
+                    </React.Fragment>
+                ) : this.state.renderChild === true && this.state.failed === true ? (
+                  <NoResults />
+                ) : (
+                    <React.Fragment></React.Fragment>
+                )
+              }
+            </div>
+          </div>
         </div>
       </div>
     );

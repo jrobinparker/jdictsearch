@@ -30,37 +30,15 @@ class Result extends React.Component {
 
   render() {
 
-  const { name, text, url } = this.props
+  const { name, text, url, length } = this.props
 
   return (
     <div
-      className="result-column"
+      className="result"
       onMouseOver={this.showLink}
       onMouseOut={this.hideLink}>
-        <div className="result">
-
-          <div className="result-header">
-            {name}
-          </div>
-
-          <div className="result-text">
-            <ul>
-              {text.map((item, i) => {
-                return <li key={i}>{item}</li>;
-              })}
-            </ul>
-          </div>
-        </div>
-        {this.state.viewLink ? (
-            <div className="view-link" id={`${name}`}>
-              <a href={url} target="_blank" rel="noopener noreferrer">see all translations</a>
-            </div>
-        ) : (
-          <div className="view-link" style={{ visibility: 'hidden' }} id={`${name}`}>
-            <a href={url} target="_blank" rel="noopener noreferrer">see all translations</a>
-          </div>
-        )}
-
+          {length} results from {name}
+        <i className="fas fa-chevron-right"/>
     </div>
     )
 }

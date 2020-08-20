@@ -64,6 +64,7 @@ class Results extends React.Component {
         <Result
           name="weblio"
           url={`https://ejje.weblio.jp/content/${term}`}
+          length={this.state.weblioResult.length}
           text={this.state.weblioResult}
           appear={showResults}
         />
@@ -74,6 +75,7 @@ class Results extends React.Component {
         <Result
           name="infoseek"
           url={`http://dictionary.infoseek.ne.jp/ejword/${term}`}
+          length={this.state.infoseekResult.length}
           text={this.state.infoseekResult}
           appear={showResults}
         />
@@ -84,6 +86,7 @@ class Results extends React.Component {
         <Result
           name="eijiro"
           url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`}
+          length={this.state.eijiroResult.length}
           text={this.state.eijiroResult}
           appear={showResults}
         />
@@ -94,12 +97,11 @@ class Results extends React.Component {
     }, false)
 
     return (
-
-    <div className="results-grid">
-        {weblioComponent}
-        {infoseekComponent}
-        {eijiroComponent}
-    </div>
+      <div className="results">
+          {weblioComponent}
+          {infoseekComponent}
+          {eijiroComponent}
+      </div>
     )
   }
 }
