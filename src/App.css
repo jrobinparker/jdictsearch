@@ -45,11 +45,10 @@ background: linear-gradient(330deg, rgba(160,175,218,1) 0%, rgba(189,242,213,1) 
 .ui-contents {
   position: relative;
   top: 15%;
+  left: -2.5%;
 }
 
 .header {
-  padding: 20px 0 20px 0;
-  /* clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 55%); */
   color: #5d13e7;
   text-align: center;
 }
@@ -193,7 +192,7 @@ input::placeholder {
 
 .results {
   width: 45%;
-  height: 30vh;
+  height: 40vh;
   position: relative;
   left: 30%;
   display: flex;
@@ -215,10 +214,52 @@ input::placeholder {
   box-shadow: -12px -12px 12px 0 rgba(255,255,255,1),
     12px 12px 12px 0 rgba(0,0,0,0.3);
   opacity: 0;
+  cursor: pointer;
 }
 
 .result i {
   margin-left: auto;
+}
+
+.result-modal {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(189, 242, 213, .75);
+}
+
+.modal-card {
+  position: relative;
+  top: 20%;
+  left: 25%;
+  max-height: 80vh;
+  width: 50%;
+  background-color: white;
+  border-radius: 5%;
+  color: #5d13e7;
+  padding: 2%;
+  box-shadow: 12px 12px 12px 0 rgba(0,0,0,0.3);
+}
+
+.modal-card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  font-size: 2rem;
+  width: 100%;
+  margin-bottom: 2.5%;
+}
+
+.modal-body {
+  max-height: 50vh;
+  overflow-y: scroll;
+  font-size: 1.5rem;
+}
+
+.modal-close {
+  margin-left: auto;
+  cursor: pointer
 }
 
 @keyframes fadeInUp {

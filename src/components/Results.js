@@ -66,6 +66,7 @@ class Results extends React.Component {
           url={`https://ejje.weblio.jp/content/${term}`}
           length={this.state.weblioResult.length}
           text={this.state.weblioResult}
+          term={this.props.term}
           appear={showResults}
         />
     }
@@ -77,6 +78,7 @@ class Results extends React.Component {
           url={`http://dictionary.infoseek.ne.jp/ejword/${term}`}
           length={this.state.infoseekResult.length}
           text={this.state.infoseekResult}
+          term={this.props.term}
           appear={showResults}
         />
     }
@@ -88,6 +90,7 @@ class Results extends React.Component {
           url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`}
           length={this.state.eijiroResult.length}
           text={this.state.eijiroResult}
+          term={this.props.term}
           appear={showResults}
         />
     }
