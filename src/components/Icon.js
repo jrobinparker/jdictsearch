@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import gsap from 'gsap';
 
-class Icon extends React.Component {
+const Icon = ({ animate, clear, reset, search }) => {
 
-  searchAnimation = () => {
+  const searchAnimation = () => {
     const icon = document.getElementById('icon')
     const clear = document.getElementById('clear-icon')
     const arrow = document.querySelector('.arrow-container')
@@ -20,46 +20,43 @@ class Icon extends React.Component {
     }
   }
 
-  handleClick = e => {
-    this.searchAnimation()
-    this.props.search(e)
+  const handleClick = e => {
+    searchAnimation()
+    search(e)
   }
 
-  clearSearch = () => {
+  const clearSearch = () => {
     const icon = document.getElementById('icon')
-    const clear = document.getElementById('clear-icon')
+    const clearIcon = document.getElementById('clear-icon')
     const arrow = document.querySelector('.arrow-container')
     const tl = gsap.timeline()
 
     tl
-      .to(clear, .1, {opacity: 0, visibility: 'hidden'})
+      .to(clearIcon, .1, {opacity: 0, visibility: 'hidden'})
       .to(icon, .1, {opacity: 1, visibility: 'visible', className: '-= fas fa-search '})
 
     if (window.innerWidth < 680) {
       tl.to(arrow, .5, {visibility: 'hidden', opacity: 0})
     }
 
-    this.props.clear()
+    clear()
   }
 
-  render() {
-
     return (
-      <React.Fragment>
+      <Fragment>
         <i
           className="fas fa-search" id="icon"
-          onClick={this.handleClick}
-          onMouseOver={this.props.animate}
-          onMouseOut={this.props.reset}
+          onClick={handleClick}
+          onMouseOver={animate}
+          onMouseOut={reset}
         />
         <i
           className="fas fa-times"
           id="clear-icon"
-          onClick={this.clearSearch}
+          onClick={e => clearSearch()}
         />
-      </React.Fragment>
+      </Fragment>
     )
   }
-}
 
 export default Icon;
