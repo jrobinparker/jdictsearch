@@ -5,7 +5,6 @@ import gsap from 'gsap';
 import Search from './components/Search';
 import Results from './components/Results';
 import NoResults from './components/NoResults';
-import Arrow from './components/Arrow';
 import './App.css';
 
 const App = () => {
@@ -125,7 +124,6 @@ const App = () => {
               />
                 {renderStatus === true && failedStatus === false ? (
                   <Fragment>
-                      <Arrow display={true} />
                       <Results
                         weblio={weblio}
                         infoseek={infoSeek}

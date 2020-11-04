@@ -1,51 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Result from './Result';
 import gsap from 'gsap';
 
-class Results extends React.Component {
-  state = {
-    weblioResult: [],
-    infoseekResult: [],
-    eijiroResult: [],
-  }
+const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
+  const [weblioResult, setWeblioResult] = useState([]);
+  const [infoSeekResult, setInfoSeekResult] = useState([]);
+  const [eijiroResult, setEijiroResult] = useState([]);
 
-  componentWillReceiveProps(nextProps) {
-
-    // weblio search results
-    if (nextProps.weblio) {
-      const weblioSearch = nextProps.weblio.split("主な意味").toString().split("、");
-      this.setState({
-        weblioResult: weblioSearch
-      })
+  useEffect(() => {
+    if (weblio) {
+      const weblioSearch = weblio.split("主な意味").toString().split("、");
+      setWeblioResult(weblioSearch)
     }
 
-    // infoseek search results
-    if (nextProps.infoseek) {
-      const infoseekSearchFullArray = nextProps.infoseek.split("今日のキーワード")
-      const infoseekArray = infoseekSearchFullArray[0].split("；")
-      this.setState({
-        infoseekResult: infoseekArray
-      })
+    if (infoseek) {
+      const infoSeekSearchFullArray = infoseek.split("今日のキーワード")
+      const infoSeekArray = infoSeekSearchFullArray[0].split("；")
+      setInfoSeekResult(infoSeekArray)
     }
 
-    // eijiro results
-    if (nextProps.eijiro) {
-      const eijiroSearchFullArray = nextProps.eijiro.split("<a")
+    if (eijiro) {
+      const eijiroSearchFullArray = eijiro.split("<a")
       const eijiroSplitArray = eijiroSearchFullArray[0].split("【レベル】")
       const eijiroSplitArray2 = eijiroSplitArray[0].split("、")
-      this.setState({
-        eijiroResult: eijiroSplitArray2
-      })
+      setEijiroResult(eijiroSplitArray2)
     }
-  }
+  }, [weblio, infoseek, eijiro])
 
-  componentWillMount() {
-    console.log('mounting results component')
+  useEffect(() => {
     const results = document.querySelectorAll('.results-grid')
     gsap.to(results, .5, {opacity: 1, y: -5})
-  }
+  }, [])
 
-  toggleOnResize = () => {
+  const toggleOnResize = () => {
     const results = document.querySelector('.results-grid')
 
     if (window.innerWidth > 650) {
@@ -53,60 +40,57 @@ class Results extends React.Component {
     }
   }
 
-  render() {
-
-    let weblioComponent, infoseekComponent, eijiroComponent
-
-    const { term, showResults } = this.props
-
-    if (this.state.weblioResult.length >= 1) {
-      weblioComponent =
-        <Result
-          name="weblio"
-          url={`https://ejje.weblio.jp/content/${term}`}
-          length={this.state.weblioResult.length}
-          text={this.state.weblioResult}
-          term={this.props.term}
-          appear={showResults}
-        />
-    }
-
-    if (this.state.infoseekResult.length >= 1) {
-      infoseekComponent =
-        <Result
-          name="infoseek"
-          url={`http://dictionary.infoseek.ne.jp/ejword/${term}`}
-          length={this.state.infoseekResult.length}
-          text={this.state.infoseekResult}
-          term={this.props.term}
-          appear={showResults}
-        />
-    }
-
-    if (this.state.eijiroResult.length >= 1) {
-      eijiroComponent =
-        <Result
-          name="eijiro"
-          url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`}
-          length={this.state.eijiroResult.length}
-          text={this.state.eijiroResult}
-          term={this.props.term}
-          appear={showResults}
-        />
-    }
-
+  useEffect(() => {
     window.addEventListener('resize', () => {
-      this.toggleOnResize()
+      toggleOnResize()
     }, false)
+  }, [])
+
+  let weblioComponent, infoSeekComponent, eijiroComponent
+
+  if (weblioResult.length >= 1) {
+    weblioComponent =
+      <Result
+        name="weblio"
+        url={`https://ejje.weblio.jp/content/${term}`}
+        length={weblioResult.length}
+        text={weblioResult}
+        term={term}
+        appear={showResults}
+      />
+  }
+
+  if (infoSeekResult.length >= 1) {
+    infoSeekComponent =
+      <Result
+        name="infoseek"
+        url={`http://dictionary.infoseek.ne.jp/ejword/${term}`}
+        length={infoSeekResult.length}
+        text={infoSeekResult}
+        term={term}
+        appear={showResults}
+      />
+  }
+
+  if (eijiroResult.length >= 1) {
+    eijiroComponent =
+      <Result
+        name="eijiro"
+        url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`}
+        length={eijiroResult.length}
+        text={eijiroResult}
+        term={term}
+        appear={showResults}
+      />
+  }
 
     return (
       <div className="results">
           {weblioComponent}
-          {infoseekComponent}
+          {infoSeekComponent}
           {eijiroComponent}
       </div>
     )
-  }
 }
 
 export default Results;
