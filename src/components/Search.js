@@ -1,65 +1,56 @@
-import React from 'react';
+import React, { useState } from 'react';
 import gsap from 'gsap';
 import Icon from './Icon.js';
 
-class Search extends React.Component {
+const Search = ({ onTermSubmit, handleReload }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
-  state = {
-    searchTerm: ''
-  };
-
-  onChange = e => {
-    this.setState({
-      searchTerm: e.target.value
-    })
+  const onChange = e => {
+    setSearchTerm(e.target.value)
   }
 
-  onFormSubmit = e => {
+  const onFormSubmit = e => {
       e.preventDefault();
-      this.props.onTermSubmit(this.state.searchTerm);
+      onTermSubmit(searchTerm);
   }
 
-  animateIcon = () => {
+  const animateIcon = () => {
     const icon = document.getElementById("icon")
     gsap.to(icon, .5, {backgroundColor: '#bdf2d5'})
   }
 
-  resetIcon = () => {
+  const resetIcon = () => {
     const icon = document.getElementById("icon")
     gsap.to(icon, .5, {backgroundColor: '#f6f6f6'})
   }
 
-  clearSearch = () => {
-    this.setState({
-      searchTerm: ''
-    })
-    this.props.handleReload()
+  const clearSearch = () => {
+    setSearchTerm('')
+    handleReload()
   }
 
-  render() {
-    return (
-          <form onSubmit={this.onFormSubmit}>
+  return (
+          <form onSubmit={onFormSubmit}>
               <input
                 type="text"
                 className="input-text"
                 placeholder="enter an english word..."
                 name="searchTerm"
-                value={this.state.searchTerm}
-                onChange={this.onChange}
-                onFocus={this.animateIcon}
-                onBlur={this.resetIcon}
-                onSubmit={this.onFormSubmit}
+                value={searchTerm}
+                onChange={onChange}
+                onFocus={animateIcon}
+                onBlur={resetIcon}
+                onSubmit={onFormSubmit}
                 id="search-form"
               />
               <Icon
-                search={this.onFormSubmit}
-                clear={this.clearSearch}
-                animate={this.animateIcon}
-                reset={this.resetIcon}
+                search={onFormSubmit}
+                clear={clearSearch}
+                animate={animateIcon}
+                reset={resetIcon}
               />
           </form>
     )
   }
-}
 
 export default Search;
