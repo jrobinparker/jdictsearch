@@ -1,42 +1,31 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import ResultModal from './ResultModal';
 
-class Result extends React.Component {
-  state = {
-    viewLink: false,
-    showModal: false
+const Result = ({ appear, name, text, url, length, term }) => {
+  const [link, setLink] = useState(false);
+  const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    appear()
+  }, [])
+
+  const toggleModal = e => {
+    setModal(!modal)
   }
-
-  componentDidMount() {
-    this.props.appear()
-  }
-
-  toggleModal = e => {
-    this.setState({
-      showModal: !this.state.showModal
-    })
-  }
-
-  render() {
-
-  const { name, text, url, length, term } = this.props
 
   return (
     <Fragment>
       <div
         className="result"
-        onMouseOver={this.showLink}
-        onMouseOut={this.hideLink}
-        onClick={e => this.toggleModal(e)}
+        onClick={e => toggleModal(e)}
         >
             {length} results from {name}
-          <i className="fas fa-chevron-right" onClick={e => this.toggleModal(e)}/>
+          <i className="fas fa-chevron-right" onClick={e => toggleModal(e)}/>
       </div>
-      {this.state.showModal === true ? <ResultModal closeModal={this.toggleModal} text={text} name={name} url={url} length={length} term={term} /> : <Fragment></Fragment>}
+      {modal ? <ResultModal closeModal={toggleModal} text={text} name={name} url={url} length={length} term={term} /> : <Fragment></Fragment>}
     </Fragment>
     )
-}
 }
 
 export default Result;
