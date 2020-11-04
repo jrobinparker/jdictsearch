@@ -1,14 +1,12 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import gsap from 'gsap';
 import ResultModal from './ResultModal';
 
 const Result = ({ appear, name, text, url, length, term }) => {
-  const [link, setLink] = useState(false);
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
     appear()
-  }, [])
+  }, [appear])
 
   const toggleModal = e => {
     setModal(!modal)
