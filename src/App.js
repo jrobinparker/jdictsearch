@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import gsap from 'gsap';
@@ -8,78 +8,68 @@ import NoResults from './components/NoResults';
 import Arrow from './components/Arrow';
 import './App.css';
 
-class App extends React.Component {
-  state = {
-      weblio: '',
-      infoseek: '',
-      eijiro: '',
-      term: '',
-      renderChild: 'results',
-      failed: false
-    }
+const App = () => {
+  const [weblio, setWeblio] = useState('')
+  const [infoSeek, setInfoSeek] = useState('')
+  const [eijiro, setEijiro] = useState('')
+  const [term, setTerm] = useState('')
+  const [renderStatus, setRenderStatus] = useState('results')
+  const [failedStatus, setFailedStatus] = useState(false)
 
-    onTermSubmit = searchTerm => {
-      this.setState({
-        term: searchTerm
-      })
-      this.weblioSearch(searchTerm)
-      this.infoseekSearch(searchTerm)
-      this.eijiroSearch(searchTerm)
+
+  const onTermSubmit = searchTerm => {
+      setTerm(searchTerm)
+      weblioSearch(searchTerm)
+      infoseekSearch(searchTerm)
+      eijiroSearch(searchTerm)
   }
 
-  weblioSearch(searchTerm) {
+  const weblioSearch = (searchTerm) => {
     axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
       .then(res => {
         const $ = cheerio.load(res.data);
         const result1Data = $('.content-explanation.ej').text();
-        this.setState({
-          weblio: result1Data
-        })
+        setWeblio(result1Data)
       })
       .catch(err => {
         this.setState({
           failed: true,
           renderChild: true
         })
+        setFailedStatus(true)
+        setRenderStatus(true)
       })
     }
 
-  infoseekSearch(searchTerm) {
+  const infoseekSearch = (searchTerm) => {
     axios.get(`https://cors-anywhere.herokuapp.com/http://dictionary.infoseek.ne.jp/ejword/${searchTerm}`)
       .then(res => {
           const $ = cheerio.load(res.data);
           const result2Data = $('.word_block').children().slice(2, 11).text();
-           this.setState({
-             infoseek: result2Data,
-             renderChild: true
-           })
+           setInfoSeek(result2Data)
+           setRenderStatus(true)
          })
          .catch(err => {
-           this.setState({
-             failed: true,
-             renderChild: true
-           })
+           setFailedStatus(true)
+           setRenderStatus(true)
          })
   }
 
-  eijiroSearch(searchTerm) {
+  const eijiroSearch = (searchTerm) => {
     axios.get(`https://cors-anywhere.herokuapp.com/https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`)
       .then(res => {
         const $ = cheerio.load(res.data);
         const result3Data = $('ul li div ul li, #resultsList').children().slice(2, 4).text();
-        this.setState({
-          eijiro: result3Data
-        });
+        setEijiro(result3Data)
+        setRenderStatus(true)
       })
    .catch(err => {
-     this.setState({
-       failed: true,
-       renderChild: true
-     })
+     setFailedStatus(true)
+     setRenderStatus(true)
    })
   }
 
-  handleReload = () => {
+  const handleReload = () => {
 
     const result1 = document.querySelectorAll('.result')[0]
     const result2 = document.querySelectorAll('.result')[1]
@@ -93,21 +83,19 @@ class App extends React.Component {
       .to(noResults, .25, {opacity: 0, x: -5})
 
     setTimeout(() => {
-      this.setState({
-        weblio: '',
-        infoseek: '',
-        eijiro: '',
-        term: '',
-        renderChild: !this.state.renderChild,
-        failed: false
-      })}, 1000)
+      setWeblio('')
+      setInfoSeek('')
+      setEijiro('')
+      setTerm('')
+      setRenderStatus(!renderStatus)
+      setFailedStatus(false)
+      }, 1000)
   }
 
-  resultAnimation = () => {
+  const resultAnimation = () => {
     const result1 = document.querySelectorAll('.result')[0]
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
-    const noResults = document.querySelector('.no-results')
     const tl = gsap.timeline()
 
     tl.to(result1, .25, {delay: 1, opacity: 1, x: 5})
@@ -115,12 +103,12 @@ class App extends React.Component {
       .to(result3, .25, {delay: 1, opacity: 1, x: 5})
   }
 
-  render () {
-    let image = require('./assets/img3.svg')
+  let image = require('./assets/img3.svg')
+
     return (
       <div className="container">
         <div className="image">
-          <img src={`${image}`} />
+          <img src={`${image}`} alt='splash'/>
         </div>
         <div className="ui">
           <div className="ui-contents">
@@ -132,24 +120,24 @@ class App extends React.Component {
             </div>
             <div className="row">
               <Search
-                onTermSubmit={this.onTermSubmit}
-                handleReload={this.handleReload}
+                onTermSubmit={onTermSubmit}
+                handleReload={handleReload}
               />
-                {this.state.renderChild === true && this.state.failed === false ? (
-                  <React.Fragment>
+                {renderStatus === true && failedStatus === false ? (
+                  <Fragment>
                       <Arrow display={true} />
                       <Results
-                        weblio={this.state.weblio}
-                        infoseek={this.state.infoseek}
-                        eijiro={this.state.eijiro}
-                        term={this.state.term}
-                        showResults={this.resultAnimation}
+                        weblio={weblio}
+                        infoseek={infoSeek}
+                        eijiro={eijiro}
+                        term={term}
+                        showResults={resultAnimation}
                       />
-                    </React.Fragment>
-                ) : this.state.renderChild === true && this.state.failed === true ? (
+                    </Fragment>
+                ) : renderStatus === true && renderStatus === true ? (
                   <NoResults />
                 ) : (
-                    <React.Fragment></React.Fragment>
+                    <Fragment></Fragment>
                 )
               }
             </div>
@@ -157,7 +145,6 @@ class App extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 export default App;
