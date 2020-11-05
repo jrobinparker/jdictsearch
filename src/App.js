@@ -102,12 +102,15 @@ const App = () => {
       .to(result3, .25, {delay: 1, opacity: 1, x: 5})
   }
 
-  let image = require('./assets/img3.svg')
+  let image = require('./assets/splash2.png')
 
     return (
       <div className="container">
         <div className="image">
-          <img src={`${image}`} alt='splash'/>
+          <img src={`${image}`} alt='splash' className="person" />
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#A7F0BA" d="M38.3,-56.7C52.7,-50.3,69.5,-44.9,77.1,-33.6C84.6,-22.4,83,-5.3,79.6,10.8C76.3,26.9,71.2,42.1,60.8,50.9C50.4,59.8,34.7,62.4,19.1,68.6C3.5,74.8,-12.1,84.7,-23.9,81.3C-35.7,77.9,-43.7,61.4,-52.8,47.6C-62,33.8,-72.3,22.8,-76.3,9.6C-80.2,-3.6,-77.8,-19,-70.3,-30.8C-62.9,-42.6,-50.4,-50.8,-37.8,-58C-25.3,-65.2,-12.6,-71.3,-0.3,-70.8C12,-70.3,23.9,-63,38.3,-56.7Z" transform="translate(100 100)" />
+          </svg>
         </div>
         <div className="ui">
           <div className="ui-contents">

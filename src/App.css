@@ -20,19 +20,18 @@ li {
 .container {
   display: flex;
   flex-direction: row;
+  background-color: #F6F6F6;
 }
 
 .image {
   height: 100vh;
   width: 50%;
-  clip-path: circle(70% at 20% 50%);
-  background: rgb(160,175,218);
-background: linear-gradient(330deg, rgba(160,175,218,1) 0%, rgba(189,242,213,1) 100%, rgba(93,19,231,1) 100%);
 }
 
 .image img {
-  position: absolute;
+  position: relative;
   top: 20%;
+  left: -5%;
 }
 
 .ui {
@@ -44,8 +43,8 @@ background: linear-gradient(330deg, rgba(160,175,218,1) 0%, rgba(189,242,213,1) 
 
 .ui-contents {
   position: relative;
-  top: 15%;
-  left: -2.5%;
+  top: 25%;
+  left: -5%;
 }
 
 .header {
@@ -85,7 +84,7 @@ input {
   background-color: #f6f6f6;
   border: 0px;
   border-radius: 5px;
-  box-shadow: -12px -12px 12px 0 rgba(255,255,255,1),
+  box-shadow: -12px -12px 12px 0 rgba(246,246,246,1),
     12px 12px 12px 0 rgba(0,0,0,0.3);
   font-size: 1.5rem;
   font-family: 'Alata', sans-serif;
@@ -488,7 +487,7 @@ a, a:hover {
 
 /* med-large screens */
 
-@media only screen and (min-width: 650.5px) and (max-width: 1000px) {
+@media only screen and (orientation: portrait) and (min-width: 650.5px) and (max-width: 1034px) {
 
   .header {
     height: 20vh;
@@ -502,6 +501,11 @@ a, a:hover {
 
   .header-subtext {
     font-size: 1.25rem;
+  }
+
+  .image {
+    position: relative;
+    left: -25%;
   }
 
   form {
@@ -539,7 +543,14 @@ a, a:hover {
 
 /* small-mid laptop screens */
 
-@media only screen and (min-width: 1000.5px) and (max-width: 1200px) {
+@media only screen and (orientation: landscape) and (min-width: 1035px) and (max-width: 1200px) {
+
+  .image {
+  }
+
+  .ui {
+
+  }
 
   #icon {
     left: -1%;
