@@ -2,6 +2,7 @@ body {
   color: black;
   font-family: 'Alata', sans-serif;
   margin: 0 auto;
+  background-color: #F6F6F6;
   overflow-y: hidden;
   overflow-x: hidden;
 }
@@ -26,12 +27,13 @@ li {
 .image {
   height: 100vh;
   width: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .image img {
-  position: relative;
-  top: 20%;
-  left: -5%;
+  width: 100%;
+  height: auto;
 }
 
 .ui {
@@ -70,7 +72,6 @@ li {
 form {
   width: 100%;
 }
-
 
 input {
   display: inline-block;
@@ -245,7 +246,7 @@ input::placeholder {
   display: flex;
   flex-direction: row;
   align-items: baseline;
-  font-size: 2rem;
+  font-size: 4vh;
   width: 100%;
   margin-bottom: 2.5%;
 }
@@ -253,7 +254,7 @@ input::placeholder {
 .modal-body {
   max-height: 50vh;
   overflow-y: scroll;
-  font-size: 1.5rem;
+  font-size: 3vh;
 }
 
 .modal-close {
@@ -408,13 +409,8 @@ a, a:hover {
 
 /* medium screens */
 
-@media only screen and (min-width: 472px) and (max-width: 650px) {
+@media only screen and (orientation: landscape) and (min-width: 472px) and (max-width: 650px) {
 
-  .header {
-    height: 15vh;
-    clip-path: polygon(0% 0, 100% 0%, 100% 70%, 0 45%);
-    padding: 10px 0 20px 0;
-  }
 
   .header-maintext {
     font-size: 1.25rem;
@@ -487,12 +483,14 @@ a, a:hover {
 
 /* med-large screens */
 
-@media only screen and (orientation: portrait) and (min-width: 650.5px) and (max-width: 1034px) {
+@media only screen and (orientation: portrait) and (max-width: 680px) {
 
-  .header {
-    height: 20vh;
-    clip-path: polygon(0% 0, 100% 0%, 100% 70%, 0 45%);
-    padding: 10px 0 20px 0;
+  .container {
+    width: 100vw;
+  }
+
+  .ui, .image {
+    height: 35vh;
   }
 
   .header-maintext {
@@ -503,39 +501,56 @@ a, a:hover {
     font-size: 1.25rem;
   }
 
-  .image {
-    position: relative;
-    left: -25%;
+  .row {
+    position: absolute;
+    left: -100%;
+    top: 170%;
+    width: 100vw;
+    height: 70vh;
   }
+
 
   form {
     width: 100%;
-    margin-top: -5%;
   }
 
   input {
-    width: 77%;
+    width: 60%;
+    position: relative;
+    left: 17%;
     font-size: 1.25rem;
   }
 
   #icon {
-    left: -3%;
-    top: 1%;
+    left: 5%;
     font-size: 1.25rem;
   }
 
   #clear-icon {
-    left: -8%;
+    left: -1.5%;
     top: -1%;
     font-size: 1.25rem;
   }
 
   .no-results {
     font-size: 1.25rem;
+    width: 60%;
+    left: 21%;
   }
 
-  .results-grid {
-    left: 2%;
+  .results {
+    position: relative;
+    height: 50vh;
+    width: 60%;
+    left: 20%;
+  }
+
+  .modal-card {
+    position: relative;
+    top: 20%;
+    left: 5%;
+    width: 80%;
+    padding: 4%;
   }
 
 }
@@ -543,17 +558,13 @@ a, a:hover {
 
 /* small-mid laptop screens */
 
-@media only screen and (orientation: landscape) and (min-width: 1035px) and (max-width: 1200px) {
-
-  .image {
-  }
+@media only screen and (orientation: landscape) and (min-width: 681px) {
 
   .ui {
-
   }
 
   #icon {
-    left: -1%;
+    left: 18%;
     top: -2%;
   }
 
