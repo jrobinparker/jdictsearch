@@ -72,13 +72,24 @@ const App = () => {
     const result3 = document.querySelectorAll('.result')[2]
     const noResults = document.querySelector('.no-results')
     const uiElements = document.querySelector('.ui-contents')
+    const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
-    tl.to(result1, .25, {opacity: 0, x: -5})
-      .to(result2, .25, {opacity: 0, x: -5})
-      .to(result3, .25, {opacity: 0, x: -5})
-      .to(noResults, .25, {opacity: 0, x: -5})
-      .to(uiElements, .5, {y: 0})
+    if (window.innerWidth >= 681) {
+      tl.to(result1, .25, {opacity: 0, x: -5})
+        .to(result2, .25, {opacity: 0, x: -5})
+        .to(result3, .25, {opacity: 0, x: -5})
+        .to(noResults, .25, {opacity: 0, x: -5})
+        .to(uiElements, .5, {y: 0})
+    }
+
+    if (window.innerWidth <= 680) {
+      tl.to(result1, .25, {opacity: 0, x: -5})
+        .to(result2, .25, {opacity: 0, x: -5})
+        .to(result3, .25, {opacity: 0, x: -5})
+        .to(noResults, .25, {opacity: 0, x: -5})
+        .to(input, .5, {y: 0})
+    }
 
     setTimeout(() => {
       clearResults()
@@ -99,12 +110,23 @@ const App = () => {
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
     const uiElements = document.querySelector('.ui-contents')
+    const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
-    tl.to(uiElements, .5, {delay: 1, y: -100})
-      .to(result1, .25, {delay: 1, opacity: 1, x: 5})
-      .to(result2, .25, {delay: 1, opacity: 1, x: 5})
-      .to(result3, .25, {delay: 1, opacity: 1, x: 5})
+    if (window.innerWidth >= 681) {
+      tl.to(uiElements, .5, {delay: 1, y: -100})
+        .to(result1, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result2, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result3, .25, {delay: 1, opacity: 1, x: 5})
+    }
+
+    if (window.innerWidth <= 680) {
+      tl.to(input, .5, {delay: 1, y: -100})
+        .to(result1, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result2, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result3, .25, {delay: 1, opacity: 1, x: 5})
+    }
+
   }
 
   let image = require('./assets/splash2.png')
