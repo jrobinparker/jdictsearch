@@ -12,7 +12,7 @@ const App = () => {
   const [infoSeek, setInfoSeek] = useState('')
   const [eijiro, setEijiro] = useState('')
   const [term, setTerm] = useState('')
-  const [renderStatus, setRenderStatus] = useState('results')
+  const [renderStatus, setRenderStatus] = useState(false)
   const [failedStatus, setFailedStatus] = useState(false)
 
 
@@ -29,12 +29,9 @@ const App = () => {
         const $ = cheerio.load(res.data);
         const result1Data = $('.content-explanation.ej').text();
         setWeblio(result1Data)
+        setRenderStatus(true)
       })
       .catch(err => {
-        this.setState({
-          failed: true,
-          renderChild: true
-        })
         setFailedStatus(true)
         setRenderStatus(true)
       })
@@ -68,36 +65,44 @@ const App = () => {
    })
   }
 
-  const handleReload = () => {
+  const handleReload = async () => {
 
     const result1 = document.querySelectorAll('.result')[0]
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
     const noResults = document.querySelector('.no-results')
+    const uiElements = document.querySelector('.ui-contents')
     const tl = gsap.timeline()
 
     tl.to(result1, .25, {opacity: 0, x: -5})
       .to(result2, .25, {opacity: 0, x: -5})
       .to(result3, .25, {opacity: 0, x: -5})
       .to(noResults, .25, {opacity: 0, x: -5})
+      .to(uiElements, .5, {y: 0})
 
     setTimeout(() => {
-      setWeblio('')
-      setInfoSeek('')
-      setEijiro('')
-      setTerm('')
-      setRenderStatus(!renderStatus)
-      setFailedStatus(false)
-      }, 1000)
+      clearResults()
+    }, 1000)
+  }
+
+  const clearResults = () => {
+    setWeblio('')
+    setInfoSeek('')
+    setEijiro('')
+    setTerm('')
+    setRenderStatus(!renderStatus)
+    setFailedStatus(false)
   }
 
   const resultAnimation = () => {
     const result1 = document.querySelectorAll('.result')[0]
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
+    const uiElements = document.querySelector('.ui-contents')
     const tl = gsap.timeline()
 
-    tl.to(result1, .25, {delay: 1, opacity: 1, x: 5})
+    tl.to(uiElements, .5, {delay: 1, y: -100})
+      .to(result1, .25, {delay: 1, opacity: 1, x: 5})
       .to(result2, .25, {delay: 1, opacity: 1, x: 5})
       .to(result3, .25, {delay: 1, opacity: 1, x: 5})
   }
