@@ -324,7 +324,7 @@ a, a:hover {
 
 /* mobile devices - portrait */
 
-@media only screen and (orientation: portrait) and (max-width: 680px) {
+@media only screen and (orientation: portrait) and (max-width: 760px) {
 
   .container {
     width: 100vw;
@@ -365,12 +365,12 @@ a, a:hover {
   }
 
   #icon {
-    left: 5%;
+    left: 6%;
     font-size: 1.25rem;
   }
 
   #clear-icon {
-    left: -1.5%;
+    left: -1%;
     top: -1%;
     font-size: 1.25rem;
   }
@@ -401,7 +401,7 @@ a, a:hover {
 @media only screen and (orientation: landscape) and (max-width: 921px) {
 
   .ui-contents {
-    top: 40%;
+    top: 35%;
   }
 
   .header-maintext {
@@ -409,17 +409,24 @@ a, a:hover {
   }
 
   .header-subtext {
-    font-size: 2.5vh;
+    font-size: 3vh;
   }
 
   input {
     font-size: 1rem;
+    margin-top: 5%;
   }
 
   #icon {
     right: -10%;
-    font-size: 1rem;
+    font-size: 2vh;
     padding: 10px;
+  }
+
+  #clear-icon {
+    right: -5%;
+    top: -5%;
+    font-size: 2vh;
   }
 
   .result {
@@ -431,7 +438,7 @@ a, a:hover {
 @media only screen and (orientation: landscape) and (min-width: 922px) and (max-width: 1166px) {
 
   .ui-contents {
-    top: 20%;
+    top: 35%;
   }
 
   .header-maintext {
