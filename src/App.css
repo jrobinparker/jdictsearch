@@ -353,6 +353,8 @@ a, a:hover {
 
   form {
     width: 100%;
+    position: relative;
+    top: 20%;
   }
 
   input {
