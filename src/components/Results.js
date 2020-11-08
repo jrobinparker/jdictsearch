@@ -27,6 +27,25 @@ const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
     }
   }, [weblio, infoseek, eijiro])
 
+  useEffect(() => {
+    const results = document.querySelectorAll('.results-grid')
+    gsap.to(results, .5, {opacity: 1, y: -5})
+  }, [])
+
+  const toggleOnResize = () => {
+    const results = document.querySelector('.results-grid')
+
+    if (window.innerWidth > 650) {
+      gsap.to(results, .5, {visibility: 'visible', opacity: 1})
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      toggleOnResize()
+    }, false)
+  }, [])
+
   let weblioComponent, infoSeekComponent, eijiroComponent
 
   if (weblioResult.length >= 1) {

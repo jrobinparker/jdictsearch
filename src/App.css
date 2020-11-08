@@ -45,7 +45,7 @@ li {
 
 .ui-contents {
   position: relative;
-  top: 30%;
+  top: 25%;
   left: -5%;
 }
 
@@ -55,11 +55,11 @@ li {
 }
 
 .header-maintext {
-  font-size: 5vh;
+  font-size: 3rem;
 }
 
 .header-subtext {
-  font-size: 4vh;
+  font-size: 2rem;
 }
 
 #cursor {
@@ -76,8 +76,8 @@ form {
 input {
   display: inline-block;
   position: relative;
-  left: 20%;
-  width: 50%;
+  left: 26%;
+  width: 45%;
   padding: 20px;
   margin-top: 2.5%;
   margin-left: 2.5%;
@@ -95,12 +95,15 @@ input::placeholder {
   color: black;
 }
 
+.icon-container {
+  width: 10%;
+  background-color: blue;
+}
+
 #icon {
-  display: inline-block;
   position: relative;
-  z-index: 400;
-  right: -12%;
-  top: 65%;
+  left: 18%;
+  top: 36.5%;
   border-radius: 50%;
   padding: 15px;
   font-size: 1.5rem;
@@ -110,7 +113,7 @@ input::placeholder {
 
 #clear-icon {
   position: relative;
-  right: -7%;
+  left: 14%;
   top: 36.5%;
   border-radius: 50%;
   font-size: 1.75rem;
@@ -188,13 +191,12 @@ input::placeholder {
 }
 
 .results {
-  width: 50%;
-  left: 23%;
+  width: 45%;
   height: 40vh;
   position: relative;
+  left: 30%;
   display: flex;
   flex-direction: column;
-  align-self: flex-end;
   justify-content: space-evenly;
 }
 
@@ -322,7 +324,164 @@ a, a:hover {
   text-decoration: none;
 }
 
-/* mobile devices - portrait */
+/* small screens */
+
+@media only screen and (min-width: 319px) and (max-width: 471.5px) {
+
+  .header {
+    height: 15vh;
+    clip-path: polygon(0% 0, 100% 0%, 100% 70%, 0 45%);
+    padding: 10px 0 20px 0;
+  }
+
+  .header-maintext {
+    font-size: 1rem;
+  }
+
+  .header-subtext {
+    font-size: .85rem;
+  }
+
+  form {
+    width: 100%;
+    position: relative;
+    left: 5%;
+    margin-top: -10%;
+  }
+
+  input {
+    width: 60%;
+    font-size: .75rem;
+  }
+
+  #icon {
+    left: -10%;
+    top: 4.5%;
+    font-size: 1.25rem;
+  }
+
+  #clear-icon {
+    position: absolute;
+    left: 65%;
+    top: 17%;
+    font-size: 1.25rem;
+  }
+
+  .arrow-container {
+    margin-top: 10%;
+  }
+
+  #arrow {
+    padding: 15px;
+  }
+
+  .arrow-text {
+    font-size: 1rem;
+  }
+
+  .no-results {
+    width: 30%;
+    margin-top: 10%;
+    left: 32.5%;
+    font-size: 1rem;
+  }
+
+  .results-grid {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 100vw;
+    width: 90%;
+    flex-direction: column;
+    opacity: 0;
+  }
+
+  .result-column {
+    width: 100%;
+    height: 50%;
+    margin-bottom: 50px;
+  }
+
+  .result-header {
+    font-size: 1rem;
+  }
+
+}
+
+/* medium screens */
+
+@media only screen and (orientation: landscape) and (min-width: 472px) and (max-width: 650px) {
+
+
+  .header-maintext {
+    font-size: 1.25rem;
+  }
+
+  .header-subtext {
+    font-size: 1rem;
+  }
+
+  form {
+    width: 100%;
+    position: relative;
+    left: 7.5%;
+    margin-top: -5%;
+  }
+
+  input {
+    width: 60%;
+    font-size: 1.25rem;
+  }
+
+  #icon {
+    left: -6.5%;
+    top: 3%;
+    font-size: 1.25rem;
+  }
+
+  #clear-icon {
+    position: absolute;
+    left: 65%;
+    top: 26%;
+    font-size: 1.25rem;
+  }
+
+  .arrow-container {
+    margin-top: 5%;
+  }
+
+  #arrow {
+    padding: 15px;
+  }
+
+  .arrow-text {
+    font-size: 1rem;
+  }
+
+  .no-results {
+    width: 30%;
+    left: 35%;
+    margin-top: 7%;
+    font-size: 1rem;
+  }
+
+  .results-grid {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    height: 90vw;
+    width: 90%;
+    flex-direction: column;
+    opacity: 0;
+  }
+
+  .result-column {
+    width: 100%;
+    height: 40%;
+    margin-bottom: 50px;
+  }
+
+}
+
+/* med-large screens */
 
 @media only screen and (orientation: portrait) and (max-width: 760px) {
 
@@ -398,84 +557,60 @@ a, a:hover {
 
 }
 
-@media only screen and (orientation: landscape) and (max-width: 921px) {
-
-  .ui-contents {
-    top: 35%;
-  }
-
-  .header-maintext {
-    font-size: 3.5vh;
-  }
-
-  .header-subtext {
-    font-size: 3vh;
-  }
-
-  input {
-    font-size: 1rem;
-    margin-top: 5%;
-  }
-
-  #icon {
-    right: -10%;
-    font-size: 2vh;
-    padding: 10px;
-  }
-
-  #clear-icon {
-    right: -5%;
-    top: -5%;
-    font-size: 2vh;
-  }
-
-  .result {
-    font-size: 2vh;
-  }
-
-}
-
 @media only screen and (orientation: landscape) and (min-width: 922px) and (max-width: 1166px) {
 
   .ui-contents {
     top: 35%;
   }
 
-  .header-maintext {
-    font-size: 4vh;
-  }
+    .header-maintext {
+      font-size: 3.5vh;
+    }
 
-  .header-subtext {
-    font-size: 3vh;
-  }
+    .header-subtext {
+      font-size: 3vh;
+    }
 
-  input {
-    font-size: 1.25rem;
-  }
+    input {
+      font-size: 1rem;
+      margin-top: 5%;
+    }
 
-  #icon {
-    right: -12%;
-    font-size: 1rem;
-    padding: 10px;
-  }
+    #icon {
+      right: -10%;
+      font-size: 2vh;
+      padding: 10px;
+    }
 
-  #clear-icon {
-    font-size: 3vh;
-  }
+    #clear-icon {
+      right: -5%;
+      top: -5%;
+      font-size: 2vh;
+    }
 
-  .result {
-    font-size: 2.5vh;
-  }
+    .result {
+      font-size: 2vh;
+    }
 
 }
 
+@media only screen and (orientation: landscape) and (min-width: 681px) {
 
-/* small-mid laptop screens */
-
-@media only screen and (orientation: landscape) and (min-width: 1167px) and (max-width: 1345px) {
+  .ui {
+  }
 
   #icon {
-    right: -10%;
+    left: 18%;
+    top: -2%;
+  }
+
+  #clear-icon {
+    left: -5.25%;
+    top: -3%;
+  }
+
+  .results-grid {
+    left: 3.5%;
   }
 
 }
