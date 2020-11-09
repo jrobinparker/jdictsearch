@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import gsap from 'gsap';
@@ -12,7 +12,7 @@ const App = () => {
   const [infoSeek, setInfoSeek] = useState('')
   const [eijiro, setEijiro] = useState('')
   const [term, setTerm] = useState('')
-  const [renderStatus, setRenderStatus] = useState('results')
+  const [renderStatus, setRenderStatus] = useState(false)
   const [failedStatus, setFailedStatus] = useState(false)
 
 
@@ -29,6 +29,7 @@ const App = () => {
         const $ = cheerio.load(res.data);
         const result1Data = $('.content-explanation.ej').text();
         setWeblio(result1Data)
+        setRenderStatus(true)
       })
       .catch(err => {
         setFailedStatus(true)
@@ -42,6 +43,7 @@ const App = () => {
           const $ = cheerio.load(res.data);
           const result2Data = $('.word_block').children().slice(2, 11).text();
            setInfoSeek(result2Data)
+           setRenderStatus(true)
          })
          .catch(err => {
            setFailedStatus(true)
@@ -73,11 +75,21 @@ const App = () => {
     const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
-    tl.to(result1, .25, {opacity: 0, x: -5})
-      .to(result2, .25, {opacity: 0, x: -5})
-      .to(result3, .25, {opacity: 0, x: -5})
-      .to(noResults, .25, {opacity: 0, x: -5})
-      .to(uiElements, .25, {y: 0})
+    if (window.matchMedia("(orientation: portrait)").matches) {
+      tl.to(result1, .25, {opacity: 0, x: -5})
+        .to(result2, .25, {opacity: 0, x: -5})
+        .to(result3, .25, {opacity: 0, x: -5})
+        .to(noResults, .25, {opacity: 0, x: -5})
+        .to(input, .25, {y: 0})
+    }
+
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      tl.to(result1, .25, {opacity: 0, x: -5})
+        .to(result2, .25, {opacity: 0, x: -5})
+        .to(result3, .25, {opacity: 0, x: -5})
+        .to(noResults, .25, {opacity: 0, x: -5})
+        .to(uiElements, .25, {y: 0})
+    }
 
     setTimeout(() => {
       setWeblio('')
@@ -97,11 +109,38 @@ const App = () => {
     const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
-    tl.to(uiElements, .25, {y: -100})
-      .to(result1, .25, {delay: 1, opacity: 1, x: 5})
-      .to(result2, .25, {delay: 1, opacity: 1, x: 5})
-      .to(result3, .25, {delay: 1, opacity: 1, x: 5})
+    if (window.matchMedia("(orientation: portrait)").matches) {
+      tl.to(input, .25, {y: -100})
+        .to(result1, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result2, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result3, .25, {delay: 1, opacity: 1, x: 5})
+    }
+
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      tl.to(uiElements, .25, {y: -100})
+        .to(result1, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result2, .25, {delay: 1, opacity: 1, x: 5})
+        .to(result3, .25, {delay: 1, opacity: 1, x: 5})
+    }
+
   }
+
+  useEffect(() => {
+    const result1 = document.querySelectorAll('.result')[0]
+    const result2 = document.querySelectorAll('.result')[1]
+    const result3 = document.querySelectorAll('.result')[2]
+    const uiElements = document.querySelector('.ui-contents')
+    const input = document.getElementsByTagName('form')
+    window.addEventListener('resize', function() {
+      if (window.innerWidth <= 765) {
+        gsap.to(input, .25, { y: -100 })
+      }
+
+      if (window.innerWidth >= 766) {
+        gsap.to(input, .25, { y: 0 })
+      }
+    })
+  }, [])
 
   let image = require('./assets/splash2.png')
 
@@ -123,7 +162,7 @@ const App = () => {
                 onTermSubmit={onTermSubmit}
                 handleReload={handleReload}
               />
-                {renderStatus === true && failedStatus === false ? (
+                {renderStatus && !failedStatus ? (
                   <Fragment>
                       <Results
                         weblio={weblio}
@@ -133,7 +172,7 @@ const App = () => {
                         showResults={resultAnimation}
                       />
                     </Fragment>
-                ) : renderStatus === true && renderStatus === true ? (
+                ) : renderStatus && failedStatus ? (
                   <NoResults />
                 ) : (
                     <Fragment></Fragment>
