@@ -45,7 +45,7 @@ li {
 
 .ui-contents {
   position: relative;
-  top: 25%;
+  top: 30%;
   left: -5%;
 }
 
@@ -326,83 +326,88 @@ a, a:hover {
 
 /* small screens */
 
-@media only screen and (min-width: 319px) and (max-width: 471.5px) {
+@media only screen and (orientation: portrait) and (max-width: 374px) {
 
-  .header {
-    height: 15vh;
-    clip-path: polygon(0% 0, 100% 0%, 100% 70%, 0 45%);
-    padding: 10px 0 20px 0;
+  .container {
+    width: 100vw;
+  }
+
+  .ui, .image {
+    height: 35vh;
   }
 
   .header-maintext {
-    font-size: 1rem;
+    font-size: 5vh;
   }
 
   .header-subtext {
-    font-size: .85rem;
+    font-size: 3vh;
   }
+
+  .row {
+    width: 100vw;
+    height: 70vh;
+  }
+
 
   form {
     width: 100%;
     position: relative;
-    left: 5%;
-    margin-top: -10%;
+    top: 30%;
+    right: 60%;
   }
 
   input {
-    width: 60%;
-    font-size: .75rem;
+    width: 65%;
+    position: relative;
+    font-size: 3vh;
   }
 
   #icon {
-    left: -10%;
-    top: 4.5%;
+    left: 10%;
     font-size: 1.25rem;
   }
 
   #clear-icon {
-    position: absolute;
-    left: 65%;
-    top: 17%;
+    left: -1%;
+    top: -1%;
     font-size: 1.25rem;
   }
 
-  .arrow-container {
-    margin-top: 10%;
-  }
-
-  #arrow {
-    padding: 15px;
-  }
-
-  .arrow-text {
-    font-size: 1rem;
-  }
-
   .no-results {
-    width: 30%;
-    margin-top: 10%;
-    left: 32.5%;
-    font-size: 1rem;
+    font-size: 1.25rem;
+    width: 60%;
+    left: 21%;
   }
 
-  .results-grid {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    height: 100vw;
-    width: 90%;
-    flex-direction: column;
-    opacity: 0;
+  .results {
+    position: relative;
+    height: 50vh;
+    width: 60%;
+    left: -30%;
   }
 
-  .result-column {
-    width: 100%;
-    height: 50%;
-    margin-bottom: 50px;
+  .result {
+    font-size: 3vh;
   }
 
-  .result-header {
-    font-size: 1rem;
+  .result i {
+    position: relative;
+    top: 25%;
+  }
+
+  .result-modal {
+    position: absolute;
+    height: 110vh;
+    width: 110vw;
+  }
+
+  .modal-card {
+    position: relative;
+    top: 20%;
+    left: 5%;
+    width: 80%;
+    padding: 4%;
   }
 
 }
@@ -483,7 +488,7 @@ a, a:hover {
 
 /* med-large screens */
 
-@media only screen and (orientation: portrait) and (max-width: 760px) {
+@media only screen and (orientation: portrait) and (min-width: 375px) and (max-width: 765px) {
 
   .container {
     width: 100vw;
@@ -572,12 +577,12 @@ a, a:hover {
   }
 
   input {
-    font-size: 1rem;
+    font-size: 2vh;
     margin-top: 5%;
   }
 
   #icon {
-    right: -10%;
+    left: 16%;
     font-size: 2vh;
     padding: 10px;
   }
@@ -594,7 +599,7 @@ a, a:hover {
 
 }
 
-@media only screen and (orientation: landscape) and (min-width: 922px) and (max-width: 1166px) {
+@media only screen and (orientation: landscape) and (min-width: 922px) and (max-width: 1350px) {
 
     .ui-contents {
       top: 35%;
