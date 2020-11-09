@@ -77,6 +77,7 @@ const App = () => {
       .to(result2, .25, {opacity: 0, x: -5})
       .to(result3, .25, {opacity: 0, x: -5})
       .to(noResults, .25, {opacity: 0, x: -5})
+      .to(uiElements, .25, {y: 0})
 
     setTimeout(() => {
       setWeblio('')
@@ -96,7 +97,8 @@ const App = () => {
     const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
-    tl.to(result1, .25, {delay: 1, opacity: 1, x: 5})
+    tl.to(uiElements, .25, {y: -100})
+      .to(result1, .25, {delay: 1, opacity: 1, x: 5})
       .to(result2, .25, {delay: 1, opacity: 1, x: 5})
       .to(result3, .25, {delay: 1, opacity: 1, x: 5})
   }
