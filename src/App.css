@@ -55,18 +55,11 @@ li {
 }
 
 .header-maintext {
-  font-size: 3rem;
+  font-size: 7vh;
 }
 
 .header-subtext {
-  font-size: 2rem;
-}
-
-#cursor {
-  display: inline-block;
-  height: 2rem;
-  width: 2px;
-  background-color: black;
+  font-size: 5rem;
 }
 
 form {
@@ -87,7 +80,7 @@ input {
   border-radius: 5px;
   box-shadow: -12px -12px 12px 0 rgba(246,246,246,1),
     12px 12px 12px 0 rgba(0,0,0,0.3);
-  font-size: 1.5rem;
+  font-size: 3vh;
   font-family: 'Alata', sans-serif;
 }
 
@@ -150,29 +143,6 @@ input::placeholder {
         transform:rotate(360deg);
        }
   }
-
-.arrow-container {
-  visibility: hidden;
-  opacity: 0;
-  color: #5d13e7;
-  background-color: #f6f6f6;
-  font-size: 1.5rem;
-}
-
-.arrow-container div {
-  text-align: center;
-}
-
-.arrow-text {
-  font-size: 1.25rem;
-}
-
-#arrow {
-  display: inline-block;
-  padding: 15px;
-  border-radius: 50%;
-  cursor: pointer;
-}
 
 .no-results {
   opacity: 0;
@@ -260,68 +230,6 @@ input::placeholder {
 .modal-close {
   margin-left: auto;
   cursor: pointer
-}
-
-@keyframes fadeInUp {
-    from {
-        transform: translate3d(0,40px,0);
-        opacity: 0
-    }
-
-    to {
-        transform: translate3d(0,0,0);
-        opacity: 1
-    }
-}
-
-@-webkit-keyframes fadeInUp {
-    from {
-        transform: translate3d(0,40px,0);
-        opacity: 0
-    }
-
-    to {
-        transform: translate3d(0,0,0);
-        opacity: 1
-    }
-}
-
-.view-link  {
-  opacity: 0;
-  position: relative;
-  left: 4%;
-  width: 90%;
-  padding: 10px;
-  border-radius: 5px;
-  background-color: #5d13e7;
-  text-align: center;
-  color: #bdf2d5;
-  position: relative;
-  top: 10px;
-}
-
-.view-link:hover {
-  cursor: pointer;
-}
-
-.view-link {
-  animation: fadeInDown .5s;
-}
-
-@keyframes fadeInDown {
-            0% {
-               opacity: 0;
-               transform: translateY(-5px);
-            }
-            100% {
-               opacity: 1;
-               transform: translateY(0px);
-            }
-         }
-
-a, a:hover {
-  color: white;
-  text-decoration: none;
 }
 
 /* small screens - portrait */
@@ -506,18 +414,18 @@ a, a:hover {
   }
 
   #icon {
-    left: 5%;
+    left: 7%;
     font-size: 2vh;
   }
 
   #clear-icon {
     left: -1%;
     top: -1%;
-    font-size: 1.25rem;
+    font-size: 2vh;
   }
 
   .no-results {
-    font-size: 1.25rem;
+    font-size: 2vh;
     width: 60%;
     left: 21%;
   }
@@ -589,11 +497,11 @@ a, a:hover {
   #clear-icon {
     left: -1%;
     top: -1%;
-    font-size: 1.25rem;
+    font-size: 2vh;
   }
 
   .no-results {
-    font-size: 1.25rem;
+    font-size: 3vh;
     width: 60%;
     left: 21%;
   }
@@ -632,7 +540,7 @@ a, a:hover {
   }
 
   input {
-    font-size: 2.5vh;
+    font-size: 2vh;
     margin-top: 5%;
     left: 20%;
   }
