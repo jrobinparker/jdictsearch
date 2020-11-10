@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/jdictsearch/static/css/main.c0096568.chunk.css",
-    "main.js": "/jdictsearch/static/js/main.3c59cf8c.chunk.js",
-    "main.js.map": "/jdictsearch/static/js/main.3c59cf8c.chunk.js.map",
+    "main.css": "/jdictsearch/static/css/main.a40d5911.chunk.css",
+    "main.js": "/jdictsearch/static/js/main.4e079c0f.chunk.js",
+    "main.js.map": "/jdictsearch/static/js/main.4e079c0f.chunk.js.map",
     "runtime~main.js": "/jdictsearch/static/js/runtime~main.16bda6ef.js",
     "runtime~main.js.map": "/jdictsearch/static/js/runtime~main.16bda6ef.js.map",
-    "static/js/2.021ab359.chunk.js": "/jdictsearch/static/js/2.021ab359.chunk.js",
-    "static/js/2.021ab359.chunk.js.map": "/jdictsearch/static/js/2.021ab359.chunk.js.map",
+    "static/js/2.1851b04f.chunk.js": "/jdictsearch/static/js/2.1851b04f.chunk.js",
+    "static/js/2.1851b04f.chunk.js.map": "/jdictsearch/static/js/2.1851b04f.chunk.js.map",
     "index.html": "/jdictsearch/index.html",
-    "precache-manifest.f5cd1196f4d7e6394226e06079b627e4.js": "/jdictsearch/precache-manifest.f5cd1196f4d7e6394226e06079b627e4.js",
+    "precache-manifest.9d433c0245f95691111ba334d087965e.js": "/jdictsearch/precache-manifest.9d433c0245f95691111ba334d087965e.js",
     "service-worker.js": "/jdictsearch/service-worker.js",
-    "static/css/main.c0096568.chunk.css.map": "/jdictsearch/static/css/main.c0096568.chunk.css.map"
+    "static/css/main.a40d5911.chunk.css.map": "/jdictsearch/static/css/main.a40d5911.chunk.css.map",
+    "static/media/splash2.png": "/jdictsearch/static/media/splash2.e84fb919.png"
   }
 }
