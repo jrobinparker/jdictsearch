@@ -4,11 +4,6 @@
   "description": "English - Japanese Dictionary Aggregator",
   "icons": [
     {
-      "src": "/favicons/apple-touch-icon.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
       "src": "/favicons/favicon-32x32.png",
       "type": "image/png",
       "sizes": "32x32"
