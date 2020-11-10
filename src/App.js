@@ -126,17 +126,15 @@ const App = () => {
   }
 
   useEffect(() => {
-    const result1 = document.querySelectorAll('.result')[0]
-    const result2 = document.querySelectorAll('.result')[1]
-    const result3 = document.querySelectorAll('.result')[2]
     const uiElements = document.querySelector('.ui-contents')
     const input = document.getElementsByTagName('form')
     window.addEventListener('resize', function() {
-      if (window.innerWidth <= 765) {
+      if (window.matchMedia('(orientation: portrait)').matches) {
+        gsap.to(uiElements, .25, { y: 0 })
         gsap.to(input, .25, { y: -100 })
       }
 
-      if (window.innerWidth >= 766) {
+      if (window.matchMedia('(orientation: landscape)').matches) {
         gsap.to(input, .25, { y: 0 })
       }
     })
