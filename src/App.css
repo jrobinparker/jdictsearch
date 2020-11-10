@@ -76,7 +76,7 @@ form {
 input {
   display: inline-block;
   position: relative;
-  left: 26%;
+  left: 22%;
   width: 45%;
   padding: 20px;
   margin-top: 2.5%;
@@ -102,7 +102,7 @@ input::placeholder {
 
 #icon {
   position: relative;
-  left: 18%;
+  left: 13%;
   top: 36.5%;
   border-radius: 50%;
   padding: 15px;
@@ -194,7 +194,7 @@ input::placeholder {
   width: 45%;
   height: 40vh;
   position: relative;
-  left: 30%;
+  left: 25%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -324,7 +324,7 @@ a, a:hover {
   text-decoration: none;
 }
 
-/* small screens */
+/* small screens - portrait */
 
 @media only screen and (orientation: portrait) and (max-width: 374px) {
 
@@ -353,7 +353,7 @@ a, a:hover {
   form {
     width: 100%;
     position: relative;
-    top: 30%;
+    top: 20%;
     right: 60%;
   }
 
@@ -364,8 +364,8 @@ a, a:hover {
   }
 
   #icon {
-    left: 10%;
-    font-size: 1.25rem;
+    left: 7%;
+    font-size: 2.5vh;
   }
 
   #clear-icon {
@@ -412,83 +412,60 @@ a, a:hover {
 
 }
 
-/* medium screens */
+/* small screens - landscape */
 
-@media only screen and (orientation: landscape) and (min-width: 472px) and (max-width: 650px) {
+@media only screen and (orientation: landscape) and (min-width: 550px) and (max-width: 670px) {
 
 
   .header-maintext {
-    font-size: 1.25rem;
+    font-size: 5vh;
   }
 
   .header-subtext {
-    font-size: 1rem;
+    font-size: 3vh;
   }
 
   form {
     width: 100%;
     position: relative;
-    left: 7.5%;
-    margin-top: -5%;
+    left: -10%;
+    margin-top: 5%;
   }
 
   input {
     width: 60%;
-    font-size: 1.25rem;
+    font-size: 2.5vh;
   }
 
   #icon {
-    left: -6.5%;
-    top: 3%;
-    font-size: 1.25rem;
+    left: 7%;
+    top: 5%;
+    font-size: 2.5vh;
+    padding: 10px;
   }
 
   #clear-icon {
     position: absolute;
-    left: 65%;
-    top: 26%;
+    left: 85%;
+    top: 45%;
     font-size: 1.25rem;
   }
 
-  .arrow-container {
-    margin-top: 5%;
-  }
-
-  #arrow {
-    padding: 15px;
-  }
-
-  .arrow-text {
-    font-size: 1rem;
-  }
-
-  .no-results {
-    width: 30%;
-    left: 35%;
-    margin-top: 7%;
-    font-size: 1rem;
-  }
-
-  .results-grid {
-    margin-top: 10%;
-    margin-bottom: 10%;
-    height: 90vw;
-    width: 90%;
-    flex-direction: column;
-    opacity: 0;
-  }
-
-  .result-column {
+  .results {
     width: 100%;
-    height: 40%;
-    margin-bottom: 50px;
+    left: 16%;
+  }
+
+  .result {
+    font-size: 4vh;
+    width: 60%;
   }
 
 }
 
-/* med-large screens */
+/* med-large screens - portrait */
 
-@media only screen and (orientation: portrait) and (min-width: 375px) and (max-width: 765px) {
+@media only screen and (orientation: portrait) and (min-width: 375px) and (max-width: 767px) {
 
   .container {
     width: 100vw;
@@ -499,11 +476,11 @@ a, a:hover {
   }
 
   .header-maintext {
-    font-size: 1.5rem;
+    font-size: 5vh;
   }
 
   .header-subtext {
-    font-size: 1.25rem;
+    font-size: 3vh;
   }
 
   .row {
@@ -518,19 +495,19 @@ a, a:hover {
   form {
     width: 100%;
     position: relative;
-    top: 20%;
+    top: 10%;
   }
 
   input {
     width: 60%;
     position: relative;
     left: 17%;
-    font-size: 1.25rem;
+    font-size: 2.5vh;
   }
 
   #icon {
-    left: 6%;
-    font-size: 1.25rem;
+    left: 5%;
+    font-size: 2vh;
   }
 
   #clear-icon {
@@ -562,7 +539,85 @@ a, a:hover {
 
 }
 
-@media only screen and (orientation: landscape) and (min-width: 681px) and (max-width: 921px) {
+/* large tablets - portrait */
+
+@media only screen and (orientation: portrait) and (min-width: 768px) and (max-width: 1025px) {
+
+  .container {
+    width: 100vw;
+  }
+
+  .ui, .image {
+    height: 35vh;
+  }
+
+  .header-maintext {
+    font-size: 5vh;
+  }
+
+  .header-subtext {
+    font-size: 3vh;
+  }
+
+  .row {
+    position: absolute;
+    left: -100%;
+    top: 170%;
+    width: 100vw;
+    height: 70vh;
+  }
+
+
+  form {
+    width: 100%;
+    position: relative;
+    top: 10%;
+  }
+
+  input {
+    width: 60%;
+    position: relative;
+    left: 17%;
+    font-size: 2.5vh;
+  }
+
+  #icon {
+    left: 10%;
+    font-size: 2vh;
+  }
+
+  #clear-icon {
+    left: -1%;
+    top: -1%;
+    font-size: 1.25rem;
+  }
+
+  .no-results {
+    font-size: 1.25rem;
+    width: 60%;
+    left: 21%;
+  }
+
+  .results {
+    position: relative;
+    height: 50vh;
+    width: 60%;
+    left: 20%;
+  }
+
+  .modal-card {
+    position: relative;
+    top: 20%;
+    left: 5%;
+    width: 80%;
+    padding: 4%;
+  }
+
+}
+
+/* tablets and small laptops - landscape */
+
+@media only screen and (orientation: landscape) and (min-width: 671px) and (max-width: 921px) {
 
   .ui-contents {
     top: 35%;
@@ -577,27 +632,38 @@ a, a:hover {
   }
 
   input {
-    font-size: 2vh;
+    font-size: 2.5vh;
     margin-top: 5%;
+    left: 20%;
   }
 
   #icon {
-    left: 16%;
+    left: 10%;
     font-size: 2vh;
     padding: 10px;
   }
 
   #clear-icon {
-    right: -5%;
-    top: -5%;
+    left: 5%;
+    top: -6%;
     font-size: 2vh;
+  }
+
+  .results {
+    position: relative;
+    height: 50vh;
+    width: 55%;
+    left: 22%;
   }
 
   .result {
-    font-size: 2vh;
+    width: 90%;
+    font-size: 2.5vh;
   }
 
 }
+
+/* large tablets and mid-size laptops - landscape */
 
 @media only screen and (orientation: landscape) and (min-width: 922px) and (max-width: 1350px) {
 
@@ -614,18 +680,66 @@ a, a:hover {
     }
 
     input {
-      font-size: 1rem;
+      font-size: 2vh;
       margin-top: 5%;
+      left: 21%;
     }
 
     #icon {
-      right: -10%;
+      left: 13%;
       font-size: 2vh;
       padding: 10px;
     }
 
     #clear-icon {
-      right: -5%;
+      left: 8%;
+      top: -5%;
+      font-size: 2vh;
+    }
+
+    .results {
+      position: relative;
+      height: 50vh;
+      width: 50%;
+      left: 25%;
+    }
+
+    .result {
+      font-size: 3vh;
+    }
+
+}
+
+/* laptops - landscape */
+
+@media only screen and (orientation: landscape) and (min-width: 1365px) {
+
+    .ui-contents {
+      top: 35%;
+    }
+
+    .header-maintext {
+      font-size: 3.5vh;
+    }
+
+    .header-subtext {
+      font-size: 3vh;
+    }
+
+    input {
+      font-size: 2vh;
+      margin-top: 5%;
+      left: 21%;
+    }
+
+    #icon {
+      left: 13%;
+      font-size: 2vh;
+      padding: 10px;
+    }
+
+    #clear-icon {
+      left: 10%;
       top: -5%;
       font-size: 2vh;
     }
