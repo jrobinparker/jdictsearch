@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/jdictsearch/static/css/main.a40d5911.chunk.css",
+    "main.css": "/jdictsearch/static/css/main.699a74fb.chunk.css",
     "main.js": "/jdictsearch/static/js/main.4e079c0f.chunk.js",
     "main.js.map": "/jdictsearch/static/js/main.4e079c0f.chunk.js.map",
     "runtime~main.js": "/jdictsearch/static/js/runtime~main.16bda6ef.js",
@@ -8,9 +8,9 @@
     "static/js/2.1851b04f.chunk.js": "/jdictsearch/static/js/2.1851b04f.chunk.js",
     "static/js/2.1851b04f.chunk.js.map": "/jdictsearch/static/js/2.1851b04f.chunk.js.map",
     "index.html": "/jdictsearch/index.html",
-    "precache-manifest.9d433c0245f95691111ba334d087965e.js": "/jdictsearch/precache-manifest.9d433c0245f95691111ba334d087965e.js",
+    "precache-manifest.6ffb84f59fe8f7b8312631eca28c7205.js": "/jdictsearch/precache-manifest.6ffb84f59fe8f7b8312631eca28c7205.js",
     "service-worker.js": "/jdictsearch/service-worker.js",
-    "static/css/main.a40d5911.chunk.css.map": "/jdictsearch/static/css/main.a40d5911.chunk.css.map",
+    "static/css/main.699a74fb.chunk.css.map": "/jdictsearch/static/css/main.699a74fb.chunk.css.map",
     "static/media/splash2.png": "/jdictsearch/static/media/splash2.e84fb919.png"
   }
 }

@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0cdc6c29a6361196f9075debaf799b47",
+    "revision": "1d1094aa3d0a10873c9a05e58a5237ce",
     "url": "/jdictsearch/index.html"
   },
   {
-    "revision": "387635ab4bd497f8f6a0",
-    "url": "/jdictsearch/static/css/main.a40d5911.chunk.css"
+    "revision": "350d377b65314b037231",
+    "url": "/jdictsearch/static/css/main.699a74fb.chunk.css"
   },
   {
     "revision": "ed9c85e3fbea70206a9f",
     "url": "/jdictsearch/static/js/2.1851b04f.chunk.js"
   },
   {
-    "revision": "387635ab4bd497f8f6a0",
+    "revision": "350d377b65314b037231",
     "url": "/jdictsearch/static/js/main.4e079c0f.chunk.js"
   },
   {
