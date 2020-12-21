@@ -2,7 +2,6 @@ body {
   color: black;
   font-family: 'Alata', sans-serif;
   margin: 0 auto;
-  background-color: #F6F6F6;
   overflow-y: hidden;
   overflow-x: hidden;
 }
@@ -19,7 +18,11 @@ li {
 }
 
 .container {
-  background: #F6F6F6;
+  height: 100vh;
+  width: 100vw;
+  background: url('./assets/sakura.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .image {
@@ -35,10 +38,15 @@ li {
 }
 
 .ui {
-  width: 70vw;
+  width: 100%;
+  height: 60%;
   position: absolute;
   top: 20%;
   left: 5%;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .header-maintext {
@@ -46,7 +54,7 @@ li {
 }
 
 .header-subtext {
-  font-size: 5vh;
+  font-size: 3vh;
 }
 
 form {
@@ -55,12 +63,11 @@ form {
 
 input {
   display: inline-block;
-  width: 60%;
+  width: 80%;
   padding: 20px;
   color: black;
-  background-color: #f6f6f6;
   border: 0px;
-  font-size: 3.5vh;
+  font-size: 3vh;
   font-family: 'Alata', sans-serif;
 }
 
@@ -74,7 +81,7 @@ input::placeholder {
 
 #icon {
   position: relative;
-  left: -9%;
+  left: -10%;
   border-radius: 50%;
   font-size: 4vh;
   padding: 15px;
@@ -84,10 +91,9 @@ input::placeholder {
 
 #clear-icon {
   position: relative;
-  left: 14%;
-  top: 36.5%;
+  left: -11%;
   border-radius: 50%;
-  font-size: 1.75rem;
+  font-size: 4vh;
   cursor: pointer;
   color: #5d13e7;
   visibility: hidden;
@@ -122,6 +128,11 @@ input::placeholder {
        }
   }
 
+.row {
+  height: 25vh;
+  width: 90%;
+}
+
 .no-results {
   opacity: 0;
   position: relative;
@@ -134,22 +145,18 @@ input::placeholder {
   font-size: 1.5rem;
   border-radius: 5px;
   text-align: center;
-  box-shadow: -12px -12px 12px 0 rgba(255,255,255,1),
-    12px 12px 12px 0 rgba(0,0,0,0.3);
 }
 
 .results {
-  width: 45%;
-  height: 40vh;
-  position: relative;
-  left: 25%;
+  width: 90%;
+  margin-left: 0px;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .result {
-  width: 100%;
+  width: 30%;
   border-radius: 5px;
   display: flex;
   align-items: baseline;
@@ -159,8 +166,6 @@ input::placeholder {
   font-size: 1.5rem;
   border-radius: 5px;
   text-align: center;
-  box-shadow: -12px -12px 12px 0 rgba(255,255,255,1),
-    12px 12px 12px 0 rgba(0,0,0,0.3);
   opacity: 0;
   cursor: pointer;
 }
@@ -184,7 +189,7 @@ input::placeholder {
   max-height: 80vh;
   width: 50%;
   background-color: white;
-  border-radius: 5%;
+  border-radius: 5px;
   color: #5d13e7;
   padding: 2%;
   box-shadow: 12px 12px 12px 0 rgba(0,0,0,0.3);
@@ -210,413 +215,79 @@ input::placeholder {
   cursor: pointer
 }
 
-/* small screens - portrait */
+/*  portrait orientation */
 
-@media only screen and (orientation: portrait) and (max-width: 374px) {
+@media only screen and (orientation: portrait) {
 
-  .container {
-    width: 100vw;
+  .ui {
+    left: 5%;
+    padding-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
-  .ui, .image {
-    height: 35vh;
-  }
-
-  .header-maintext {
-    font-size: 5vh;
-  }
-
-  .header-subtext {
-    font-size: 3vh;
-  }
-
-  .row {
-    width: 100vw;
-    height: 70vh;
-  }
-
-
-  form {
-    width: 100%;
-    position: relative;
-    top: 20%;
-    right: 60%;
+  .header {
+    width: 90%;
   }
 
   input {
-    width: 65%;
-    position: relative;
-    font-size: 3vh;
+    width: 70%;
   }
 
   #icon {
-    left: 7%;
-    font-size: 2.5vh;
+    left: -15%;
   }
 
   #clear-icon {
-    left: -1%;
-    top: -1%;
-    font-size: 1.25rem;
-  }
-
-  .no-results {
-    font-size: 1.25rem;
-    width: 60%;
-    left: 21%;
+    left: -20%;
   }
 
   .results {
-    position: relative;
-    height: 50vh;
-    width: 60%;
-    left: -30%;
+    flex-direction: column;
+    width: 81%;
   }
 
   .result {
-    font-size: 3vh;
-  }
-
-  .result i {
-    position: relative;
-    top: 25%;
-  }
-
-  .result-modal {
-    position: absolute;
-    height: 110vh;
-    width: 110vw;
+    width: 100%;
+    margin-bottom: 10px;
   }
 
   .modal-card {
-    position: relative;
-    top: 20%;
     left: 5%;
-    width: 80%;
-    padding: 4%;
+    width: 85%;
   }
 
 }
 
 /* small screens - landscape */
 
-@media only screen and (orientation: landscape) and (min-width: 550px) and (max-width: 670px) {
-
-
-  .header-maintext {
-    font-size: 5vh;
-  }
-
-  .header-subtext {
-    font-size: 3vh;
-  }
-
-  form {
-    width: 100%;
-    position: relative;
-    left: -10%;
-    margin-top: 5%;
-  }
+@media only screen and (orientation: landscape) and (max-width: 680px) {
 
   input {
-    width: 60%;
-    font-size: 2.5vh;
+    width: 70%;
   }
 
-  #icon {
-    left: 7%;
-    top: 5%;
-    font-size: 2.5vh;
-    padding: 10px;
-  }
 
   #clear-icon {
-    position: absolute;
-    left: 85%;
-    top: 45%;
-    font-size: 1.25rem;
-  }
-
-  .results {
-    width: 100%;
-    left: 16%;
+    margin-left: -4%;
   }
 
   .result {
-    font-size: 4vh;
-    width: 60%;
-  }
-
-}
-
-/* med-large screens - portrait */
-
-@media only screen and (orientation: portrait) and (min-width: 375px) and (max-width: 767px) {
-
-  .container {
-    width: 100vw;
-  }
-
-  .ui, .image {
-    height: 35vh;
-  }
-
-  .header-maintext {
-    font-size: 5vh;
-  }
-
-  .header-subtext {
-    font-size: 3vh;
-  }
-
-  .row {
-    position: absolute;
-    left: -100%;
-    top: 170%;
-    width: 100vw;
-    height: 70vh;
-  }
-
-
-  form {
-    width: 100%;
-    position: relative;
-    top: 10%;
-  }
-
-  input {
-    width: 60%;
-    position: relative;
-    left: 17%;
-    font-size: 2.5vh;
-  }
-
-  #icon {
-    left: 7%;
-    font-size: 2vh;
-  }
-
-  #clear-icon {
-    left: -1%;
-    top: -1%;
-    font-size: 2vh;
-  }
-
-  .no-results {
-    font-size: 2vh;
-    width: 60%;
-    left: 21%;
-  }
-
-  .results {
-    position: relative;
-    height: 50vh;
-    width: 60%;
-    left: 20%;
-  }
-
-  .modal-card {
-    position: relative;
-    top: 20%;
-    left: 5%;
-    width: 80%;
-    padding: 4%;
-  }
-
-}
-
-/* large tablets - portrait */
-
-@media only screen and (orientation: portrait) and (min-width: 768px) and (max-width: 1025px) {
-
-  .container {
-    width: 100vw;
-  }
-
-  .ui, .image {
-    height: 35vh;
-  }
-
-  .header-maintext {
-    font-size: 5vh;
-  }
-
-  .header-subtext {
-    font-size: 3vh;
-  }
-
-  .row {
-    position: absolute;
-    left: -100%;
-    top: 170%;
-    width: 100vw;
-    height: 70vh;
-  }
-
-
-  form {
-    width: 100%;
-    position: relative;
-    top: 10%;
-  }
-
-  input {
-    width: 60%;
-    position: relative;
-    left: 17%;
-    font-size: 2.5vh;
-  }
-
-  #icon {
-    left: 10%;
-    font-size: 2vh;
-  }
-
-  #clear-icon {
-    left: -1%;
-    top: -1%;
-    font-size: 2vh;
-  }
-
-  .no-results {
-    font-size: 3vh;
-    width: 60%;
-    left: 21%;
-  }
-
-  .results {
-    position: relative;
-    height: 50vh;
-    width: 60%;
-    left: 20%;
-  }
-
-  .modal-card {
-    position: relative;
-    top: 20%;
-    left: 5%;
-    width: 80%;
-    padding: 4%;
-  }
-
-}
-
-/* tablets and small laptops - landscape */
-
-@media only screen and (orientation: landscape) and (min-width: 671px) and (max-width: 921px) {
-
-  .ui-contents {
-    top: 35%;
-  }
-
-  .header-maintext {
-    font-size: 3.5vh;
-  }
-
-  .header-subtext {
-    font-size: 3vh;
-  }
-
-  input {
-    font-size: 2vh;
-    margin-top: 5%;
-    left: 20%;
-  }
-
-  #icon {
-    left: 10%;
-    font-size: 2vh;
     padding: 10px;
   }
+}
+
+/* large screens - landscape */
+
+@media only screen and (orientation: landscape) and (max-width: 1500px) {
 
   #clear-icon {
-    left: 5%;
-    top: -6%;
-    font-size: 2vh;
-  }
-
-  .results {
-    position: relative;
-    height: 50vh;
-    width: 55%;
-    left: 22%;
+    left: -15%;
   }
 
   .result {
-    width: 90%;
-    font-size: 2.5vh;
+    width: 25%;
+    font-size: 2vh;
   }
-
-}
-
-/* large tablets and mid-size laptops - landscape */
-
-@media only screen and (orientation: landscape) and (min-width: 922px) and (max-width: 1350px) {
-
-    .header-maintext {
-    }
-
-    .header-subtext {
-    }
-
-    input {
-      margin-top: 5%;
-      left: 21%;
-    }
-
-    #icon {
-    }
-
-    #clear-icon {
-      left: 8%;
-      top: -5%;
-      font-size: 2vh;
-    }
-
-    .results {
-      position: relative;
-      height: 50vh;
-      width: 50%;
-      left: 25%;
-    }
-
-    .result {
-      font-size: 3vh;
-    }
-
-}
-
-/* laptops - landscape */
-
-@media only screen and (orientation: landscape) and (min-width: 1365px) {
-
-    .header-maintext {
-    }
-
-    .header-subtext {
-      font-size: 3vh;
-    }
-
-    input {
-      font-size: 2vh;
-      margin-top: 5%;
-      left: 21%;
-    }
-
-    #icon {
-      left: 13%;
-      font-size: 2vh;
-      padding: 10px;
-    }
-
-    #clear-icon {
-      left: 10%;
-      top: -5%;
-      font-size: 2vh;
-    }
-
-    .result {
-      font-size: 2vh;
-    }
-
 }

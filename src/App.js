@@ -81,7 +81,6 @@ const App = () => {
         .to(result2, .25, {opacity: 0, x: -5})
         .to(result3, .25, {opacity: 0, x: -5})
         .to(noResults, .25, {opacity: 0, x: -5})
-        .to(input, .25, {y: 0})
     }
 
     if (window.matchMedia("(orientation: landscape)").matches) {
@@ -89,7 +88,6 @@ const App = () => {
         .to(result2, .25, {opacity: 0, x: -5})
         .to(result3, .25, {opacity: 0, x: -5})
         .to(noResults, .25, {opacity: 0, x: -5})
-        .to(uiElements, .25, {y: 0})
     }
 
     setTimeout(() => {
@@ -106,20 +104,19 @@ const App = () => {
     const result1 = document.querySelectorAll('.result')[0]
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
-    const uiElements = document.querySelector('.ui-contents')
+    const uiElements = document.querySelector('.ui')
     const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
     if (window.matchMedia("(orientation: portrait)").matches) {
-      tl.to(input, .25, {y: -100})
-        .to(result1, .25, {delay: 1, opacity: 1, x: 5})
-        .to(result2, .25, {delay: 1, opacity: 1, x: 5})
-        .to(result3, .25, {delay: 1, opacity: 1, x: 5})
+      tl
+        .to(result1, .25, {delay: 1, opacity: 1, x: 0})
+        .to(result2, .25, {delay: 1, opacity: 1, x: 0})
+        .to(result3, .25, {delay: 1, opacity: 1, x: 0})
     }
 
     if (window.matchMedia("(orientation: landscape)").matches) {
-      tl.to(uiElements, .25, {y: -100})
-        .to(result1, .25, {delay: 1, opacity: 1, x: 5})
+      tl.to(result1, .25, {delay: 1, opacity: 1, x: 5})
         .to(result2, .25, {delay: 1, opacity: 1, x: 5})
         .to(result3, .25, {delay: 1, opacity: 1, x: 5})
     }
@@ -131,12 +128,9 @@ const App = () => {
     const input = document.getElementsByTagName('form')
     window.addEventListener('resize', function() {
       if (window.matchMedia('(orientation: portrait)').matches) {
-        gsap.to(uiElements, .25, { y: 0 })
-        gsap.to(input, .25, { y: -100 })
       }
 
       if (window.matchMedia('(orientation: landscape)').matches) {
-        gsap.to(input, .25, { y: 0 })
       }
     })
   }, [])
@@ -150,11 +144,12 @@ const App = () => {
               <div className="header-maintext">JDictSearch</div>
               <div className="header-subtext">english-japanese dictionary search aggregator</div>
             </div>
+            <Search
+              onTermSubmit={onTermSubmit}
+              handleReload={handleReload}
+            />
             <div className="row">
-              <Search
-                onTermSubmit={onTermSubmit}
-                handleReload={handleReload}
-              />
+
                 {renderStatus && !failedStatus ? (
                   <Fragment>
                       <Results
