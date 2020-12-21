@@ -9,7 +9,7 @@ import './App.css';
 
 const App = () => {
   const [weblio, setWeblio] = useState('')
-  const [infoSeek, setInfoSeek] = useState('')
+  const [eiNavi, setEiNavi] = useState('')
   const [eijiro, setEijiro] = useState('')
   const [term, setTerm] = useState('')
   const [renderStatus, setRenderStatus] = useState(false)
@@ -19,12 +19,12 @@ const App = () => {
   const onTermSubmit = searchTerm => {
       setTerm(searchTerm)
       weblioSearch(searchTerm)
-      infoseekSearch(searchTerm)
+      eiNaviSearch(searchTerm)
       eijiroSearch(searchTerm)
   }
 
   const weblioSearch = (searchTerm) => {
-    axios.get(`https://cors-anywhere.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
+    axios.get(`https://pure-coast-05369.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
       .then(res => {
         const $ = cheerio.load(res.data);
         const result1Data = $('.content-explanation.ej').text();
@@ -37,12 +37,13 @@ const App = () => {
       })
     }
 
-  const infoseekSearch = (searchTerm) => {
-    axios.get(`https://cors-anywhere.herokuapp.com/http://dictionary.infoseek.ne.jp/ejword/${searchTerm}`)
+  const eiNaviSearch = (searchTerm) => {
+    axios.get(`https://pure-coast-05369.herokuapp.com/https://www.ei-navi.jp/dictionary/content/${searchTerm}/`)
       .then(res => {
           const $ = cheerio.load(res.data);
-          const result2Data = $('.word_block').children().slice(2, 11).text();
-           setInfoSeek(result2Data)
+          const result2Data = $('.main .container .summary .list-group .list-group-item .list-group-item-text').children().text();
+          console.log(result2Data)
+           setEiNavi(result2Data)
            setRenderStatus(true)
          })
          .catch(err => {
@@ -52,7 +53,7 @@ const App = () => {
   }
 
   const eijiroSearch = (searchTerm) => {
-    axios.get(`https://cors-anywhere.herokuapp.com/https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`)
+    axios.get(`https://pure-coast-05369.herokuapp.com/https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`)
       .then(res => {
         const $ = cheerio.load(res.data);
         const result3Data = $('ul li div ul li, #resultsList').children().slice(2, 4).text();
@@ -93,7 +94,7 @@ const App = () => {
 
     setTimeout(() => {
       setWeblio('')
-      setInfoSeek('')
+      setEiNavi('')
       setEijiro('')
       setTerm('')
       setRenderStatus(!renderStatus)
@@ -144,16 +145,10 @@ const App = () => {
 
     return (
       <div className="container">
-        <div className="image">
-          <img src={`${image}`} alt='splash' className="person" />
-        </div>
         <div className="ui">
-          <div className="ui-contents">
             <div className="header">
-              <div className="header-text">
-                <div className="header-maintext">JDictSearch</div>
-                <div className="header-subtext">english-japanese dictionary search aggregator</div>
-              </div>
+              <div className="header-maintext">JDictSearch</div>
+              <div className="header-subtext">english-japanese dictionary search aggregator</div>
             </div>
             <div className="row">
               <Search
@@ -164,7 +159,7 @@ const App = () => {
                   <Fragment>
                       <Results
                         weblio={weblio}
-                        infoseek={infoSeek}
+                        eiNavi={eiNavi}
                         eijiro={eijiro}
                         term={term}
                         showResults={resultAnimation}
@@ -179,7 +174,6 @@ const App = () => {
             </div>
           </div>
         </div>
-      </div>
     );
 }
 

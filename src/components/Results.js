@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Result from './Result';
 import gsap from 'gsap';
 
-const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
+const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
   const [weblioResult, setWeblioResult] = useState([]);
-  const [infoSeekResult, setInfoSeekResult] = useState([]);
+  const [eiNaviResult, setInfoSeekResult] = useState([]);
   const [eijiroResult, setEijiroResult] = useState([]);
 
   useEffect(() => {
@@ -13,10 +13,9 @@ const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
       setWeblioResult(weblioSearch)
     }
 
-    if (infoseek) {
-      const infoSeekSearchFullArray = infoseek.split("今日のキーワード")
-      const infoSeekArray = infoSeekSearchFullArray[0].split("；")
-      setInfoSeekResult(infoSeekArray)
+    if (eiNavi) {
+      const eiNaviArray = eiNavi.split("、")
+      setInfoSeekResult(eiNaviArray)
     }
 
     if (eijiro) {
@@ -25,7 +24,7 @@ const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
       const eijiroSplitArray2 = eijiroSplitArray[0].split("、")
       setEijiroResult(eijiroSplitArray2)
     }
-  }, [weblio, infoseek, eijiro])
+  }, [weblio, eiNavi, eijiro])
 
   useEffect(() => {
     const results = document.querySelectorAll('.results-grid')
@@ -46,7 +45,7 @@ const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
     }, false)
   }, [])
 
-  let weblioComponent, infoSeekComponent, eijiroComponent
+  let weblioComponent, eiNaviComponent, eijiroComponent
 
   if (weblioResult.length >= 1) {
     weblioComponent =
@@ -60,13 +59,13 @@ const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
       />
   }
 
-  if (infoSeekResult.length >= 1) {
-    infoSeekComponent =
+  if (eiNaviResult.length >= 1) {
+    eiNaviComponent =
       <Result
-        name="infoseek"
-        url={`http://dictionary.infoseek.ne.jp/ejword/${term}`}
-        length={infoSeekResult.length}
-        text={infoSeekResult}
+        name="ei-navi"
+        url={`https://www.ei-navi.jp/dictionary/content/${term}/`}
+        length={eiNaviResult.length}
+        text={eiNaviResult}
         term={term}
         appear={showResults}
       />
@@ -87,7 +86,7 @@ const Results = ({ weblio, infoseek, eijiro, term, showResults }) => {
     return (
       <div className="results">
           {weblioComponent}
-          {infoSeekComponent}
+          {eiNaviComponent}
           {eijiroComponent}
       </div>
     )

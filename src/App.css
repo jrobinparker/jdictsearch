@@ -19,9 +19,7 @@ li {
 }
 
 .container {
-  display: flex;
-  flex-direction: row;
-  background-color: #F6F6F6;
+  background: #F6F6F6;
 }
 
 .image {
@@ -37,21 +35,10 @@ li {
 }
 
 .ui {
-  height: 100vh;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-}
-
-.ui-contents {
-  position: relative;
-  top: 30%;
-  left: -5%;
-}
-
-.header {
-  color: #5d13e7;
-  text-align: center;
+  width: 70vw;
+  position: absolute;
+  top: 20%;
+  left: 5%;
 }
 
 .header-maintext {
@@ -59,7 +46,7 @@ li {
 }
 
 .header-subtext {
-  font-size: 5rem;
+  font-size: 5vh;
 }
 
 form {
@@ -68,19 +55,12 @@ form {
 
 input {
   display: inline-block;
-  position: relative;
-  left: 22%;
-  width: 45%;
+  width: 60%;
   padding: 20px;
-  margin-top: 2.5%;
-  margin-left: 2.5%;
   color: black;
   background-color: #f6f6f6;
   border: 0px;
-  border-radius: 5px;
-  box-shadow: -12px -12px 12px 0 rgba(246,246,246,1),
-    12px 12px 12px 0 rgba(0,0,0,0.3);
-  font-size: 3vh;
+  font-size: 3.5vh;
   font-family: 'Alata', sans-serif;
 }
 
@@ -90,16 +70,14 @@ input::placeholder {
 
 .icon-container {
   width: 10%;
-  background-color: blue;
 }
 
 #icon {
   position: relative;
-  left: 13%;
-  top: 36.5%;
+  left: -9%;
   border-radius: 50%;
+  font-size: 4vh;
   padding: 15px;
-  font-size: 1.5rem;
   cursor: pointer;
   color: #5d13e7;
 }
@@ -575,28 +553,18 @@ input::placeholder {
 
 @media only screen and (orientation: landscape) and (min-width: 922px) and (max-width: 1350px) {
 
-    .ui-contents {
-      top: 35%;
-    }
-
     .header-maintext {
-      font-size: 3.5vh;
     }
 
     .header-subtext {
-      font-size: 3vh;
     }
 
     input {
-      font-size: 2vh;
       margin-top: 5%;
       left: 21%;
     }
 
     #icon {
-      left: 13%;
-      font-size: 2vh;
-      padding: 10px;
     }
 
     #clear-icon {
@@ -622,12 +590,7 @@ input::placeholder {
 
 @media only screen and (orientation: landscape) and (min-width: 1365px) {
 
-    .ui-contents {
-      top: 35%;
-    }
-
     .header-maintext {
-      font-size: 3.5vh;
     }
 
     .header-subtext {
