@@ -91,7 +91,7 @@ input::placeholder {
 
 #clear-icon {
   position: relative;
-  left: -11%;
+  left: -10%;
   border-radius: 50%;
   font-size: 4vh;
   cursor: pointer;
@@ -148,7 +148,7 @@ input::placeholder {
 }
 
 .results {
-  width: 90%;
+  width: 91%;
   margin-left: 0px;
   display: flex;
   flex-direction: row;
@@ -220,6 +220,7 @@ input::placeholder {
 @media only screen and (orientation: portrait) {
 
   .ui {
+    top: 20%;
     left: 5%;
     padding-left: 30px;
     display: flex;
@@ -249,7 +250,7 @@ input::placeholder {
   }
 
   .result {
-    width: 100%;
+    width: 95%;
     margin-bottom: 10px;
   }
 
@@ -262,32 +263,49 @@ input::placeholder {
 
 /* small screens - landscape */
 
-@media only screen and (orientation: landscape) and (max-width: 680px) {
+@media only screen and (orientation: landscape) and (max-width: 829px) {
 
-  input {
-    width: 70%;
+  #icon {
+    left: -8%;
   }
-
-
-  #clear-icon {
-    margin-left: -4%;
-  }
-
-  .result {
-    padding: 10px;
-  }
-}
-
-/* large screens - landscape */
-
-@media only screen and (orientation: landscape) and (max-width: 1500px) {
 
   #clear-icon {
     left: -15%;
   }
 
   .result {
+    font-size: 1.75vh;
     width: 25%;
-    font-size: 2vh;
   }
+
+}
+
+/* medium screens - landscape */
+
+@media only screen and (orientation: landscape) and (min-width: 830px) and (max-width: 1359px) {
+
+  #icon {
+    left: -9%;
+  }
+
+  #clear-icon {
+    left: -12.5%;
+  }
+
+  .result {
+    font-size: 2vh;
+    width: 25%;
+  }
+
+}
+
+/* large screens - landscape */
+
+@media only screen and (orientation: landscape) and (min-width: 1360px) and (max-width: 1500px) {
+
+  .result {
+    width: 25%;
+    font-size: 3vh;
+  }
+
 }

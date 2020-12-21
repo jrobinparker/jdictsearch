@@ -6,7 +6,6 @@ const Icon = ({ animate, clear, reset, search }) => {
   const searchAnimation = () => {
     const icon = document.getElementById('icon')
     const clear = document.getElementById('clear-icon')
-    const arrow = document.querySelector('.arrow-container')
     const tl = gsap.timeline()
 
     tl
@@ -15,9 +14,6 @@ const Icon = ({ animate, clear, reset, search }) => {
       .to(icon, .5, {opacity: 0, visibility: 'hidden'})
       .to(clear, .5, {opacity: 1, visibility: 'visible'})
 
-    if (window.innerWidth < 680) {
-      tl.to(arrow, .5, {visibility: 'visible', opacity: 1})
-    }
   }
 
   const handleClick = e => {
@@ -34,10 +30,6 @@ const Icon = ({ animate, clear, reset, search }) => {
     tl
       .to(clearIcon, .1, {opacity: 0, visibility: 'hidden'})
       .to(icon, .1, {opacity: 1, visibility: 'visible', className: '-= fas fa-search '})
-
-    if (window.innerWidth < 680) {
-      tl.to(arrow, .5, {visibility: 'hidden', opacity: 0})
-    }
 
     clear()
   }
