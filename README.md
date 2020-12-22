@@ -8,6 +8,6 @@ This app searches three separate Japanese-English dictionaries in one search, sa
 * React
 * React Hooks
 * axios
-* Unsplash API
+* Preloaded images from Unsplash API 
 * GSAP
 * Custom CSS - responsive, no frameworks used
