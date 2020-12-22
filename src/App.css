@@ -60,7 +60,7 @@ li {
 }
 
 .header {
-  width: 40%;
+  width: 50%;
   color: white;
 }
 
@@ -73,12 +73,12 @@ li {
 }
 
 form {
-  width: 100%;
+  width: 110%;
 }
 
 input {
   display: inline-block;
-  width: 80%;
+  width: 84%;
   padding: 20px;
   color: black;
   border: 0px;
@@ -162,11 +162,11 @@ input::placeholder {
 }
 
 .results {
-  width: 91%;
-  margin-left: 0px;
+  width: 100%;
+  margin-left: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-content: center;
   align-self: center;
 }
@@ -238,14 +238,22 @@ input::placeholder {
   .ui {
     top: 20%;
     left: 5%;
+    width: 90%;
+    height: 40%;
     padding-left: 30px;
+    padding-top: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .header {
     width: 90%;
+    margin-bottom: 20px;
+  }
+
+  form {
+    width: 120%;
   }
 
   input {
@@ -253,20 +261,26 @@ input::placeholder {
   }
 
   #icon {
-    left: -15%;
+    left: -12.5%;
   }
 
   #clear-icon {
-    left: -20%;
+    left: -17.5%;
+  }
+
+  .row {
+    height: 20%;
+    position: relative;
+    top: 30%;
   }
 
   .results {
     flex-direction: column;
-    width: 81%;
+    width: 94%;
   }
 
   .result {
-    width: 95%;
+    width: 100%;
     margin-bottom: 10px;
   }
 
@@ -300,6 +314,9 @@ input::placeholder {
 
 @media only screen and (orientation: landscape) and (min-width: 830px) and (max-width: 1359px) {
 
+  input {
+    width: 82%;
+  }
 
   #icon {
     left: -9%;
