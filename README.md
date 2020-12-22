@@ -7,6 +7,7 @@ This app searches three separate Japanese-English dictionaries in one search, sa
 # features / frameworks / npm packages used
 * React
 * React Hooks
+* React Portal
 * axios
 * Preloaded images from Unsplash API 
 * GSAP
