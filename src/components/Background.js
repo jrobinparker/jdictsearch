@@ -16,7 +16,14 @@ export default function Background() {
           const imageWidth = img.width;
           const imageHeight = img.height;
 
-          if (imageWidth > imageHeight) bgImages.push(img.urls.regular)
+          if (imageWidth > imageHeight) {
+             const imgLink = document.createElement('link')
+             imgLink.setAttribute('rel', 'preload')
+             imgLink.setAttribute('href', img.urls.regular)
+             imgLink.setAttribute('as', 'image')
+             document.head.appendChild(imgLink)
+             bgImages.push(img.urls.regular)
+         }
 
           return null
       })
