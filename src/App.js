@@ -132,18 +132,6 @@ const App = () => {
 
   }
 
-  useEffect(() => {
-    const uiElements = document.querySelector('.ui-contents')
-    const input = document.getElementsByTagName('form')
-    window.addEventListener('resize', function() {
-      if (window.matchMedia('(orientation: portrait)').matches) {
-      }
-
-      if (window.matchMedia('(orientation: landscape)').matches) {
-      }
-    })
-  }, [])
-
     return (
       <div className="container">
         <img className="bg" />
