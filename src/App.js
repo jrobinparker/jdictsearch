@@ -5,8 +5,8 @@ import gsap from 'gsap';
 import Search from './components/Search';
 import Results from './components/Results';
 import NoResults from './components/NoResults';
+import Background from './components/Background';
 import './App.css';
-
 
 const App = () => {
   const [weblio, setWeblio] = useState('')
@@ -15,34 +15,6 @@ const App = () => {
   const [term, setTerm] = useState('')
   const [renderStatus, setRenderStatus] = useState(false)
   const [failedStatus, setFailedStatus] = useState(false)
-  let bgImages = []
-  const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY
-
-  useEffect(() => {
-    axios.get(`https://api.unsplash.com/search/photos?query=tokyo&client_id=${ACCESS_KEY}`, {
-      headers: {
-        'Authorization': `Client-ID ${ACCESS_KEY}`
-      }
-    })
-      .then(res => {
-        console.log(res.data)
-        res.data.results.map(img => {
-          const imageWidth = img.width;
-          const imageHeight = img.height;
-
-          if (imageWidth > imageHeight) bgImages.push(img.urls.regular)
-      })
-    })
-      .catch(err => console.log(err))
-  }, [])
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const img = bgImages[Math.floor(Math.random() * bgImages.length)]
-      document.querySelector('.bg').style.backgroundImage = `url('${img}')`
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
 
   const onTermSubmit = searchTerm => {
       setTerm(searchTerm)
@@ -134,36 +106,36 @@ const App = () => {
 
     return (
       <div className="container">
-        <img className="bg" />
-        <div className="ui">
-            <div className="header">
-              <div className="header-maintext">JDictSearch</div>
-              <div className="header-subtext">english-japanese dictionary search aggregator</div>
-            </div>
-            <Search
-              onTermSubmit={onTermSubmit}
-              handleReload={handleReload}
-            />
-            <div className="row">
+          <Background />
+          <div className="ui">
+              <div className="header">
+                <div className="header-maintext">JDictSearch</div>
+                <div className="header-subtext">english-japanese dictionary search aggregator</div>
+              </div>
+              <Search
+                onTermSubmit={onTermSubmit}
+                handleReload={handleReload}
+              />
+              <div className="row">
 
-                {renderStatus && !failedStatus ? (
-                  <Fragment>
-                      <Results
-                        weblio={weblio}
-                        eiNavi={eiNavi}
-                        eijiro={eijiro}
-                        term={term}
-                        showResults={resultAnimation}
-                      />
-                    </Fragment>
-                ) : renderStatus && failedStatus ? (
-                  <NoResults />
-                ) : (
-                    <Fragment></Fragment>
-                )
-              }
+                  {renderStatus && !failedStatus ? (
+                    <Fragment>
+                        <Results
+                          weblio={weblio}
+                          eiNavi={eiNavi}
+                          eijiro={eijiro}
+                          term={term}
+                          showResults={resultAnimation}
+                        />
+                      </Fragment>
+                  ) : renderStatus && failedStatus ? (
+                    <NoResults />
+                  ) : (
+                      <Fragment></Fragment>
+                  )
+                }
+              </div>
             </div>
-          </div>
         </div>
     );
 }

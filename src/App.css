@@ -17,6 +17,11 @@ li {
   padding: 0px 10px 0px 10px;
 }
 
+.loading {
+  position: absolute;
+  top: 20%;
+}
+
 .container {
   height: 100vh;
   width: 100vw;
@@ -30,7 +35,7 @@ li {
   background-size: cover;
   background-repeat: no-repeat;
   border: transparent;
-  transition: 1s;
+  transition: 2s;
 }
 
 .image {
