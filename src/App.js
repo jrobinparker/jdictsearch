@@ -6,6 +6,7 @@ import Search from './components/Search';
 import Results from './components/Results';
 import NoResults from './components/NoResults';
 import Background from './components/Background';
+import Header from './components/Header';
 import './App.css';
 
 const App = () => {
@@ -108,10 +109,7 @@ const App = () => {
       <div className="container">
           <Background />
           <div className="ui">
-              <div className="header">
-                <div className="header-maintext">JDictSearch</div>
-                <div className="header-subtext">english-japanese dictionary search aggregator</div>
-              </div>
+              <Header />
               <Search
                 onTermSubmit={onTermSubmit}
                 handleReload={handleReload}
