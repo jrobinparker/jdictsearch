@@ -1,4 +1,4 @@
-# jchain
+# jDictSearch
 https://jdictsearch.netlify.app/
 
 # about
