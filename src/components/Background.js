@@ -17,6 +17,8 @@ export default function Background() {
           const imageHeight = img.height;
 
           if (imageWidth > imageHeight) bgImages.push(img.urls.regular)
+
+          return null
       })
     })
       .catch(err => console.log(err))
@@ -28,10 +30,10 @@ export default function Background() {
       document.querySelector('.bg').style.backgroundImage = `url('${img}')`
     }, 10000);
     return () => clearInterval(interval);
-  }, []);
+  }, [bgImages]);
 
 
   return (
-    <img className="bg" />
+    <img className="bg" alt="" />
   )
 }

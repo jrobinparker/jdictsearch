@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { Fragment, useState } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import gsap from 'gsap';
@@ -72,8 +72,6 @@ const App = () => {
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
     const noResults = document.querySelector('.no-results')
-    const uiElements = document.querySelector('.ui-contents')
-    const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
       tl.to(result1, .25, {opacity: 0, y: 5})
@@ -95,8 +93,6 @@ const App = () => {
     const result1 = document.querySelectorAll('.result')[0]
     const result2 = document.querySelectorAll('.result')[1]
     const result3 = document.querySelectorAll('.result')[2]
-    const uiElements = document.querySelector('.ui')
-    const input = document.getElementsByTagName('form')
     const tl = gsap.timeline()
 
       tl.to(result1, .25, {delay: 1, opacity: 1, y: -5})

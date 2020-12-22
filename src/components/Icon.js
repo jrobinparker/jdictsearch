@@ -24,7 +24,6 @@ const Icon = ({ animate, clear, reset, search }) => {
   const clearSearch = () => {
     const icon = document.getElementById('icon')
     const clearIcon = document.getElementById('clear-icon')
-    const arrow = document.querySelector('.arrow-container')
     const tl = gsap.timeline()
 
     tl
