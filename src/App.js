@@ -7,6 +7,7 @@ import Results from './components/Results';
 import NoResults from './components/NoResults';
 import './App.css';
 
+
 const App = () => {
   const [weblio, setWeblio] = useState('')
   const [eiNavi, setEiNavi] = useState('')
@@ -14,7 +15,34 @@ const App = () => {
   const [term, setTerm] = useState('')
   const [renderStatus, setRenderStatus] = useState(false)
   const [failedStatus, setFailedStatus] = useState(false)
+  let bgImages = []
+  const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY
 
+  useEffect(() => {
+    axios.get(`https://api.unsplash.com/search/photos?query=tokyo&client_id=${ACCESS_KEY}`, {
+      headers: {
+        'Authorization': `Client-ID ${ACCESS_KEY}`
+      }
+    })
+      .then(res => {
+        console.log(res.data)
+        res.data.results.map(img => {
+          const imageWidth = img.width;
+          const imageHeight = img.height;
+
+          if (imageWidth > imageHeight) bgImages.push(img.urls.regular)
+      })
+    })
+      .catch(err => console.log(err))
+  }, [])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const img = bgImages[Math.floor(Math.random() * bgImages.length)]
+      document.querySelector('.bg').style.backgroundImage = `url('${img}')`
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
 
   const onTermSubmit = searchTerm => {
       setTerm(searchTerm)
@@ -42,7 +70,6 @@ const App = () => {
       .then(res => {
           const $ = cheerio.load(res.data);
           const result2Data = $('.main .container .summary .list-group .list-group-item .list-group-item-text').children().text();
-          console.log(result2Data)
            setEiNavi(result2Data)
            setRenderStatus(true)
          })
@@ -117,10 +144,9 @@ const App = () => {
     })
   }, [])
 
-  let image = require('./assets/splash2.png')
-
     return (
       <div className="container">
+        <img className="bg" />
         <div className="ui">
             <div className="header">
               <div className="header-maintext">JDictSearch</div>
