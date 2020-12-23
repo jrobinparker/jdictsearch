@@ -51,12 +51,12 @@ li {
 }
 
 .ui {
-  width: 92.5%;
-  height: 45%;
+  width: 90%;
+  height: 35%;
   position: absolute;
   top: 20%;
-  left: 2.5%;
-  padding-left: 35px;
+  left: 5%;
+  padding: 5px 20px 0px 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -67,6 +67,7 @@ li {
 .header {
   width: 50%;
   color: white;
+  margin-bottom: 20px;
 }
 
 .header-maintext {
@@ -78,12 +79,12 @@ li {
 }
 
 form {
-  width: 110%;
+  width: 100%;
+  display: flex;
 }
 
 input {
-  display: inline-block;
-  width: 84%;
+  width: 100%;
   padding: 20px;
   color: black;
   border: 0px;
@@ -96,16 +97,21 @@ input::placeholder {
 }
 
 .icon-container {
-  width: 10%;
+  height: 100%;
+  background: white;
+  cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.icon-container:hover {
+  background: #bdf2d5;
 }
 
 #icon {
-  position: relative;
-  left: -10%;
-  border-radius: 50%;
   font-size: 4vh;
-  padding: 15px;
-  cursor: pointer;
   color: #5d13e7;
 }
 
@@ -149,7 +155,10 @@ input::placeholder {
   }
 
 .row {
-  width: 90%;
+  position: relative;
+  top: 30%;
+  height: 10%;
+  width: 100%;
 }
 
 .no-results {
@@ -168,10 +177,9 @@ input::placeholder {
 
 .results {
   width: 100%;
-  margin-left: 10px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: center;
   align-self: center;
 }
@@ -206,9 +214,9 @@ input::placeholder {
 .modal-card {
   position: relative;
   top: 20%;
-  left: 25%;
+  left: 15%;
   max-height: 80vh;
-  width: 50%;
+  width: 70%;
   background-color: white;
   border-radius: 5px;
   color: #5d13e7;
@@ -244,37 +252,31 @@ input::placeholder {
     top: 20%;
     left: 5%;
     width: 90%;
-    height: 40%;
-    padding-left: 30px;
-    padding-top: 30px;
+    height: 25%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
   }
 
   .header {
-    width: 90%;
-    margin-bottom: 20px;
+    width: 100%;
+    margin-bottom: 0px;
   }
 
-  form {
-    width: 120%;
+  .header-maintext {
+    font-size: 4vh;
   }
 
-  input {
-    width: 70%;
+  .header-subtext {
+    font-size: 2.25vh;
   }
 
-  #icon {
-    left: -12.5%;
-  }
-
-  #clear-icon {
-    left: -17.5%;
+  .icon-container {
+    padding-left: 15px;
   }
 
   .row {
-    height: 20%;
+    height: 5%;
     position: relative;
     top: 30%;
   }
@@ -298,18 +300,14 @@ input::placeholder {
 
 /* small screens - landscape */
 
-@media only screen and (orientation: landscape) and (max-width: 829px) {
+@media only screen and (orientation: landscape) and (max-width: 929px) {
 
-  #icon {
-    left: -8%;
-  }
-
-  #clear-icon {
-    left: -15%;
+  .icon-container {
+    padding: 20px 0px 20px 15px;
   }
 
   .result {
-    font-size: 1.75vh;
+    font-size: 1.9vh;
     width: 25%;
   }
 
@@ -317,22 +315,14 @@ input::placeholder {
 
 /* medium screens - landscape */
 
-@media only screen and (orientation: landscape) and (min-width: 830px) and (max-width: 1359px) {
+@media only screen and (orientation: landscape) and (min-width: 930px) and (max-width: 1359px) {
 
-  input {
-    width: 82%;
-  }
-
-  #icon {
-    left: -9%;
-  }
-
-  #clear-icon {
-    left: -12.5%;
+  .icon-container {
+    padding: 20px 0px 20px 20px;
   }
 
   .result {
-    font-size: 2vh;
+    font-size: 2.25vh;
     width: 25%;
   }
 
@@ -342,12 +332,7 @@ input::placeholder {
 
 @media only screen and (orientation: landscape) and (min-width: 1360px) and (max-width: 1500px) {
 
-  #clear-icon {
-    left: -12.5%;
-  }
-
   .result {
-    width: 25%;
     font-size: 3vh;
   }
 

@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import gsap from 'gsap';
 
-const Icon = ({ animate, clear, reset, search }) => {
+const Icon = ({ clear, search }) => {
 
   const searchAnimation = () => {
     const icon = document.getElementById('icon')
@@ -34,19 +34,17 @@ const Icon = ({ animate, clear, reset, search }) => {
   }
 
     return (
-      <Fragment>
+      <div className="icon-container">
         <i
           className="fas fa-search" id="icon"
           onClick={handleClick}
-          onMouseOver={animate}
-          onMouseOut={reset}
         />
         <i
           className="fas fa-times"
           id="clear-icon"
           onClick={e => clearSearch()}
         />
-      </Fragment>
+      </div>
     )
   }
 
