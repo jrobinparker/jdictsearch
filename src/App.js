@@ -14,8 +14,7 @@ const App = () => {
   const [eiNavi, setEiNavi] = useState('')
   const [eijiro, setEijiro] = useState('')
   const [term, setTerm] = useState('')
-  const [renderStatus, setRenderStatus] = useState(false)
-  const [failedStatus, setFailedStatus] = useState(false)
+  const [failedStatus, setFailedStatus] = useState(null)
 
   const onTermSubmit = searchTerm => {
       setTerm(searchTerm)
@@ -30,11 +29,10 @@ const App = () => {
         const $ = cheerio.load(res.data);
         const result1Data = $('.content-explanation.ej').text();
         setWeblio(result1Data)
-        setRenderStatus(true)
+        setFailedStatus(false)
       })
       .catch(err => {
         setFailedStatus(true)
-        setRenderStatus(true)
       })
     }
 
@@ -44,11 +42,10 @@ const App = () => {
           const $ = cheerio.load(res.data);
           const result2Data = $('.main .container .summary .list-group .list-group-item .list-group-item-text').children().text();
            setEiNavi(result2Data)
-           setRenderStatus(true)
+           setFailedStatus(false)
          })
          .catch(err => {
            setFailedStatus(true)
-           setRenderStatus(true)
          })
   }
 
@@ -58,11 +55,10 @@ const App = () => {
         const $ = cheerio.load(res.data);
         const result3Data = $('ul li div ul li, #resultsList').children().slice(2, 4).text();
         setEijiro(result3Data)
-        setRenderStatus(true)
+        setFailedStatus(false)
       })
    .catch(err => {
      setFailedStatus(true)
-     setRenderStatus(true)
    })
   }
 
@@ -84,7 +80,6 @@ const App = () => {
       setEiNavi('')
       setEijiro('')
       setTerm('')
-      setRenderStatus(!renderStatus)
       setFailedStatus(false)
       }, 1000)
   }
@@ -104,32 +99,31 @@ const App = () => {
     return (
       <div className="container">
           <Background />
-          <div className="ui">
-              <Header />
-              <Search
-                onTermSubmit={onTermSubmit}
-                handleReload={handleReload}
-              />
-              <div className="row">
-
-                  {renderStatus && !failedStatus ? (
-                    <Fragment>
-                        <Results
-                          weblio={weblio}
-                          eiNavi={eiNavi}
-                          eijiro={eijiro}
-                          term={term}
-                          showResults={resultAnimation}
-                        />
-                      </Fragment>
-                  ) : renderStatus && failedStatus ? (
-                    <NoResults />
-                  ) : (
+            <div className="ui">
+                <Header />
+                <Search
+                  onTermSubmit={onTermSubmit}
+                  handleReload={handleReload}
+                />
+                <div className="row">
+                    {failedStatus === false ? (
+                      <Fragment>
+                          <Results
+                            weblio={weblio}
+                            eiNavi={eiNavi}
+                            eijiro={eijiro}
+                            term={term}
+                            showResults={resultAnimation}
+                          />
+                        </Fragment>
+                    ) : failedStatus === true ? (
+                      <NoResults />
+                    ) : (
                       <Fragment></Fragment>
-                  )
-                }
+                    )
+                  }
+                </div>
               </div>
-            </div>
         </div>
     );
 }

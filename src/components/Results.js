@@ -8,6 +8,7 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
   const [eijiroResult, setEijiroResult] = useState([]);
 
   useEffect(() => {
+
     if (weblio) {
       const weblioSearch = weblio.split("主な意味").toString().split("、");
       setWeblioResult(weblioSearch)
@@ -24,6 +25,7 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
       const eijiroSplitArray2 = eijiroSplitArray[0].split("、")
       setEijiroResult(eijiroSplitArray2)
     }
+
   }, [weblio, eiNavi, eijiro])
 
   useEffect(() => {
@@ -71,9 +73,9 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
 
     return (
       <div className="results">
-          {weblioComponent}
-          {eiNaviComponent}
-          {eijiroComponent}
+        {weblioComponent}
+        {eiNaviComponent}
+        {eijiroComponent}
       </div>
     )
 }

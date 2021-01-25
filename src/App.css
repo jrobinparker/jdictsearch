@@ -98,6 +98,7 @@ input::placeholder {
 
 .icon-container {
   height: 100%;
+  padding: 20px 0px 20px 20px;
   background: white;
   cursor: pointer;
   box-sizing: border-box;
