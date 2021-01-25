@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Result from './Result';
-import gsap from 'gsap';
 
-const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
+const Results = ({ weblio, eiNavi, eijiro, term, showResults, loading }) => {
   const [weblioResult, setWeblioResult] = useState([]);
   const [eiNaviResult, setInfoSeekResult] = useState([]);
   const [eijiroResult, setEijiroResult] = useState([]);
@@ -27,11 +26,6 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
     }
 
   }, [weblio, eiNavi, eijiro])
-
-  useEffect(() => {
-    const results = document.querySelectorAll('.results-grid')
-    gsap.to(results, .5, {opacity: 1, y: -5})
-  }, [])
 
   let weblioComponent, eiNaviComponent, eijiroComponent
 

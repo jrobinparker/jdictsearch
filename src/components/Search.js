@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Icon from './Icon.js';
 
-const Search = ({ onTermSubmit, handleReload }) => {
+const Search = ({ onTermSubmit, handleReload, loading }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const onChange = e => {
@@ -32,6 +32,7 @@ const Search = ({ onTermSubmit, handleReload }) => {
               <Icon
                 search={onFormSubmit}
                 clear={clearSearch}
+                loading={loading}
               />
           </form>
     )

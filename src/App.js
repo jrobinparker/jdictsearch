@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import gsap from 'gsap';
@@ -14,14 +14,23 @@ const App = () => {
   const [eiNavi, setEiNavi] = useState('')
   const [eijiro, setEijiro] = useState('')
   const [term, setTerm] = useState('')
-  const [failedStatus, setFailedStatus] = useState(null)
+  const [loading, setLoading] = useState('inactive')
+  const [renderStatus, setRenderStatus] = useState(false)
+  const [failedStatus, setFailedStatus] = useState(false)
 
   const onTermSubmit = searchTerm => {
+      setLoading('loading')
       setTerm(searchTerm)
       weblioSearch(searchTerm)
       eiNaviSearch(searchTerm)
       eijiroSearch(searchTerm)
   }
+
+  useEffect(() => {
+    if (weblio.length > 1) {
+      setLoading('loaded')
+    }
+  }, [weblio])
 
   const weblioSearch = (searchTerm) => {
     axios.get(`https://pure-coast-05369.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`)
@@ -55,6 +64,7 @@ const App = () => {
         const $ = cheerio.load(res.data);
         const result3Data = $('ul li div ul li, #resultsList').children().slice(2, 4).text();
         setEijiro(result3Data)
+        setRenderStatus(true)
         setFailedStatus(false)
       })
    .catch(err => {
@@ -80,6 +90,8 @@ const App = () => {
       setEiNavi('')
       setEijiro('')
       setTerm('')
+      setLoading('inactive')
+      setRenderStatus(false)
       setFailedStatus(false)
       }, 1000)
   }
@@ -104,9 +116,10 @@ const App = () => {
                 <Search
                   onTermSubmit={onTermSubmit}
                   handleReload={handleReload}
+                  loading={loading}
                 />
                 <div className="row">
-                    {failedStatus === false ? (
+                    {renderStatus && !failedStatus ? (
                       <Fragment>
                           <Results
                             weblio={weblio}
@@ -114,9 +127,10 @@ const App = () => {
                             eijiro={eijiro}
                             term={term}
                             showResults={resultAnimation}
+                            loading={loading}
                           />
                         </Fragment>
-                    ) : failedStatus === true ? (
+                    ) : renderStatus && failedStatus ? (
                       <NoResults />
                     ) : (
                       <Fragment></Fragment>
