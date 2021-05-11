@@ -9,7 +9,7 @@
     "create-react-app": "^3.4.1",
     "gh-pages": "^2.2.0",
     "gsap": "^3.5.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "^3.4.4"
