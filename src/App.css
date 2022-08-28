@@ -1,14 +1,14 @@
 body {
   color: black;
-  font-family: 'Alata', sans-serif;
+  font-family: "Alata", sans-serif;
   margin: 0 auto;
   overflow-y: hidden;
   overflow-x: hidden;
 }
 
 ul {
-   list-style-type: none;
-   padding-bottom: 5px;
+  list-style-type: none;
+  padding-bottom: 5px;
 }
 
 li {
@@ -31,7 +31,7 @@ li {
 .bg {
   height: 100vh;
   width: 100vw;
-  background: url('/images/sakura.jpg');
+  background: url("/images/sakura.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   border: transparent;
@@ -89,7 +89,7 @@ input {
   color: black;
   border: 0px;
   font-size: 3vh;
-  font-family: 'Alata', sans-serif;
+  font-family: "Alata", sans-serif;
 }
 
 input::placeholder {
@@ -104,8 +104,7 @@ input::placeholder {
   cursor: pointer;
   box-sizing: border-box;
   display: flex;
-  align-items: center;
-  text-align: center;
+  justify-content: center;
 }
 
 .icon-container:hover {
@@ -113,7 +112,6 @@ input::placeholder {
 }
 
 .icon {
-
   font-size: 4vh;
   color: #5d13e7;
 }
@@ -124,28 +122,22 @@ input::placeholder {
   animation: spin 1s linear infinite;
 }
 
-@-moz-keyframes spin
-  {
-    100%
-      {
-        -moz-transform: rotate(360deg);
-        }
-    }
-@-webkit-keyframes spin
-  {
-    100%
-      {
-        -webkit-transform: rotate(360deg);
-      }
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
   }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
 
-@keyframes spin
-  {
-    100%
-      {
-        transform:rotate(360deg);
-       }
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
   }
+}
 
 .row {
   position: relative;
@@ -201,7 +193,7 @@ input::placeholder {
   top: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, .9);
+  background-color: rgba(0, 0, 0, 0.9);
 }
 
 .modal-card {
@@ -214,7 +206,7 @@ input::placeholder {
   border-radius: 5px;
   color: #5d13e7;
   padding: 2%;
-  box-shadow: 12px 12px 12px 0 rgba(0,0,0,0.3);
+  box-shadow: 12px 12px 12px 0 rgba(0, 0, 0, 0.3);
 }
 
 .modal-card-header {
@@ -234,13 +226,12 @@ input::placeholder {
 
 .modal-close {
   margin-left: auto;
-  cursor: pointer
+  cursor: pointer;
 }
 
 /*  portrait orientation */
 
 @media only screen and (orientation: portrait) {
-
   .ui {
     top: 20%;
     left: 5%;
@@ -289,37 +280,30 @@ input::placeholder {
     left: 5%;
     width: 85%;
   }
-
 }
 
 /* small screens - landscape */
 
 @media only screen and (orientation: landscape) and (max-width: 929px) {
-
   .result {
     font-size: 1.9vh;
     width: 25%;
   }
-
 }
 
 /* medium screens - landscape */
 
 @media only screen and (orientation: landscape) and (min-width: 930px) and (max-width: 1359px) {
-
   .result {
     font-size: 2.25vh;
     width: 25%;
   }
-
 }
 
 /* large screens - landscape */
 
 @media only screen and (orientation: landscape) and (min-width: 1360px) and (max-width: 1500px) {
-
   .result {
     font-size: 3vh;
   }
-
 }

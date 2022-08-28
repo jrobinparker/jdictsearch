@@ -1,29 +1,37 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import ResultModal from './ResultModal';
+import React, { Fragment, useEffect, useState } from "react";
+import ResultModal from "./ResultModal";
 
 const Result = ({ appear, name, text, url, length, term }) => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    appear()
-  }, [appear])
+    appear();
+  }, [appear]);
 
-  const toggleModal = e => {
-    setModal(!modal)
-  }
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  const displayModal = modal && (
+    <ResultModal
+      closeModal={toggleModal}
+      text={text}
+      name={name}
+      url={url}
+      length={length}
+      term={term}
+    />
+  );
 
   return (
     <Fragment>
-      <div
-        className="result"
-        onClick={e => toggleModal(e)}
-        >
-            {length} results from {name}
-          <i className="fas fa-chevron-right" onClick={e => toggleModal(e)}/>
+      <div className="result" onClick={() => toggleModal()}>
+        {length} results from {name}
+        <i className="fas fa-chevron-right" onClick={() => toggleModal()} />
       </div>
-      {modal ? <ResultModal closeModal={toggleModal} text={text} name={name} url={url} length={length} term={term} /> : <Fragment></Fragment>}
+      {displayModal ?? <Fragment></Fragment>}
     </Fragment>
-    )
-}
+  );
+};
 
 export default Result;
