@@ -49,5 +49,5 @@ export default function Background() {
     return () => clearInterval(interval);
   }, [bgImages]);
 
-  return <img className="bg" alt="" />;
+  return <img className="bg" alt="Areas of Tokyo" />;
 }
