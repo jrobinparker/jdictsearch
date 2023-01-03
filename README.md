@@ -12,3 +12,4 @@ This app searches three separate Japanese-English dictionaries in one search, sa
 * Preloaded images from Unsplash API 
 * GSAP
 * Custom CSS - responsive, no frameworks used
+* Vite
