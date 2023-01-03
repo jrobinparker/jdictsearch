@@ -9,13 +9,16 @@ import Background from "/src/components/Background";
 import Header from "/src/components/Header";
 import "./App.css";
 
+const BASE_URL = "https://pure-coast-05369.herokuapp.com/";
+
 const App = () => {
-  const [weblio, setWeblio] = useState("");
-  const [eiNavi, setEiNavi] = useState("");
-  const [eijiro, setEijiro] = useState("");
+  const [results, setResults] = useState({
+    weblio: "",
+    eiNavi: "",
+    eijiro: ""
+  });
   const [term, setTerm] = useState("");
   const [loading, setLoading] = useState("inactive");
-  const [renderStatus, setRenderStatus] = useState(false);
   const [failedStatus, setFailedStatus] = useState(false);
 
   const onTermSubmit = async (searchTerm) => {
@@ -27,20 +30,20 @@ const App = () => {
   };
 
   useEffect(() => {
-    if (weblio.length > 1) {
+    if (results.weblio.length > 1) {
       setLoading("loaded");
     }
-  }, [weblio]);
+  }, [results.weblio]);
 
   const weblioSearch = async (searchTerm) => {
     try {
       const req = axios.get(
-        `https://pure-coast-05369.herokuapp.com/https://ejje.weblio.jp/content/${searchTerm}`
+        `${BASE_URL}/https://ejje.weblio.jp/content/${searchTerm}`
       );
       const res = await req;
       const $ = cheerio.load(res.data);
       const result1Data = $(".content-explanation.ej").text();
-      setWeblio(result1Data);
+      setResults({...results, weblio: result1Data});
       setFailedStatus(false);
     } catch (error) {
       setFailedStatus(true);
@@ -50,7 +53,7 @@ const App = () => {
   const eiNaviSearch = async (searchTerm) => {
     try {
       const req = axios.get(
-        `https://pure-coast-05369.herokuapp.com/https://www.ei-navi.jp/dictionary/content/${searchTerm}/`
+        `${BASE_URL}/https://www.ei-navi.jp/dictionary/content/${searchTerm}/`
       );
       const res = await req;
       const $ = cheerio.load(res.data);
@@ -59,7 +62,7 @@ const App = () => {
       )
         .children()
         .text();
-      setEiNavi(result2Data);
+      setResults({...results, eiNavi: result2Data});
       setFailedStatus(false);
     } catch (error) {
       setFailedStatus(true);
@@ -69,7 +72,7 @@ const App = () => {
   const eijiroSearch = async (searchTerm) => {
     try {
       const req = axios.get(
-        `https://pure-coast-05369.herokuapp.com/https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`
+        `${BASE_URL}/https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`
       );
       const res = await req;
       const $ = cheerio.load(res.data);
@@ -77,47 +80,47 @@ const App = () => {
         .children()
         .slice(2, 4)
         .text();
-      setEijiro(result3Data);
-      setRenderStatus(true);
-      setFailedStatus(false);
+      setResults({...results, eijiro: result3Data});
     } catch (error) {
       setFailedStatus(true);
     }
   };
 
   const handleReload = () => {
-    const result1 = document.querySelectorAll(".result")[0];
-    const result2 = document.querySelectorAll(".result")[1];
-    const result3 = document.querySelectorAll(".result")[2];
-    const noResults = document.querySelector(".no-results");
-    const tl = gsap.timeline();
-
-    tl.to(result1, 0.25, { opacity: 0, y: 5 })
-      .to(result2, 0.25, { opacity: 0, y: 5 })
-      .to(result3, 0.25, { opacity: 0, y: 5 })
-      .to(noResults, 0.25, { opacity: 0, y: 5 });
-
+    resultAnimation(-5, true);
     setTimeout(() => {
-      setWeblio("");
-      setEiNavi("");
-      setEijiro("");
+      setResults({
+        weblio: "",
+        eiNavi: "",
+        eijiro: ""
+      });
       setTerm("");
       setLoading("inactive");
-      setRenderStatus(false);
       setFailedStatus(false);
     }, 1000);
   };
 
-  const resultAnimation = () => {
+  const resultAnimation = (yValue, reload = false) => {
     const result1 = document.querySelectorAll(".result")[0];
     const result2 = document.querySelectorAll(".result")[1];
     const result3 = document.querySelectorAll(".result")[2];
     const tl = gsap.timeline();
+    
+    if (reload) {
+      const noResults = document.querySelector(".no-results");
+      return tl.to(result1, 0.25, { opacity: 0, y: yValue })
+        .to(result2, 0.25, { opacity: 0, y: yValue })
+        .to(result3, 0.25, { opacity: 0, y: yValue })
+        .to(noResults, 0.25, { opacity: 0, y: yValue });
+    }
 
-    tl.to(result1, 0.25, { delay: 1, opacity: 1, y: -5 })
-      .to(result2, 0.25, { delay: 1, opacity: 1, y: -5 })
-      .to(result3, 0.25, { delay: 1, opacity: 1, y: -5 });
+    return tl.to(result1, 0.25, { delay: 1, opacity: 1, y: yValue })
+        .to(result2, 0.25, { delay: 1, opacity: 1, y: yValue })
+        .to(result3, 0.25, { delay: 1, opacity: 1, y: yValue })
   };
+
+  const defaultState = !results.weblio.length && !results.eiNavi.length && !results.eijiro.length && !failedStatus;
+  const hasResults = results.weblio.length || results.eiNavi.length || results.eijiro.length;
 
   return (
     <div className="container">
@@ -130,22 +133,20 @@ const App = () => {
           loading={loading}
         />
         <div className="row">
-          {renderStatus && !failedStatus ? (
+          {defaultState && <Fragment />}
+          {hasResults && (
             <Fragment>
               <Results
-                weblio={weblio}
-                eiNavi={eiNavi}
-                eijiro={eijiro}
+                weblio={results.weblio}
+                eiNavi={results.eiNavi}
+                eijiro={results.eijiro}
                 term={term}
                 showResults={resultAnimation}
                 loading={loading}
               />
             </Fragment>
-          ) : renderStatus && failedStatus ? (
-            <NoResults />
-          ) : (
-            <Fragment></Fragment>
           )}
+          {failedStatus && <NoResults />}
         </div>
       </div>
     </div>

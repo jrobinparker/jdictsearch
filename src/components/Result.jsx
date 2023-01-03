@@ -5,7 +5,7 @@ const Result = ({ appear, name, text, url, length, term }) => {
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    appear();
+    appear(5);
   }, [appear]);
 
   const toggleModal = () => {
