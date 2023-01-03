@@ -2,11 +2,11 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import cheerio from "cheerio";
 import gsap from "gsap";
-import Search from "./components/Search";
-import Results from "./components/Results";
-import NoResults from "./components/NoResults";
-import Background from "./components/Background";
-import Header from "./components/Header";
+import Search from "/src/components/Search";
+import Results from "/src/components/Results";
+import NoResults from "/src/components/NoResults";
+import Background from "/src/components/Background";
+import Header from "/src/components/Header";
 import "./App.css";
 
 const App = () => {

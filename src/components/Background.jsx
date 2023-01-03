@@ -3,7 +3,7 @@ import axios from "axios";
 
 export default function Background() {
   const [bgImages] = useState([]);
-  const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+  const ACCESS_KEY = import.meta.env.VITE_APP_ACCESS_KEY;
 
   useEffect(() => {
     async function getBgImages() {
@@ -30,7 +30,7 @@ export default function Background() {
             bgImages.push(img.urls.regular);
           }
 
-          return null;
+          return;
         });
       } catch (error) {
         console.log(error);
@@ -49,5 +49,5 @@ export default function Background() {
     return () => clearInterval(interval);
   }, [bgImages]);
 
-  return <img className="bg" alt="Areas of Tokyo" />;
+  return <img className="bg" />;
 }

@@ -5,21 +5,18 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
-    "cheerio": "^1.0.0-rc.3",
-    "create-react-app": "^3.4.1",
+    "cheerio": "^1.0.0-rc.12",
     "gh-pages": "^2.2.0",
     "gsap": "^3.5.1",
     "lodash": "^4.17.20",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-scripts": "^3.4.4"
+    "react": "^18.0.21",
+    "react-dom": "^18.0.6",
+    "vite": "^4.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -36,5 +33,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/cheerio": "^0.22.31",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^3.0.0",
+    "vite-plugin-svgr": "^2.4.0"
   }
 }

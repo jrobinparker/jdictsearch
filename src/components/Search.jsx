@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Icon from "./Icon.js";
+import Icon from "./Icon.jsx";
 
 const Search = ({ onTermSubmit, handleReload, loading }) => {
   const [searchTerm, setSearchTerm] = useState("");
