@@ -27,24 +27,18 @@ const App = () => {
     await weblioSearch(searchTerm);
     await eiNaviSearch(searchTerm);
     await eijiroSearch(searchTerm);
+    setLoading("loaded");
   };
-
-  useEffect(() => {
-    if (results.weblio.length > 1) {
-      setLoading("loaded");
-    }
-  }, [results.weblio]);
 
   const weblioSearch = async (searchTerm) => {
     try {
       const req = axios.get(
-        `${BASE_URL}/https://ejje.weblio.jp/content/${searchTerm}`
+        `${BASE_URL}https://ejje.weblio.jp/content/${searchTerm}`
       );
       const res = await req;
       const $ = cheerio.load(res.data);
       const result1Data = $(".content-explanation.ej").text();
       setResults({...results, weblio: result1Data});
-      setFailedStatus(false);
     } catch (error) {
       setFailedStatus(true);
     }
@@ -53,7 +47,7 @@ const App = () => {
   const eiNaviSearch = async (searchTerm) => {
     try {
       const req = axios.get(
-        `${BASE_URL}/https://www.ei-navi.jp/dictionary/content/${searchTerm}/`
+        `${BASE_URL}https://www.ei-navi.jp/dictionary/content/${searchTerm}/`
       );
       const res = await req;
       const $ = cheerio.load(res.data);
@@ -63,7 +57,6 @@ const App = () => {
         .children()
         .text();
       setResults({...results, eiNavi: result2Data});
-      setFailedStatus(false);
     } catch (error) {
       setFailedStatus(true);
     }
@@ -72,7 +65,7 @@ const App = () => {
   const eijiroSearch = async (searchTerm) => {
     try {
       const req = axios.get(
-        `${BASE_URL}/https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`
+        `${BASE_URL}https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`
       );
       const res = await req;
       const $ = cheerio.load(res.data);
@@ -116,11 +109,11 @@ const App = () => {
 
     return tl.to(result1, 0.25, { delay: 1, opacity: 1, y: yValue })
         .to(result2, 0.25, { delay: 1, opacity: 1, y: yValue })
-        .to(result3, 0.25, { delay: 1, opacity: 1, y: yValue })
+        .to(result3, 0.25, { delay: 1, opacity: 1, y: yValue });
   };
 
   const defaultState = !results.weblio.length && !results.eiNavi.length && !results.eijiro.length && !failedStatus;
-  const hasResults = results.weblio.length || results.eiNavi.length || results.eijiro.length;
+  const hasResults = (results.weblio.length > 1 || results.eiNavi.length > 1 || results.eijiro.length > 1) && !failedStatus;
 
   return (
     <div className="container">

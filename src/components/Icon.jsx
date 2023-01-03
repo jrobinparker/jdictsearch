@@ -10,8 +10,8 @@ const Icon = ({ clear, search, loading }) => {
   }, [loading]);
 
   return (
-    <div className="icon-container">
-      <i className={`fas ${displayIcon} icon`} onClick={loading !== "loaded" ? search : clear} />
+    <div className="icon-container" onClick={loading !== "loaded" ? search : clear}>
+      <i className={`fas ${displayIcon} icon`} />
     </div>
   );
 };
