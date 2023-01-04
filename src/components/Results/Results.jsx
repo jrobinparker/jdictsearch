@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from "react";
-import Result from "../Result/Result";
-import { StyledResultsContainer } from "./Results.styles";
+import React, { useState, useEffect } from 'react';
+import Result from '../Result/Result';
+import { StyledResultsContainer } from './Results.styles';
 
 const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
   const [results, setResults] = useState({
     weblio: [],
     eiNavi: [],
-    eijiro: []
+    eijiro: [],
   });
 
   useEffect(() => {
     if (weblio.length) {
       setResults({
         ...results,
-        weblio: [...weblio.split("主な意味").toString().split("、")]
+        weblio: [...weblio.split('主な意味').toString().split('、')],
       });
     }
 
     if (eiNavi.length) {
       setResults({
         ...results,
-        eiNavi: [...eiNavi.split("、")]
+        eiNavi: [...eiNavi.split('、')],
       });
     }
 
     if (eijiro.length) {
       setResults({
         ...results,
-        eijiro: [...eijiro.split("<a")[0].split("【レベル】")[0].split("、")]
+        eijiro: [...eijiro.split('<a')[0].split('【レベル】')[0].split('、')],
       });
     }
   }, [weblio, eiNavi, eijiro]);

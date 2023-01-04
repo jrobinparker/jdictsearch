@@ -1,21 +1,21 @@
-import React from "react";
-import { createPortal } from "react-dom";
-import { 
-  StyledResultModal, 
-  StyledResultModalCard, 
-  StyledResultModalCardHeader, 
-  StyledResultModalCardBody ,
-  StyledResultModalClose
-} from "./ResultModal.styles";
+import React from 'react';
+import { createPortal } from 'react-dom';
+import {
+  StyledResultModal,
+  StyledResultModalCard,
+  StyledResultModalCardHeader,
+  StyledResultModalCardBody,
+  StyledResultModalClose,
+} from './ResultModal.styles';
 
-const ResultModal = ({ closeModal, length, name, text, term, url }) => {
+const ResultModal = ({ closeModal, length, name, text, term }) => {
   return createPortal(
     <StyledResultModal>
       <StyledResultModalCard>
         <StyledResultModalCardHeader>
           {name}: {length} results for "{term}"
-          <StyledResultModalClose
-            onClick={() => closeModal()}
+          <StyledResultModalClose 
+            onClick={() => closeModal()} 
           />
         </StyledResultModalCardHeader>
         <StyledResultModalCardBody>
@@ -25,7 +25,7 @@ const ResultModal = ({ closeModal, length, name, text, term, url }) => {
         </StyledResultModalCardBody>
       </StyledResultModalCard>
     </StyledResultModal>,
-    document.querySelector("#result-modal")
+    document.querySelector('#result-modal'),
   );
 };
 
