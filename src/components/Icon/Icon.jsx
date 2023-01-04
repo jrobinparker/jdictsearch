@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { StyledIconContainer, StyledIcon } from "./Icon.styles";
 
 const Icon = ({ clear, search, loading }) => {
   const [displayIcon, setDisplayIcon] = useState("fa-search");
@@ -10,9 +11,11 @@ const Icon = ({ clear, search, loading }) => {
   }, [loading]);
 
   return (
-    <div className="icon-container" onClick={loading !== "loaded" ? search : clear}>
-      <i className={`fas ${displayIcon} icon`} />
-    </div>
+    <StyledIconContainer
+      onClick={e => loading !== "loaded" ? search(e) : clear()}
+    >
+      <StyledIcon displayIcon={`${displayIcon}`} />
+    </StyledIconContainer>
   );
 };
 

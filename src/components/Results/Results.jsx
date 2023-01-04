@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Result from "./Result";
+import Result from "../Result/Result";
+import { StyledResultsContainer } from "./Results.styles";
 
 const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
   const [results, setResults] = useState({
@@ -29,7 +30,7 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
         eijiro: [...eijiro.split("<a")[0].split("【レベル】")[0].split("、")]
       });
     }
-  }, [results.weblio, results.eiNavi, results.eijiro]);
+  }, [weblio, eiNavi, eijiro]);
 
   let weblioComponent, eiNaviComponent, eijiroComponent;
 
@@ -73,11 +74,11 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
   }
 
   return (
-    <div className="results">
+    <StyledResultsContainer>
       {weblioComponent}
       {eiNaviComponent}
       {eijiroComponent}
-    </div>
+    </StyledResultsContainer>
   );
 };
 

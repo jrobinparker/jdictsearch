@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { StyledBackground } from "./Background.styles";
 
 export default function Background() {
   const [bgImages] = useState([]);
@@ -49,5 +50,5 @@ export default function Background() {
     return () => clearInterval(interval);
   }, [bgImages]);
 
-  return <img className="bg" />;
+  return <StyledBackground className="bg" />;
 }

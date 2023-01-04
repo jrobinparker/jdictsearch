@@ -2,11 +2,14 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import cheerio from "cheerio";
 import gsap from "gsap";
-import Search from "/src/components/Search";
-import Results from "/src/components/Results";
-import NoResults from "/src/components/NoResults";
-import Background from "/src/components/Background";
-import Header from "/src/components/Header";
+import Search from "/src/components/Search/Search";
+import Results from "/src/components/Results/Results";
+import NoResults from "/src/components/NoResults/NoResults";
+import Background from "/src/components/Background/Background";
+import Header from "/src/components/Header/Header";
+import { StyledContainer, StyledRow, StyledUi } from "./App.styles";
+import { GlobalStyles } from "./GlobalStyle.styles";
+
 import "./App.css";
 
 const BASE_URL = "https://pure-coast-05369.herokuapp.com/";
@@ -116,16 +119,17 @@ const App = () => {
   const hasResults = (results.weblio.length > 1 || results.eiNavi.length > 1 || results.eijiro.length > 1) && !failedStatus;
 
   return (
-    <div className="container">
+    <StyledContainer>
+      <GlobalStyles />
       <Background />
-      <div className="ui">
+      <StyledUi>
         <Header />
         <Search
           onTermSubmit={onTermSubmit}
           handleReload={handleReload}
           loading={loading}
         />
-        <div className="row">
+        <StyledRow>
           {defaultState && <Fragment />}
           {hasResults && (
             <Fragment>
@@ -140,9 +144,9 @@ const App = () => {
             </Fragment>
           )}
           {failedStatus && <NoResults />}
-        </div>
-      </div>
-    </div>
+        </StyledRow>
+      </StyledUi>
+    </StyledContainer>
   );
 };
 

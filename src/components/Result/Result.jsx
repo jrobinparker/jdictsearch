@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
-import ResultModal from "./ResultModal";
+import ResultModal from "../ResultModal/ResultModal";
+import { StyledResult } from "./Result.styles";
 
 const Result = ({ appear, name, text, url, length, term }) => {
   const [modal, setModal] = useState(false);
@@ -25,10 +26,10 @@ const Result = ({ appear, name, text, url, length, term }) => {
 
   return (
     <Fragment>
-      <div className="result" onClick={() => toggleModal()}>
+      <StyledResult onClick={() => toggleModal()}>
         {length} results from {name}
         <i className="fas fa-chevron-right" onClick={() => toggleModal()} />
-      </div>
+      </StyledResult>
       {displayModal ?? <Fragment></Fragment>}
     </Fragment>
   );

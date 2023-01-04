@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Icon from "./Icon.jsx";
+import Icon from "../Icon/Icon";
+import { StyledForm, StyledInput } from "./Search.styles";
 
 const Search = ({ onTermSubmit, handleReload, loading }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -19,18 +20,16 @@ const Search = ({ onTermSubmit, handleReload, loading }) => {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <input
+    <StyledForm>
+      <StyledInput
         type="text"
-        className="input-text"
-        placeholder="Enter an english word..."
+        placeholder="Enter an English word..."
         name="searchTerm"
         value={searchTerm}
         onChange={onChange}
-        onSubmit={onFormSubmit}
       />
       <Icon search={onFormSubmit} clear={clearSearch} loading={loading} />
-    </form>
+    </StyledForm>
   );
 };
 
