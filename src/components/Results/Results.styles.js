@@ -4,7 +4,6 @@ export const StyledResultsContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-content: center;
   align-self: center;
 

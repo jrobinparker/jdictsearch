@@ -1,13 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Result from '../Result/Result';
 import { StyledResultsContainer } from './Results.styles';
 
-const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
+const Results = ({ weblio, eiNavi, eijiro, term, cleared }) => {
   const [results, setResults] = useState({
     weblio: [],
     eiNavi: [],
     eijiro: [],
   });
+  const [display, setDisplay] = useState(true);
+  const rowRef = useRef(null);
+
+  useLayoutEffect(() => {
+      if (cleared) {
+        rowRef.current.className = `${rowRef.current.className} slide-down`;
+        setTimeout(() => setDisplay(false), 500);
+      }
+  }, [cleared]);
+
 
   useEffect(() => {
     if (weblio.length) {
@@ -42,7 +52,6 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
         length={results.weblio.length}
         text={results.weblio}
         term={term}
-        appear={showResults}
       />
     );
   }
@@ -55,7 +64,6 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
         length={results.eiNavi.length}
         text={results.eiNavi}
         term={term}
-        appear={showResults}
       />
     );
   }
@@ -68,18 +76,17 @@ const Results = ({ weblio, eiNavi, eijiro, term, showResults }) => {
         length={results.eijiro.length}
         text={results.eijiro}
         term={term}
-        appear={showResults}
       />
     );
   }
 
-  return (
-    <StyledResultsContainer>
+  return display &&
+    <StyledResultsContainer ref={rowRef}>
       {weblioComponent}
       {eiNaviComponent}
       {eijiroComponent}
     </StyledResultsContainer>
-  );
+  ;
 };
 
 export default Results;

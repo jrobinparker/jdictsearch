@@ -31,7 +31,7 @@ export const StyledUi = styled.div`
 
 export const StyledRow = styled.div`
   position: relative;
-  top: 30%;
+  top: 60%;
   height: 10%;
   width: 100%;
 

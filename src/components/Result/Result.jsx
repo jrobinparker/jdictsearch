@@ -1,21 +1,18 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ResultModal from "../ResultModal/ResultModal";
 import { StyledResult } from "./Result.styles";
 
-const Result = ({ appear, name, text, url, length, term }) => {
+const Result = ({ name, text, url, length, term }) => {
   const [modal, setModal] = useState(false);
+  const resultRef = useRef(null);
 
   useEffect(() => {
-    appear(5);
-  }, [appear]);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
+    resultRef.current.className = `${resultRef.current.className} slide-top`;
+  }, [resultRef]);
 
   const displayModal = modal && (
     <ResultModal
-      closeModal={toggleModal}
+      closeModal={() => setModal(!modal)}
       text={text}
       name={name}
       url={url}
@@ -25,13 +22,13 @@ const Result = ({ appear, name, text, url, length, term }) => {
   );
 
   return (
-    <Fragment>
-      <StyledResult onClick={() => toggleModal()}>
+    <>
+      <StyledResult ref={resultRef} onClick={() => setModal(!modal)}>
         {length} results from {name}
-        <i className="fas fa-chevron-right" onClick={() => toggleModal()} />
+        <i className="fas fa-chevron-right" onClick={() => setModal(!modal)} />
       </StyledResult>
-      {displayModal ?? <Fragment></Fragment>}
-    </Fragment>
+      {displayModal ?? <></>}
+    </>
   );
 };
 

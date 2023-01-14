@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useRef } from 'react';
 import { StyledNoResults } from './NoResults.styles';
 
 const NoResults = () => {
-  useEffect(() => {
-    const msg = document.querySelector('.no-results');
-    gsap.to(msg, 0.5, { opacity: 1, y: -5 });
-  }, []);
+  const noResultRef = useRef(null);
 
-  return <StyledNoResults>No results found!</StyledNoResults>;
+  useEffect(() => {
+    noResultRef.current.className = `${noResultRef.current.className} slide-top`;
+  }, [noResultRef]);
+
+
+  return <StyledNoResults ref={noResultRef}>No results found!</StyledNoResults>;
 };
 
 export default NoResults;

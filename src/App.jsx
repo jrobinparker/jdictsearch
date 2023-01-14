@@ -1,7 +1,6 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
-import gsap from 'gsap';
 import Search from '/src/components/Search/Search';
 import Results from '/src/components/Results/Results';
 import NoResults from '/src/components/NoResults/NoResults';
@@ -22,9 +21,16 @@ const App = () => {
   });
   const [term, setTerm] = useState('');
   const [loading, setLoading] = useState('inactive');
+  const [cleared, setCleared] = useState(false);
   const [failedStatus, setFailedStatus] = useState(false);
 
   const onTermSubmit = async (searchTerm) => {
+    if (!searchTerm.length) {
+      setFailedStatus(true);
+      return;
+    }
+    
+    setCleared(false);
     setLoading('loading');
     setTerm(searchTerm);
     await weblioSearch(searchTerm);
@@ -41,6 +47,7 @@ const App = () => {
       const result1Data = $('.content-explanation.ej').text();
       setResults({ ...results, weblio: result1Data });
     } catch (error) {
+      console.log(error);
       setFailedStatus(true);
     }
   };
@@ -72,43 +79,22 @@ const App = () => {
   };
 
   const handleReload = () => {
-    resultAnimation(-5, true);
+    setCleared(true);
+    setTerm('');
+    setLoading('inactive');
+    setFailedStatus(false);
     setTimeout(() => {
-      setResults({
-        weblio: '',
-        eiNavi: '',
-        eijiro: '',
-      });
-      setTerm('');
-      setLoading('inactive');
-      setFailedStatus(false);
-    }, 1000);
-  };
-
-  const resultAnimation = (yValue, reload = false) => {
-    const result1 = document.querySelectorAll('.result')[0];
-    const result2 = document.querySelectorAll('.result')[1];
-    const result3 = document.querySelectorAll('.result')[2];
-    const tl = gsap.timeline();
-
-    if (reload) {
-      const noResults = document.querySelector('.no-results');
-      return tl
-        .to(result1, 0.25, { opacity: 0, y: yValue })
-        .to(result2, 0.25, { opacity: 0, y: yValue })
-        .to(result3, 0.25, { opacity: 0, y: yValue })
-        .to(noResults, 0.25, { opacity: 0, y: yValue });
-    }
-
-    return tl
-      .to(result1, 0.25, { delay: 1, opacity: 1, y: yValue })
-      .to(result2, 0.25, { delay: 1, opacity: 1, y: yValue })
-      .to(result3, 0.25, { delay: 1, opacity: 1, y: yValue });
+      if (cleared) {
+        setResults({
+          weblio: '',
+          eiNavi: '',
+          eijiro: '',
+        });
+      }
+    }, 500)
   };
 
   const defaultState = !results.weblio.length && !results.eiNavi.length && !results.eijiro.length && !failedStatus;
-  const hasResults =
-    (results.weblio.length > 1 || results.eiNavi.length > 1 || results.eijiro.length > 1) && !failedStatus;
 
   return (
     <StyledContainer>
@@ -116,26 +102,18 @@ const App = () => {
       <Background />
       <StyledUi>
         <Header />
-        <Search 
-          onTermSubmit={onTermSubmit} 
-          handleReload={handleReload} 
-          loading={loading} 
-        />
+        <Search onTermSubmit={onTermSubmit} handleReload={handleReload} loading={loading} />
         <StyledRow>
-          {defaultState && <Fragment />}
-          {hasResults && (
-            <Fragment>
-              <Results
-                weblio={results.weblio}
-                eiNavi={results.eiNavi}
-                eijiro={results.eijiro}
-                term={term}
-                showResults={resultAnimation}
-                loading={loading}
-              />
-            </Fragment>
-          )}
+          {defaultState && <></>}
           {failedStatus && <NoResults />}
+          <Results
+            weblio={results.weblio}
+            eiNavi={results.eiNavi}
+            eijiro={results.eijiro}
+            term={term}
+            cleared={cleared}
+            loading={loading}
+          />
         </StyledRow>
       </StyledUi>
     </StyledContainer>
