@@ -1,20 +1,10 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React from 'react';
 import Result from '../Result/Result';
 import { StyledResultsContainer } from './Results.styles';
 import useSetSearchResults from '../../hooks/useSetSearchResults';
 
-const Results = ({ weblio, eiNavi, eijiro, term, cleared }) => {
+const Results = ({ weblio, eiNavi, eijiro, term }, ref) => {
   const [results] = useSetSearchResults(weblio, eiNavi, eijiro);
-  const [display, setDisplay] = useState(true);
-  const rowRef = useRef(null);
-
-  useLayoutEffect(() => {
-      if (cleared) {
-        rowRef.current.className = `${rowRef.current.className} slide-down`;
-        setTimeout(() => setDisplay(false), 500);
-      }
-  }, [cleared]);
-
 
   let weblioComponent, eiNaviComponent, eijiroComponent;
 
@@ -54,13 +44,13 @@ const Results = ({ weblio, eiNavi, eijiro, term, cleared }) => {
     );
   }
 
-  return display &&
-    <StyledResultsContainer ref={rowRef}>
+  return (
+    <StyledResultsContainer ref={ref}>
       {weblioComponent}
       {eiNaviComponent}
       {eijiroComponent}
     </StyledResultsContainer>
-  ;
+  );
 };
 
-export default Results;
+export default React.forwardRef(Results);

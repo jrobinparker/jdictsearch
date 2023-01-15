@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export default function useSetSearchResults(weblio, eiNavi, eijiro) {
-  const [results, setResults] = useState({
+export default function useSetSearchResults(weblio, eiNavi, eijiro, setDisplay) {
+  const [results] = useState({
     weblio: [],
     eiNavi: [],
     eijiro: [],
   });
 
-  useEffect(() => {
+  useEffect(() => {    
     if (weblio.length) {
       setResults({
         ...results,

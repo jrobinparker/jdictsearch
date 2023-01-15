@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
 import Search from '/src/components/Search/Search';
@@ -23,13 +23,14 @@ const App = () => {
   const [loading, setLoading] = useState('inactive');
   const [cleared, setCleared] = useState(false);
   const [failedStatus, setFailedStatus] = useState(false);
+  const resultsRef = useRef(null);
 
   const onTermSubmit = async (searchTerm) => {
     if (!searchTerm.length) {
       setFailedStatus(true);
       return;
     }
-    
+
     setCleared(false);
     setLoading('loading');
     setTerm(searchTerm);
@@ -47,7 +48,7 @@ const App = () => {
       const result1Data = $('.content-explanation.ej').text();
       setResults({ ...results, weblio: result1Data });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setFailedStatus(true);
     }
   };
@@ -79,22 +80,22 @@ const App = () => {
   };
 
   const handleReload = () => {
-    setCleared(true);
-    setTerm('');
-    setLoading('inactive');
-    setFailedStatus(false);
+    resultsRef.current.className = `${resultsRef.current.className} slide-down`;
     setTimeout(() => {
-      if (cleared) {
-        setResults({
-          weblio: '',
-          eiNavi: '',
-          eijiro: '',
-        });
-      }
-    }, 500)
+      setResults({
+        weblio: '',
+        eiNavi: '',
+        eijiro: '',
+      });
+      setTerm('');
+      setLoading('inactive');
+      setFailedStatus(false);
+    }, 500);
   };
 
   const defaultState = !results.weblio.length && !results.eiNavi.length && !results.eijiro.length && !failedStatus;
+  const hasResults =
+    (results.weblio.length > 1 || results.eiNavi.length > 1 || results.eijiro.length > 1) && !failedStatus;
 
   return (
     <StyledContainer>
@@ -106,14 +107,17 @@ const App = () => {
         <StyledRow>
           {defaultState && <></>}
           {failedStatus && <NoResults />}
-          <Results
-            weblio={results.weblio}
-            eiNavi={results.eiNavi}
-            eijiro={results.eijiro}
-            term={term}
-            cleared={cleared}
-            loading={loading}
-          />
+          {hasResults && (
+            <Results
+              weblio={results.weblio}
+              eiNavi={results.eiNavi}
+              eijiro={results.eijiro}
+              term={term}
+              cleared={cleared}
+              loading={loading}
+              ref={resultsRef}
+            />
+          )}
         </StyledRow>
       </StyledUi>
     </StyledContainer>
