@@ -1,13 +1,10 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import Result from '../Result/Result';
 import { StyledResultsContainer } from './Results.styles';
+import useSetSearchResults from '../../hooks/useSetSearchResults';
 
 const Results = ({ weblio, eiNavi, eijiro, term, cleared }) => {
-  const [results, setResults] = useState({
-    weblio: [],
-    eiNavi: [],
-    eijiro: [],
-  });
+  const [results] = useSetSearchResults(weblio, eiNavi, eijiro);
   const [display, setDisplay] = useState(true);
   const rowRef = useRef(null);
 
@@ -18,29 +15,6 @@ const Results = ({ weblio, eiNavi, eijiro, term, cleared }) => {
       }
   }, [cleared]);
 
-
-  useEffect(() => {
-    if (weblio.length) {
-      setResults({
-        ...results,
-        weblio: [...weblio.split('主な意味').toString().split('、')],
-      });
-    }
-
-    if (eiNavi.length) {
-      setResults({
-        ...results,
-        eiNavi: [...eiNavi.split('、')],
-      });
-    }
-
-    if (eijiro.length) {
-      setResults({
-        ...results,
-        eijiro: [...eijiro.split('<a')[0].split('【レベル】')[0].split('、')],
-      });
-    }
-  }, [weblio, eiNavi, eijiro]);
 
   let weblioComponent, eiNaviComponent, eijiroComponent;
 
