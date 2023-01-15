@@ -7,6 +7,7 @@ export const StyledBackground = styled.img.attrs({
   width: 100vw;
   background: url('/images/sakura.jpg');
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   border: transparent;
   transition: 2s;
