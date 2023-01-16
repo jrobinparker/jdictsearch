@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-export default function useDisplayIcon(loading) {
-    const [displayIcon, setDisplayIcon] = useState('fa-search');
+export default function useDisplayIcon(loading: string) {
+    const [displayIcon, setDisplayIcon] = useState<string>('fa-search');
 
     useEffect(() => {
       if (loading === 'inactive') setDisplayIcon('fa-search');

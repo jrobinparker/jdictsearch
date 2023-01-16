@@ -1,20 +1,26 @@
-import React, { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
 import Icon from '../Icon/Icon';
 import { StyledForm, StyledInput } from './Search.styles';
 
-const Search = ({ onTermSubmit, handleReload, loading }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+interface SearchProps {
+  onTermSubmit: Function;
+  handleReload: Function;
+  loading: string;
+}
 
-  const onChange = (e) => {
-    setSearchTerm(e.target.value);
+const Search = ({ onTermSubmit, handleReload, loading }: SearchProps) => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    setSearchTerm(e.target?.value);
   };
 
-  const onFormSubmit = (e) => {
+  const onFormSubmit = (e: FormEvent<HTMLInputElement>): void => {
     e.preventDefault();
     onTermSubmit(searchTerm);
   };
 
-  const clearSearch = () => {
+  const clearSearch = (): void => {
     setSearchTerm('');
     handleReload();
   };

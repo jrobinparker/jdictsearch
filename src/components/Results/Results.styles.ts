@@ -6,7 +6,7 @@ export const StyledResultsContainer = styled.div`
   flex-direction: row;
   align-content: center;
   align-self: center;
-
+  
   @media only screen and (orientation: portrait) {
     flex-direction: column;
     width: 94%;

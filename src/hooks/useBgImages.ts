@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import axios from 'axios';
+import type { Photo } from '../types';
 
-const LOCAL_CACHE = {};
-const ACCESS_KEY = import.meta.env.VITE_APP_ACCESS_KEY;
-const QUERY_KEYS = ['japan', 'tokyo', 'kyoto', 'yokohama', 'osaka', 'sapporo', 'fukuoka'];
+const LOCAL_CACHE: Record<string, string> = {};
+const ACCESS_KEY: string = import.meta.env.VITE_APP_ACCESS_KEY;
+const QUERY_KEYS: string[] = ['japan', 'tokyo', 'kyoto', 'osaka', 'sapporo', 'fukuoka'];
 
 export default function useBgImages() {
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function useBgImages() {
                     },
                   });
                   const res = await req;
-                  res.data.results.forEach((img) => {
+                  res.data.results.forEach((img: Photo) => {
                     const imageWidth = img.width;
                     const imageHeight = img.height;
             
@@ -41,12 +42,13 @@ export default function useBgImages() {
 
       async function setBackground() {
         const interval = setInterval(() => {
-            const images = Object.values(LOCAL_CACHE);
-            const img = images[Math.floor(Math.random() * images.length)];
-            document.querySelector('.bg').style.backgroundImage = `url('${img}')`;
-            if (img.width > img.height) {
-                document.querySelector('.bg').style.overflow = 'hidden';
-            }
+            const images: string[] = Object.values(LOCAL_CACHE);
+            const img: string = images[Math.floor(Math.random() * images.length)];
+            const bgClass: HTMLElement | null = document.querySelector('.bg');
+
+            if (!bgClass) return;
+
+            bgClass.style.backgroundImage = `url('${img}')`;
           }, 10000);
           
           return () => clearInterval(interval);

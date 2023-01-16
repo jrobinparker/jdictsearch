@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState, MutableRefObject } from 'react';
 import axios from 'axios';
 import cheerio from 'cheerio';
-import Search from '/src/components/Search/Search';
-import Results from '/src/components/Results/Results';
-import NoResults from '/src/components/NoResults/NoResults';
-import Background from '/src/components/Background/Background';
-import Header from '/src/components/Header/Header';
+import Search from '../src/components/Search/Search';
+import Results from '../src/components/Results/Results';
+import NoResults from '../src/components/NoResults/NoResults';
+import Background from '../src/components/Background/Background';
+import Header from '../src/components/Header/Header';
 import { StyledContainer, StyledRow, StyledUi } from './App.styles';
 import { GlobalStyles } from './GlobalStyle.styles';
 
@@ -19,19 +19,17 @@ const App = () => {
     eiNavi: '',
     eijiro: '',
   });
-  const [term, setTerm] = useState('');
-  const [loading, setLoading] = useState('inactive');
-  const [cleared, setCleared] = useState(false);
-  const [failedStatus, setFailedStatus] = useState(false);
-  const resultsRef = useRef(null);
+  const [term, setTerm] = useState<string>('');
+  const [loading, setLoading] = useState<string>('inactive');
+  const [failedStatus, setFailedStatus] = useState<boolean>(false);
+  const resultsRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
-  const onTermSubmit = async (searchTerm) => {
+  const onTermSubmit = async (searchTerm: string): Promise<void> => {
     if (!searchTerm.length) {
       setFailedStatus(true);
       return;
     }
 
-    setCleared(false);
     setLoading('loading');
     setTerm(searchTerm);
     await weblioSearch(searchTerm);
@@ -40,7 +38,7 @@ const App = () => {
     setLoading('loaded');
   };
 
-  const weblioSearch = async (searchTerm) => {
+  const weblioSearch = async (searchTerm: string): Promise<void> => {
     try {
       const req = axios.get(`${BASE_URL}https://ejje.weblio.jp/content/${searchTerm}`);
       const res = await req;
@@ -53,7 +51,7 @@ const App = () => {
     }
   };
 
-  const eiNaviSearch = async (searchTerm) => {
+  const eiNaviSearch = async (searchTerm: string): Promise<void> => {
     try {
       const req = axios.get(`${BASE_URL}https://www.ei-navi.jp/dictionary/content/${searchTerm}/`);
       const res = await req;
@@ -67,7 +65,7 @@ const App = () => {
     }
   };
 
-  const eijiroSearch = async (searchTerm) => {
+  const eijiroSearch = async (searchTerm: string): Promise<void> => {
     try {
       const req = axios.get(`${BASE_URL}https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`);
       const res = await req;
@@ -79,8 +77,8 @@ const App = () => {
     }
   };
 
-  const handleReload = () => {
-    resultsRef.current.className = `${resultsRef.current.className} slide-down`;
+  const handleReload = (): void => {
+    if (resultsRef.current) resultsRef.current.className = `${resultsRef.current.className} slide-down`;
     setTimeout(() => {
       setResults({
         weblio: '',
@@ -113,8 +111,6 @@ const App = () => {
               eiNavi={results.eiNavi}
               eijiro={results.eijiro}
               term={term}
-              cleared={cleared}
-              loading={loading}
               ref={resultsRef}
             />
           )}

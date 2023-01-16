@@ -18,11 +18,11 @@ export const StyledResult = styled.div.attrs({
   animation: result 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 
   :nth-of-type(1) {
-        margin-right: 2.2%;
+        margin-right: 2.75%;
   }
 
   :nth-of-type(3) {
-        margin-left: 2.2%;
+        margin-left: 2.75%;
   }
 
   @-webkit-keyframes result {

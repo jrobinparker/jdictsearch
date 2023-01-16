@@ -1,21 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, MutableRefObject, ReactElement } from "react";
 import ResultModal from "../ResultModal/ResultModal";
 import { StyledResult } from "./Result.styles";
 
-const Result = ({ name, text, url, length, term }) => {
-  const [modal, setModal] = useState(false);
-  const resultRef = useRef(null);
+interface ResultProps {
+  name: string;
+  text: string[];
+  length: number;
+  term: string;
+}
+
+
+const Result = ({ name, text, length, term }: ResultProps) => {
+  const [modal, setModal] = useState<boolean>(false);
+  const resultRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   useEffect(() => {
-    resultRef.current.className = `${resultRef.current.className} slide-top`;
+    if (resultRef.current) resultRef.current.className = `${resultRef.current.className} slide-top`;
   }, [resultRef]);
 
-  const displayModal = modal && (
+  const displayModal: ReactElement | false = modal && (
     <ResultModal
       closeModal={() => setModal(!modal)}
       text={text}
       name={name}
-      url={url}
       length={length}
       term={term}
     />

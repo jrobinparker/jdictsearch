@@ -1,8 +1,13 @@
-import React from 'react';
 import useDisplayIcon from '../../hooks/useDisplayIcon';
 import { StyledIconContainer, StyledIcon } from './Icon.styles';
 
-const Icon = ({ clear, search, loading }) => {
+interface IconProps {
+  clear: Function;
+  search: Function;
+  loading: string;
+}
+
+const Icon = ({ clear, search, loading }: IconProps) => {
   const [displayIcon] = useDisplayIcon(loading);
 
   return (

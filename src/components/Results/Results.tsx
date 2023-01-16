@@ -1,18 +1,28 @@
-import React from 'react';
+import { forwardRef, ReactElement } from 'react';
 import Result from '../Result/Result';
 import { StyledResultsContainer } from './Results.styles';
 import useSetSearchResults from '../../hooks/useSetSearchResults';
 
-const Results = ({ weblio, eiNavi, eijiro, term }, ref) => {
+interface ResultsProps {
+  weblio: string,
+  eiNavi: string,
+  eijiro: string,
+  term: string
+}
+
+export type ResultRef = HTMLDivElement | null;
+
+const Results = forwardRef<ResultRef, ResultsProps>(({ weblio, eiNavi, eijiro, term }, ref) => {
   const [results] = useSetSearchResults(weblio, eiNavi, eijiro);
 
-  let weblioComponent, eiNaviComponent, eijiroComponent;
+  let weblioComponent: ReactElement | undefined, 
+      eiNaviComponent: ReactElement | undefined,
+      eijiroComponent: ReactElement | undefined;
 
   if (results.weblio.length) {
     weblioComponent = (
       <Result
         name="weblio"
-        url={`https://ejje.weblio.jp/content/${term}`}
         length={results.weblio.length}
         text={results.weblio}
         term={term}
@@ -24,7 +34,6 @@ const Results = ({ weblio, eiNavi, eijiro, term }, ref) => {
     eiNaviComponent = (
       <Result
         name="ei-navi"
-        url={`https://www.ei-navi.jp/dictionary/content/${term}/`}
         length={results.eiNavi.length}
         text={results.eiNavi}
         term={term}
@@ -36,7 +45,6 @@ const Results = ({ weblio, eiNavi, eijiro, term }, ref) => {
     eijiroComponent = (
       <Result
         name="eijiro"
-        url={`https://eow.alc.co.jp/search?q=${term}&ref=sa`}
         length={results.eijiro.length}
         text={results.eijiro}
         term={term}
@@ -51,6 +59,6 @@ const Results = ({ weblio, eiNavi, eijiro, term }, ref) => {
       {eijiroComponent}
     </StyledResultsContainer>
   );
-};
+});
 
-export default React.forwardRef(Results);
+export default Results;

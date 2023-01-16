@@ -1,4 +1,3 @@
-import React from 'react';
 import { createPortal } from 'react-dom';
 import {
   StyledResultModal,
@@ -8,7 +7,15 @@ import {
   StyledResultModalClose,
 } from './ResultModal.styles';
 
-const ResultModal = ({ closeModal, length, name, text, term }) => {
+interface ResultModalProps {
+  closeModal: Function;
+  length: number;
+  name: string;
+  text: string[];
+  term: string
+}
+
+const ResultModal = ({ closeModal, length, name, text, term }: ResultModalProps) => {
   return createPortal(
     <StyledResultModal>
       <StyledResultModalCard>
@@ -25,7 +32,7 @@ const ResultModal = ({ closeModal, length, name, text, term }) => {
         </StyledResultModalCardBody>
       </StyledResultModalCard>
     </StyledResultModal>,
-    document.querySelector('#result-modal'),
+    document.querySelector('#result-modal') as Element | DocumentFragment,
   );
 };
 

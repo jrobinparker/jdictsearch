@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface StyledIconProps {
+  displayIcon: string;
+}
+
 export const StyledIconContainer = styled.div`
   height: 100%;
   width: 10%;
@@ -20,9 +24,9 @@ export const StyledIconContainer = styled.div`
   }
 `;
 
-export const StyledIcon = styled.i.attrs((props) => ({
+export const StyledIcon = styled.i.attrs((props: StyledIconProps) => ({
   className: `fas ${props.displayIcon}`,
-}))`
+}))<StyledIconProps>`
   font-size: 4vh;
   color: #5d13e7;
 `;

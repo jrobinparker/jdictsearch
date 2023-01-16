@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-export default function useSetSearchResults(weblio, eiNavi, eijiro, setDisplay) {
-  const [results] = useState({
+export default function useSetSearchResults(weblio: string, eiNavi: string, eijiro: string) {
+  const [results, setResults] = useState<Record<string, string[]>>({
     weblio: [],
     eiNavi: [],
     eijiro: [],
@@ -11,7 +11,7 @@ export default function useSetSearchResults(weblio, eiNavi, eijiro, setDisplay) 
     if (weblio.length) {
       setResults({
         ...results,
-        weblio: [...weblio.split('主な意味').toString().split('、')],
+        weblio:  [...weblio.split('主な意味').toString().split('、')],
       });
     }
 
