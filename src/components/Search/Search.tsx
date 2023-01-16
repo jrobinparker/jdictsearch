@@ -1,10 +1,10 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, MouseEvent } from 'react';
 import Icon from '../Icon/Icon';
 import { StyledForm, StyledInput } from './Search.styles';
 
 interface SearchProps {
-  onTermSubmit: Function;
-  handleReload: Function;
+  onTermSubmit: (searchTerm: string) => void;
+  handleReload: () => void;
   loading: string;
 }
 
@@ -15,7 +15,7 @@ const Search = ({ onTermSubmit, handleReload, loading }: SearchProps) => {
     setSearchTerm(e.target?.value);
   };
 
-  const onFormSubmit = (e: FormEvent<HTMLInputElement>): void => {
+  const onFormSubmit = (e: MouseEvent<HTMLDivElement>): void => {
     e.preventDefault();
     onTermSubmit(searchTerm);
   };

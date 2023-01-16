@@ -1,9 +1,10 @@
+import { MouseEvent } from 'react';
 import useDisplayIcon from '../../hooks/useDisplayIcon';
 import { StyledIconContainer, StyledIcon } from './Icon.styles';
 
 interface IconProps {
-  clear: Function;
-  search: Function;
+  clear: () => void;
+  search: (e: MouseEvent<HTMLDivElement>) => void;
   loading: string;
 }
 

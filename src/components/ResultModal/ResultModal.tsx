@@ -8,7 +8,7 @@ import {
 } from './ResultModal.styles';
 
 interface ResultModalProps {
-  closeModal: Function;
+  closeModal: () => void;
   length: number;
   name: string;
   text: string[];
