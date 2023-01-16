@@ -9,7 +9,6 @@ interface ResultProps {
   term: string;
 }
 
-
 const Result = ({ name, text, length, term }: ResultProps) => {
   const [modal, setModal] = useState<boolean>(false);
   const resultRef: MutableRefObject<HTMLDivElement | null> = useRef(null);

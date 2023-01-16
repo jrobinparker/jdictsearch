@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import type { Photo } from '../types';
 
-const LOCAL_CACHE: Record<string, string> = {};
+const LOCAL_CACHE: { [k: string]: string } = {};
 const ACCESS_KEY: string = import.meta.env.VITE_APP_ACCESS_KEY;
 const QUERY_KEYS: string[] = ['japan', 'tokyo', 'kyoto', 'osaka', 'sapporo', 'fukuoka'];
 

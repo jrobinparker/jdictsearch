@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function useSetSearchResults(weblio: string, eiNavi: string, eijiro: string) {
-  const [results, setResults] = useState<Record<string, string[]>>({
+  const [results, setResults] = useState<{ [k: string]: string[] }>({
     weblio: [],
     eiNavi: [],
     eijiro: [],

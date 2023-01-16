@@ -8,7 +8,6 @@ const NoResults = () => {
     if (noResultRef.current) noResultRef.current.className = `${noResultRef.current.className} slide-top`;
   }, [noResultRef]);
 
-
   return <StyledNoResults ref={noResultRef}>No results found!</StyledNoResults>;
 };
 
