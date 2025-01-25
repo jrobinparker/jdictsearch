@@ -15,7 +15,7 @@ const Icon = ({ clear, search, loading }: IconProps) => {
     <StyledIconContainer
       onClick={e => loading !== 'loaded' ? search(e) : clear()}
     >
-      <StyledIcon displayIcon={`${displayIcon}`} />
+      <StyledIcon className={`${displayIcon}`} />
     </StyledIconContainer>
   );
 };
