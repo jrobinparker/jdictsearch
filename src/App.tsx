@@ -1,6 +1,6 @@
 import { useRef, useState, MutableRefObject } from 'react';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import Search from '../src/components/Search/Search';
 import Results from '../src/components/Results/Results';
 import NoResults from '../src/components/NoResults/NoResults';
