@@ -20,7 +20,7 @@ export const StyledHeaderMainText = styled.div`
 `;
 
 export const StyledHeaderSubText = styled.div`
-  font-size: 3vh;
+  font-size: 2.25vh;
 
   @media only screen and (orientation: portrait) {
     font-size: 2.25vh;
