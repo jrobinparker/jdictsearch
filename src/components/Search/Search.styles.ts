@@ -14,6 +14,6 @@ export const StyledInput = styled.input`
   font-family: 'Alata', sans-serif;
 
   &::placeholder {
-    color: black;
+    color: gray;
   }
 `;

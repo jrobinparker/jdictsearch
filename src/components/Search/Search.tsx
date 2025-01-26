@@ -29,7 +29,7 @@ const Search = ({ onTermSubmit, handleReload, loading }: SearchProps) => {
     <StyledForm>
       <StyledInput
         type="text"
-        placeholder="Enter an English word..."
+        placeholder="Search・検索"
         name="searchTerm"
         value={searchTerm}
         onChange={onChange}

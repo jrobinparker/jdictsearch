@@ -3,8 +3,8 @@ import { StyledHeader, StyledHeaderMainText, StyledHeaderSubText } from './Heade
 const Header = () => {
   return (
     <StyledHeader>   
-      <StyledHeaderMainText>JDictSearch</StyledHeaderMainText>
-      <StyledHeaderSubText>English-Japanese dictionary search aggregator</StyledHeaderSubText>
+      <StyledHeaderMainText>JDictionarySearch</StyledHeaderMainText>
+      <StyledHeaderSubText>English-Japanese/Japanese-English dictionary search aggregator</StyledHeaderSubText>
     </StyledHeader>
   );
 };

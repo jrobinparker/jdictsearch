@@ -30,7 +30,7 @@ const Result = ({ name, text, length, term }: ResultProps) => {
   return (
     <>
       <StyledResult ref={resultRef} onClick={() => setModal(!modal)}>
-        {length} results from {name}
+        {length === 1 ? `${length} result` : `${length} results`} from {name}
         <i className="fas fa-chevron-right" onClick={() => setModal(!modal)} />
       </StyledResult>
       {displayModal ?? <></>}

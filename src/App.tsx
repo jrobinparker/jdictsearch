@@ -1,27 +1,28 @@
-import { useRef, useState, MutableRefObject } from 'react';
-import axios from 'axios';
-import * as cheerio from 'cheerio';
-import Search from '../src/components/Search/Search';
-import Results from '../src/components/Results/Results';
-import NoResults from '../src/components/NoResults/NoResults';
-import Background from '../src/components/Background/Background';
-import Header from '../src/components/Header/Header';
-import { StyledContainer, StyledRow, StyledUi } from './App.styles';
-import { GlobalStyles } from './GlobalStyle.styles';
+import { useRef, useState, MutableRefObject } from "react";
+import axios from "axios";
+import * as cheerio from "cheerio";
+import Search from "../src/components/Search/Search";
+import Results from "../src/components/Results/Results";
+import NoResults from "../src/components/NoResults/NoResults";
+import Background from "../src/components/Background/Background";
+import Header from "../src/components/Header/Header";
+import { StyledContainer, StyledRow, StyledUi } from "./App.styles";
+import { GlobalStyles } from "./GlobalStyle.styles";
 
-import './App.css';
+import "./App.css";
 
-const BASE_URL = 'https://pure-coast-05369.herokuapp.com/';
+const BASE_URL = "https://pure-coast-05369.herokuapp.com/";
 
 const App = () => {
-  const [results, setResults] = useState({
-    weblio: '',
-    eiNavi: '',
-    eijiro: '',
+  const [results, setResults] = useState<Record<string, string[]>>({
+    weblio: [],
+    eiNavi: [],
+    eijiro: [],
   });
-  const [term, setTerm] = useState<string>('');
-  const [loading, setLoading] = useState<string>('inactive');
+  const [term, setTerm] = useState<string>("");
+  const [loading, setLoading] = useState<string>("inactive");
   const [failedStatus, setFailedStatus] = useState<boolean>(false);
+  const [isEngTerm, setIsEngTerm] = useState(false);
   const resultsRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
 
   const onTermSubmit = async (searchTerm: string): Promise<void> => {
@@ -30,36 +31,43 @@ const App = () => {
       return;
     }
 
-    setLoading('loading');
+    setLoading("loading");
     setTerm(searchTerm);
     await weblioSearch(searchTerm);
     await eiNaviSearch(searchTerm);
     await eijiroSearch(searchTerm);
-    setLoading('loaded');
+    setLoading("loaded");
   };
 
   const weblioSearch = async (searchTerm: string): Promise<void> => {
     try {
-      const req = axios.get(`${BASE_URL}https://ejje.weblio.jp/content/${searchTerm}`);
+      const req = axios.get(
+        `${BASE_URL}https://ejje.weblio.jp/content/${searchTerm}`
+      );
       const res = await req;
       const $ = cheerio.load(res.data);
-      const result1Data = $('.content-explanation.ej').text();
-      setResults({ ...results, weblio: result1Data });
+      const weblioData = !!searchTerm.match(/\w/g)?.length ? $(".content-explanation.ej").text() : $(".content-explanation.je").text();
+      const data = !!searchTerm.match(/\w/g)?.length ? weblioData.split('主な意味').toString().trim().split('、') : weblioData.trim().split('; ');
+      if (data.length) setResults({ ...results, weblio: data });
     } catch (error) {
-      console.error(error);
       setFailedStatus(true);
     }
   };
 
   const eiNaviSearch = async (searchTerm: string): Promise<void> => {
     try {
-      const req = axios.get(`${BASE_URL}https://www.ei-navi.jp/dictionary/content/${searchTerm}/`);
+      const eiNaviUrl = !!searchTerm.match(/\w/g)?.length
+        ? `https://www.ei-navi.jp/dictionary/content/${searchTerm}/`
+        : `https://www.ei-navi.jp/dictionary/ja_en/${searchTerm}/`;
+      const req = axios.get(`${BASE_URL}${eiNaviUrl}`);
       const res = await req;
       const $ = cheerio.load(res.data);
-      const result2Data = $('.main .container .summary .list-group .list-group-item .list-group-item-text')
-        .children()
-        .text();
-      setResults({ ...results, eiNavi: result2Data });
+
+      const data = $.extract({
+        text: [!!searchTerm.match(/\w/g)?.length ? ".main .container .summary .list-group .list-group-item .list-group-item-text" : "dl:last"]
+      })
+
+      if (data.text?.length) setResults({ ...results, eiNavi: data.text });
     } catch (error) {
       setFailedStatus(true);
     }
@@ -67,33 +75,46 @@ const App = () => {
 
   const eijiroSearch = async (searchTerm: string): Promise<void> => {
     try {
-      const req = axios.get(`${BASE_URL}https://eow.alc.co.jp/search?q=${searchTerm}&ref=sa`);
+      const req = axios.get(
+        `${BASE_URL}https://eow.alc.co.jp/search?q=${searchTerm}`
+      );
       const res = await req;
       const $ = cheerio.load(res.data);
-      const result3Data = $('ul li div ul li, #resultsList').children().slice(2, 4).text();
-      setResults({ ...results, eijiro: result3Data });
+      const data = $.extract({
+        text: [!!searchTerm.match(/\w/g)?.length ? ".search-use-list ul .result-item div ol li" : ".ul_je:first li"]
+      });
+      
+      if (data.text?.length) setResults({ ...results, eijiro: data.text });
     } catch (error) {
       setFailedStatus(true);
     }
   };
 
   const handleReload = (): void => {
-    if (resultsRef.current) resultsRef.current.className = `${resultsRef.current.className} slide-down`;
+    if (resultsRef.current)
+      resultsRef.current.className = `${resultsRef.current.className} slide-down`;
     setTimeout(() => {
       setResults({
-        weblio: '',
-        eiNavi: '',
-        eijiro: '',
+        weblio: [],
+        eiNavi: [],
+        eijiro: [],
       });
-      setTerm('');
-      setLoading('inactive');
+      setTerm("");
+      setLoading("inactive");
       setFailedStatus(false);
     }, 500);
   };
 
-  const defaultState = !results.weblio.length && !results.eiNavi.length && !results.eijiro.length && !failedStatus;
+  const defaultState =
+    !results.weblio.length &&
+    !results.eiNavi.length &&
+    !results.eijiro.length &&
+    !failedStatus;
   const hasResults =
-    (results.weblio.length > 1 || results.eiNavi.length > 1 || results.eijiro.length > 1) && !failedStatus;
+    !!(results.weblio.length ||
+      results.eiNavi.length ||
+      results.eijiro.length ) &&
+    !failedStatus;
 
   return (
     <StyledContainer>
@@ -101,7 +122,11 @@ const App = () => {
       <Background />
       <StyledUi>
         <Header />
-        <Search onTermSubmit={onTermSubmit} handleReload={handleReload} loading={loading} />
+        <Search
+          onTermSubmit={onTermSubmit}
+          handleReload={handleReload}
+          loading={loading}
+        />
         <StyledRow>
           {defaultState && <></>}
           {failedStatus && <NoResults />}
@@ -111,6 +136,7 @@ const App = () => {
               eiNavi={results.eiNavi}
               eijiro={results.eijiro}
               term={term}
+              isEngTerm={!!term.match(/\w/g)?.length}
               ref={resultsRef}
             />
           )}

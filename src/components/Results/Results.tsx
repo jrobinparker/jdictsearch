@@ -4,16 +4,17 @@ import { StyledResultsContainer } from './Results.styles';
 import useSetSearchResults from '../../hooks/useSetSearchResults';
 
 interface ResultsProps {
-  weblio: string,
-  eiNavi: string,
-  eijiro: string,
-  term: string
+  weblio: string[],
+  eiNavi: string[],
+  eijiro: string[],
+  term: string,
+  isEngTerm: boolean
 }
 
 export type ResultRef = HTMLDivElement | null;
 
-const Results = forwardRef<ResultRef, ResultsProps>(({ weblio, eiNavi, eijiro, term }, ref) => {
-  const [results] = useSetSearchResults(weblio, eiNavi, eijiro);
+const Results = forwardRef<ResultRef, ResultsProps>(({ weblio, eiNavi, eijiro, term, isEngTerm }, ref) => {
+  const [results] = useSetSearchResults(weblio, eiNavi, eijiro, isEngTerm);
 
   let weblioComponent: ReactElement | undefined, 
       eiNaviComponent: ReactElement | undefined,
