@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, MutableRefObject, ReactElement } from "react";
+import { useEffect, useRef, useState, ReactElement } from "react";
 import ResultModal from "../ResultModal/ResultModal";
 import { StyledResult } from "./Result.styles";
 
@@ -11,7 +11,7 @@ interface ResultProps {
 
 const Result = ({ name, text, length, term }: ResultProps) => {
   const [modal, setModal] = useState<boolean>(false);
-  const resultRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
+  const resultRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (resultRef.current) resultRef.current.className = `${resultRef.current.className} slide-top`;

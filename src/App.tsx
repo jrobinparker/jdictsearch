@@ -1,4 +1,4 @@
-import { useRef, useState, MutableRefObject } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import Search from "../src/components/Search/Search";
@@ -22,8 +22,7 @@ const App = () => {
   const [term, setTerm] = useState<string>("");
   const [loading, setLoading] = useState<string>("inactive");
   const [failedStatus, setFailedStatus] = useState<boolean>(false);
-  const [isEngTerm, setIsEngTerm] = useState(false);
-  const resultsRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
+  const resultsRef = useRef<HTMLDivElement | null>(null);
 
   const onTermSubmit = async (searchTerm: string): Promise<void> => {
     if (!searchTerm.length) {
@@ -33,30 +32,33 @@ const App = () => {
 
     setLoading("loading");
     setTerm(searchTerm);
-    await weblioSearch(searchTerm);
-    await eiNaviSearch(searchTerm);
-    await eijiroSearch(searchTerm);
+
+    const isEnglishTerm = !!searchTerm.match(/\w/g)?.length;
+
+    await weblioSearch(searchTerm, isEnglishTerm);
+    await eiNaviSearch(searchTerm, isEnglishTerm);
+    await eijiroSearch(searchTerm, isEnglishTerm);
     setLoading("loaded");
   };
 
-  const weblioSearch = async (searchTerm: string): Promise<void> => {
+  const weblioSearch = async (searchTerm: string, isEnglishTerm: boolean): Promise<void> => {
     try {
       const req = axios.get(
         `${BASE_URL}https://ejje.weblio.jp/content/${searchTerm}`
       );
       const res = await req;
       const $ = cheerio.load(res.data);
-      const weblioData = !!searchTerm.match(/\w/g)?.length ? $(".content-explanation.ej").text() : $(".content-explanation.je").text();
-      const data = !!searchTerm.match(/\w/g)?.length ? weblioData.split('主な意味').toString().trim().split('、') : weblioData.trim().split('; ');
+      const weblioData = isEnglishTerm ? $(".content-explanation.ej").text() : $(".content-explanation.je").text();
+      const data = isEnglishTerm ? weblioData.split('主な意味').toString().trim().split('、') : weblioData.trim().split('; ');
       if (data.length) setResults({ ...results, weblio: data });
     } catch (error) {
       setFailedStatus(true);
     }
   };
 
-  const eiNaviSearch = async (searchTerm: string): Promise<void> => {
+  const eiNaviSearch = async (searchTerm: string, isEnglishTerm: boolean): Promise<void> => {
     try {
-      const eiNaviUrl = !!searchTerm.match(/\w/g)?.length
+      const eiNaviUrl = isEnglishTerm
         ? `https://www.ei-navi.jp/dictionary/content/${searchTerm}/`
         : `https://www.ei-navi.jp/dictionary/ja_en/${searchTerm}/`;
       const req = axios.get(`${BASE_URL}${eiNaviUrl}`);
@@ -64,7 +66,7 @@ const App = () => {
       const $ = cheerio.load(res.data);
 
       const data = $.extract({
-        text: [!!searchTerm.match(/\w/g)?.length ? ".main .container .summary .list-group .list-group-item .list-group-item-text" : "dl:last"]
+        text: [isEnglishTerm ? ".main .container .summary .list-group .list-group-item .list-group-item-text" : "dl:last"]
       })
 
       if (data.text?.length) setResults({ ...results, eiNavi: data.text });
@@ -73,7 +75,7 @@ const App = () => {
     }
   };
 
-  const eijiroSearch = async (searchTerm: string): Promise<void> => {
+  const eijiroSearch = async (searchTerm: string, isEnglishTerm: boolean): Promise<void> => {
     try {
       const req = axios.get(
         `${BASE_URL}https://eow.alc.co.jp/search?q=${searchTerm}`
@@ -81,7 +83,7 @@ const App = () => {
       const res = await req;
       const $ = cheerio.load(res.data);
       const data = $.extract({
-        text: [!!searchTerm.match(/\w/g)?.length ? ".search-use-list ul .result-item div ol li" : ".ul_je:first li"]
+        text: [isEnglishTerm ? ".search-use-list ul .result-item div ol li" : ".ul_je:first li"]
       });
       
       if (data.text?.length) setResults({ ...results, eijiro: data.text });
